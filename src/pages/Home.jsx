@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Star, Clock, ArrowRight } from 'lucide-react';
-import { tourPackages, testimonials, features } from '../data/mockData';
+import { MapPin, Star, Clock, ArrowRight, Users, Award, TrendingUp, Shield, CheckCircle, ChevronDown, MessageCircle } from 'lucide-react';
+import { tourPackages, testimonials, features, contactInfo } from '../data/mockData';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -10,28 +10,169 @@ function Home() {
     AOS.init({
       duration: 1000,
       once: true,
+      easing: 'ease-out-cubic',
     });
   }, []);
+
+  const scrollToContent = () => {
+    const element = document.getElementById('features-highlights');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const statsHighlights = [
+    {
+      icon: Users,
+      value: '500+',
+      label: 'Happy Travelers',
+      description: 'Pelanggan puas dengan layanan kami'
+    },
+    {
+      icon: MapPin,
+      value: '20+',
+      label: 'Destinasi',
+      description: 'Pilihan destinasi menarik di Indonesia'
+    },
+    {
+      icon: Award,
+      value: '100%',
+      label: 'Tour Guide Profesional',
+      description: 'Bersertifikat dan berpengalaman'
+    },
+    {
+      icon: TrendingUp,
+      value: '4.9/5',
+      label: 'Rating Kepuasan',
+      description: 'Dari review pelanggan kami'
+    }
+  ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-secondary via-secondary-light to-primary">
-        <div className="absolute inset-0 bg-black opacity-30"></div>
-        <div className="relative z-10 text-center text-white px-4" data-aos="fade-up">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Jelajahi Indonesia Bersama Kami
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Parallax Effect */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80)',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-secondary/75 to-secondary-dark/85"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          {/* Trust Badges */}
+          <div
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            data-aos="fade-down"
+          >
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+              <Shield className="w-4 h-4 text-primary" />
+              <span className="text-white text-sm font-semibold">Verified Tour Operator</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              <span className="text-white text-sm font-semibold">Best Price Guarantee</span>
+            </div>
+          </div>
+
+          {/* Main Headline */}
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            Jelajahi Keindahan
+            <br />
+            <span className="text-primary">Indonesia</span> Bersama Kami
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Temukan pengalaman wisata terbaik dengan harga terjangkau dan pelayanan premium
+
+          {/* Subheadline */}
+          <p
+            className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            Paket wisata terpercaya dengan pengalaman tak terlupakan,
+            harga terbaik, dan pelayanan profesional
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/tours" className="btn-primary">
+
+          {/* CTA Buttons */}
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <Link
+              to="/tours"
+              className="group px-8 py-4 bg-primary hover:bg-primary-light text-secondary font-bold rounded-full text-lg shadow-2xl hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
               Lihat Paket Tour
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/about" className="btn-outline bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white">
-              Tentang Kami
+            <Link
+              to="/booking"
+              className="group px-8 py-4 bg-transparent hover:bg-white border-2 border-white text-white hover:text-secondary font-bold rounded-full text-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Hubungi Kami
             </Link>
+          </div>
+
+          {/* Scroll Indicator */}
+          <button
+            onClick={scrollToContent}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer group"
+            data-aos="fade-up"
+            data-aos-delay="400"
+            aria-label="Scroll to content"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">
+                Scroll untuk lebih lanjut
+              </span>
+              <ChevronDown className="w-6 h-6" />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      {/* Features Highlights with Glassmorphism */}
+      <section id="features-highlights" className="relative -mt-20 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {statsHighlights.map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <div
+                  key={index}
+                  className="group bg-white/90 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <IconComponent className="w-8 h-8 text-secondary" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-secondary mb-2">
+                      {stat.value}
+                    </h3>
+                    <p className="text-lg font-semibold text-secondary mb-2">
+                      {stat.label}
+                    </p>
+                    <p className="text-sm text-text-light">
+                      {stat.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -174,6 +315,33 @@ function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href={contactInfo.social.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group"
+        aria-label="Chat on WhatsApp"
+        data-aos="zoom-in"
+        data-aos-delay="500"
+      >
+        <div className="relative">
+          {/* Pulsing Ring Animation */}
+          <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+
+          {/* Main Button */}
+          <div className="relative bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white p-4 rounded-full shadow-2xl hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 flex items-center gap-3">
+            <MessageCircle className="w-6 h-6" />
+
+            {/* Tooltip */}
+            <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-secondary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
+              Chat dengan Kami di WhatsApp
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-45 w-2 h-2 bg-secondary"></div>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   );
 }
