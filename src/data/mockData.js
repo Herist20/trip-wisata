@@ -207,12 +207,14 @@ export const categories = [
 
 export const contactInfo = {
   phone: '+62 812-3456-7890',
+  whatsapp: '+62 812-3456-7890',
   email: 'info@tripwisata.com',
   address: 'Jl. Sudirman No. 123, Jakarta Pusat, DKI Jakarta 10110',
+  workingHours: 'Senin - Sabtu: 09.00 - 18.00 WIB',
   social: {
     facebook: 'https://facebook.com/tripwisata',
     instagram: 'https://instagram.com/tripwisata',
-    twitter: 'https://twitter.com/tripwisata',
-    youtube: 'https://youtube.com/tripwisata',
+    whatsapp: 'https://wa.me/6281234567890',
+    email: 'mailto:info@tripwisata.com',
   },
 };
