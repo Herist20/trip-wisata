@@ -203,64 +203,142 @@ function Home() {
         </div>
       </section>
 
-      {/* Popular Tours Section */}
-      <section className="section-container">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="heading-secondary">Paket Tour Populer</h2>
-          <p className="text-lg text-text-light max-w-2xl mx-auto">
-            Pilihan destinasi favorit wisatawan dengan rating terbaik
+      {/* Featured Tours Section - Premium Design */}
+      <section className="section-container bg-white">
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+            Paket Tour Populer Kami
+          </h2>
+          <p className="text-lg md:text-xl text-text-light max-w-3xl mx-auto">
+            Pilihan terbaik untuk liburan impian Anda dengan harga terjangkau dan layanan premium
           </p>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {tourPackages.slice(0, 6).map((tour, index) => (
             <div
               key={tour.id}
-              className="card"
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <div className="relative h-64 overflow-hidden">
+              {/* Image with Overlay Gradient */}
+              <div className="relative h-72 overflow-hidden">
                 <img
                   src={tour.image}
                   alt={tour.title}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute top-4 right-4 bg-primary text-secondary font-bold px-3 py-1 rounded-full">
-                  <Star className="inline w-4 h-4 mb-1" /> {tour.rating}
+
+                {/* Gradient Overlay from Bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                {/* Badge (Best Seller / New) */}
+                {tour.badge && (
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-primary text-secondary font-bold px-4 py-1.5 rounded-full text-sm shadow-lg">
+                      {tour.badge}
+                    </span>
+                  </div>
+                )}
+
+                {/* Duration Badge */}
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                    <Clock className="w-4 h-4 text-secondary" />
+                    <span className="text-sm font-semibold text-secondary">{tour.durationShort}</span>
+                  </div>
+                </div>
+
+                {/* Location Overlay at Bottom */}
+                <div className="absolute bottom-4 left-4 right-4 z-10">
+                  <div className="flex items-start gap-2">
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-white font-medium text-sm">{tour.destination}</span>
+                  </div>
                 </div>
               </div>
+
+              {/* Card Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-secondary mb-2">{tour.title}</h3>
-                <div className="flex items-center text-text-light mb-2">
-                  <MapPin className="w-4 h-4 mr-1" />
-                  <span className="text-sm">{tour.destination}</span>
+                {/* Tour Title */}
+                <h3 className="text-2xl font-bold text-secondary mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                  {tour.title}
+                </h3>
+
+                {/* Rating & Reviews */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(tour.rating)
+                            ? 'fill-primary text-primary'
+                            : 'fill-gray-300 text-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold text-secondary">{tour.rating}</span>
+                  <span className="text-sm text-text-light">({tour.reviews} reviews)</span>
                 </div>
-                <div className="flex items-center text-text-light mb-4">
-                  <Clock className="w-4 h-4 mr-1" />
-                  <span className="text-sm">{tour.duration}</span>
+
+                {/* Highlights with Checkmarks */}
+                <div className="space-y-2 mb-5">
+                  {tour.highlights.slice(0, 3).map((highlight, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="text-sm text-text-light">{highlight}</span>
+                    </div>
+                  ))}
                 </div>
+
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-5"></div>
+
+                {/* Price & CTA */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-sm text-text-light">Mulai dari</span>
-                    <p className="text-2xl font-bold text-primary">
-                      Rp {tour.price.toLocaleString('id-ID')}
-                    </p>
+                    <p className="text-xs text-text-light mb-1">Starting from</p>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-bold text-primary">
+                        ${tour.priceUSD}
+                      </span>
+                      <span className="text-sm text-text-light line-through">
+                        ${Math.round(tour.priceUSD * 1.3)}
+                      </span>
+                    </div>
+                    <p className="text-xs text-text-light mt-1">per person</p>
                   </div>
+
                   <Link
                     to={`/booking?tour=${tour.id}`}
-                    className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary-light transition-colors"
+                    className="group/btn bg-secondary hover:bg-primary text-white hover:text-secondary font-semibold px-5 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                   >
-                    Pesan
+                    <span className="flex items-center gap-2">
+                      Lihat Detail
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </span>
                   </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="text-center mt-12" data-aos="fade-up">
-          <Link to="/tours" className="btn-secondary inline-flex items-center gap-2">
-            Lihat Semua Tour <ArrowRight className="w-5 h-5" />
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16" data-aos="fade-up">
+          <Link
+            to="/tours"
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-secondary to-secondary-light hover:from-primary hover:to-primary-light text-white font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+          >
+            Lihat Semua Paket Tour
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
           </Link>
+          <p className="text-sm text-text-light mt-4">
+            Lebih dari 20+ destinasi menarik menanti Anda
+          </p>
         </div>
       </section>
 
