@@ -1,127 +1,251 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
+
+  // Handle scroll event for glassmorphism effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+
+      // Scroll spy for active section detection
+      const sections = ['home', 'tour-packages', 'booking', 'gallery', 'about'];
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/tours', label: 'Tours' },
-    { to: '/gallery', label: 'Gallery' },
-    { to: '/about', label: 'About' },
-    { to: '/booking', label: 'Booking' },
+    { to: '/', label: 'Home', section: 'home' },
+    { to: '/tours', label: 'Tour Packages', section: 'tour-packages' },
+    { to: '/booking', label: 'Booking', section: 'booking' },
+    { to: '/gallery', label: 'Gallery', section: 'gallery' },
+    { to: '/about', label: 'About Us', section: 'about' },
   ];
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Header height offset
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      {/* Top Bar */}
-      <div className="bg-secondary text-white py-2 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center text-sm">
-            <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+62 812-3456-7890</span>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/90 backdrop-blur-md shadow-lg'
+            : 'bg-transparent'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex items-center gap-2 group relative z-10"
+              onClick={() => scrollToSection('home')}
+            >
+              <div className="relative">
+                <h1 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
+                  isScrolled ? 'text-secondary' : 'text-white drop-shadow-lg'
+                }`}>
+                  Indo<span className="text-primary">Trip</span>
+                </h1>
+                <div className={`absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full`}></div>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>info@tripwisata.com</span>
-              </div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.to || activeSection === link.section;
+
+                return (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    onClick={(e) => {
+                      if (location.pathname === '/' && link.section) {
+                        e.preventDefault();
+                        scrollToSection(link.section);
+                      }
+                    }}
+                    className={`relative font-semibold transition-all duration-300 group ${
+                      isActive
+                        ? 'text-primary'
+                        : isScrolled
+                          ? 'text-secondary hover:text-primary'
+                          : 'text-white hover:text-primary drop-shadow-md'
+                    }`}
+                  >
+                    {link.label}
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
+                  </NavLink>
+                );
+              })}
+
+              {/* CTA Button */}
+              <Link
+                to="/booking"
+                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  isScrolled
+                    ? 'bg-primary text-secondary hover:bg-primary-dark shadow-md hover:shadow-xl'
+                    : 'bg-primary text-secondary hover:bg-primary-light shadow-lg hover:shadow-xl'
+                }`}
+              >
+                Book Now
+              </Link>
             </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4" />
-              <span>Jakarta, Indonesia</span>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className={`lg:hidden p-2 rounded-lg transition-all duration-300 z-50 ${
+                isMenuOpen
+                  ? 'bg-secondary text-white'
+                  : isScrolled
+                    ? 'text-secondary hover:bg-secondary/10'
+                    : 'text-white hover:bg-white/20'
+              }`}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={toggleMenu}
+        />
+      )}
+
+      {/* Mobile Navigation - Slide from right */}
+      <div
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Mobile Menu Header */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <h2 className="text-xl font-bold text-secondary">
+              Indo<span className="text-primary">Trip</span>
+            </h2>
+            <button
+              onClick={toggleMenu}
+              className="p-2 text-secondary hover:bg-secondary/10 rounded-lg transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Links */}
+          <div className="flex-1 overflow-y-auto py-6 px-4">
+            <div className="space-y-2">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.to;
+
+                return (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    onClick={(e) => {
+                      if (location.pathname === '/' && link.section) {
+                        e.preventDefault();
+                        scrollToSection(link.section);
+                        toggleMenu();
+                      } else {
+                        toggleMenu();
+                      }
+                    }}
+                    className={`block py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                      isActive
+                        ? 'bg-primary text-secondary shadow-md'
+                        : 'text-text hover:bg-secondary/5 hover:text-primary'
+                    }`}
+                  >
+                    {link.label}
+                  </NavLink>
+                );
+              })}
             </div>
+
+            {/* Mobile CTA Button */}
+            <div className="mt-6 px-4">
+              <Link
+                to="/booking"
+                onClick={toggleMenu}
+                className="block w-full py-3 px-6 bg-primary text-secondary text-center font-semibold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 transform hover:scale-105"
+              >
+                Book Now
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile Menu Footer */}
+          <div className="p-6 border-t border-gray-200 bg-gray-50">
+            <p className="text-sm text-text-light text-center">
+              Explore the beauty of Indonesia
+            </p>
           </div>
         </div>
       </div>
-
-      {/* Main Navigation */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-primary p-2 rounded-lg group-hover:scale-110 transition-transform">
-              <MapPin className="w-6 h-6 text-secondary" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-secondary">Trip Wisata</h1>
-              <p className="text-xs text-text-light -mt-1">Explore Indonesia</p>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `font-semibold transition-colors ${
-                    isActive
-                      ? 'text-primary'
-                      : 'text-text hover:text-primary'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <Link
-              to="/booking"
-              className="btn-primary text-sm"
-            >
-              Book Now
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 text-secondary hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t bg-white">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsMenuOpen(false)}
-                className={({ isActive }) =>
-                  `block py-2 px-4 rounded-lg font-semibold transition-colors ${
-                    isActive
-                      ? 'bg-primary text-secondary'
-                      : 'text-text hover:bg-gray-100'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <Link
-              to="/booking"
-              onClick={() => setIsMenuOpen(false)}
-              className="block btn-primary text-center text-sm"
-            >
-              Book Now
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
+    </>
   );
 }
 
