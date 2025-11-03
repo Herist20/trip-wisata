@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Star, Clock, ArrowRight, Users, Award, TrendingUp, Shield, CheckCircle, ChevronDown, MessageCircle } from 'lucide-react';
+import { MapPin, Star, Clock, ArrowRight, Users, Award, TrendingUp, Shield, CheckCircle, ChevronDown, MessageCircle, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { tourPackages, testimonials, features, contactInfo } from '../data/mockData';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -13,6 +16,29 @@ function Home() {
       easing: 'ease-out-cubic',
     });
   }, []);
+
+  // Testimonial Carousel Auto-play
+  useEffect(() => {
+    if (!isHovering) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+      }, 5000); // Change slide every 5 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [isHovering]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   const scrollToContent = () => {
     const element = document.getElementById('features-highlights');
@@ -475,42 +501,173 @@ function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="section-container bg-gray-50">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="heading-secondary">Apa Kata Mereka?</h2>
-          <p className="text-lg text-text-light max-w-2xl mx-auto">
-            Testimoni dari pelanggan yang telah merasakan pengalaman bersama kami
+      {/* Testimonials Section - Carousel */}
+      <section className="relative section-container bg-gradient-to-br from-white to-gray-50 overflow-hidden">
+        {/* Section Header */}
+        <div className="text-center mb-16" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
+            <Star className="w-4 h-4 text-primary fill-primary" />
+            <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
+              Testimoni Pelanggan
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+            Apa Kata Mereka?
+          </h2>
+          <p className="text-lg text-text-light max-w-3xl mx-auto">
+            Pengalaman nyata dari pelanggan yang telah mempercayai kami untuk perjalanan mereka
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              className="bg-white p-6 rounded-xl shadow-md"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
+
+        {/* Carousel Container */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Carousel Wrapper */}
+          <div
+            className="relative overflow-hidden"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            {/* Cards Container - 3 visible on desktop */}
+            <div className="flex transition-transform duration-700 ease-out"
+              style={{
+                transform: `translateX(-${currentSlide * (100 / 3)}%)`
+              }}
             >
-              <div className="flex items-center mb-4">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full mr-3"
-                />
-                <div>
-                  <h4 className="font-semibold text-secondary">{testimonial.name}</h4>
-                  <p className="text-sm text-text-light">{testimonial.location}</p>
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="w-full lg:w-1/3 flex-shrink-0 px-3"
+                >
+                  {/* Testimonial Card */}
+                  <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full border-t-4 border-primary hover:-translate-y-2">
+                    <div className="p-8">
+                      {/* Quote Icon */}
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                          <Quote className="w-8 h-8 text-primary group-hover:text-secondary" />
+                        </div>
+                      </div>
+
+                      {/* Review Text */}
+                      <p className="text-text-light italic text-base leading-relaxed mb-6 line-clamp-4">
+                        "{testimonial.comment}"
+                      </p>
+
+                      {/* Rating Stars */}
+                      <div className="flex items-center gap-1 mb-6">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${
+                              i < testimonial.rating
+                                ? 'fill-primary text-primary'
+                                : 'fill-gray-300 text-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Divider */}
+                      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+
+                      {/* Reviewer Info */}
+                      <div className="flex items-center gap-4">
+                        {/* Photo */}
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-16 h-16 rounded-full object-cover ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all"
+                        />
+
+                        {/* Name & Location */}
+                        <div className="flex-1">
+                          <h4 className="font-bold text-secondary text-lg group-hover:text-primary transition-colors">
+                            {testimonial.name}
+                          </h4>
+                          <p className="text-sm text-text-light flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            {testimonial.location}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Tour Package Badge */}
+                      <div className="mt-6 pt-6 border-t border-gray-100">
+                        <div className="flex items-start gap-2">
+                          <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="text-xs text-text-light mb-1">Tour Package</p>
+                            <p className="text-sm font-semibold text-secondary">{testimonial.tour}</p>
+                          </div>
+                        </div>
+                        {testimonial.guideName && (
+                          <div className="flex items-start gap-2 mt-3">
+                            <Users className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                            <div>
+                              <p className="text-xs text-text-light mb-1">Tour Guide</p>
+                              <p className="text-sm font-semibold text-secondary">{testimonial.guideName}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex mb-2">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-              <p className="text-text-light text-sm">{testimonial.comment}</p>
-              <p className="text-xs text-primary mt-2 font-semibold">{testimonial.tour}</p>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white hover:bg-primary text-secondary hover:text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white hover:bg-primary text-secondary hover:text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Navigation Dots */}
+          <div className="flex items-center justify-center gap-2 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  currentSlide === index
+                    ? 'w-8 h-3 bg-primary'
+                    : 'w-3 h-3 bg-gray-300 hover:bg-primary/50'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Bar */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up">
+          <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+            <p className="text-4xl font-bold text-primary mb-2">{testimonials.length}+</p>
+            <p className="text-sm text-text-light">Happy Reviews</p>
+          </div>
+          <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+            <p className="text-4xl font-bold text-primary mb-2">4.9/5</p>
+            <p className="text-sm text-text-light">Average Rating</p>
+          </div>
+          <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+            <p className="text-4xl font-bold text-primary mb-2">500+</p>
+            <p className="text-sm text-text-light">Happy Travelers</p>
+          </div>
+          <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+            <p className="text-4xl font-bold text-primary mb-2">100%</p>
+            <p className="text-sm text-text-light">Satisfaction</p>
+          </div>
         </div>
       </section>
 

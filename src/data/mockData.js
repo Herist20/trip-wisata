@@ -106,40 +106,84 @@ export const tourPackages = [
 export const testimonials = [
   {
     id: 1,
-    name: 'Andi Wijaya',
+    name: 'Sarah Wijaya',
     location: 'Jakarta',
     rating: 5,
-    comment: 'Pengalaman yang luar biasa! Tour guide sangat ramah dan profesional. Semua serba terorganisir dengan baik.',
-    image: 'https://i.pravatar.cc/150?img=12',
-    tour: 'Bali Paradise Tour',
+    comment: 'Pengalaman luar biasa! Guide kami, Mas Budi, sangat helpful dan berpengetahuan luas tentang sejarah Borobudur. Semua terorganisir dengan baik, hotel nyaman, dan makanan enak. Pasti akan booking lagi!',
+    image: 'https://i.pravatar.cc/150?img=45',
+    tour: 'Yogyakarta Culture Trip',
+    guideName: 'Mas Budi'
   },
   {
     id: 2,
-    name: 'Siti Nurhaliza',
+    name: 'Rahman Hidayat',
     location: 'Surabaya',
     rating: 5,
-    comment: 'Sunrise di Bromo benar-benar spektakuler! Worth every penny. Highly recommended!',
-    image: 'https://i.pravatar.cc/150?img=45',
+    comment: 'Sunrise di Bromo benar-benar spektakuler! Mbak Sari, tour guide kami, sangat perhatian dan memastikan semua peserta nyaman. Jeep 4x4 nya juga dalam kondisi prima. Worth every penny!',
+    image: 'https://i.pravatar.cc/150?img=12',
     tour: 'Bromo Sunrise Adventure',
+    guideName: 'Mbak Sari'
   },
   {
     id: 3,
-    name: 'Budi Santoso',
+    name: 'Dian Puspita',
     location: 'Bandung',
-    rating: 4,
-    comment: 'Pelayanan memuaskan, destinasi sangat bagus. Sedikit kendala di transportasi tapi overall sangat bagus.',
-    image: 'https://i.pravatar.cc/150?img=33',
-    tour: 'Komodo Island Expedition',
+    rating: 5,
+    comment: 'Paket Bali ini sangat worth it! Dari Tanah Lot, Ubud, sampai pantai-pantai cantik, semuanya tercover. Pak Wayan sebagai guide sangat ramah dan banyak kasih rekomendasi tempat makan lokal yang enak.',
+    image: 'https://i.pravatar.cc/150?img=25',
+    tour: 'Bali Paradise Tour',
+    guideName: 'Pak Wayan'
   },
   {
     id: 4,
-    name: 'Dewi Lestari',
+    name: 'Andi Prasetyo',
+    location: 'Semarang',
+    rating: 5,
+    comment: 'Raja Ampat adalah surga dunia! Diving spots nya luar biasa, instruktur diving sangat profesional dan sabar. Kapal yang disediakan juga nyaman untuk menginap. Highly recommended untuk para diver!',
+    image: 'https://i.pravatar.cc/150?img=33',
+    tour: 'Raja Ampat Diving Experience',
+    guideName: 'Kak Anton'
+  },
+  {
+    id: 5,
+    name: 'Fitri Handayani',
+    location: 'Medan',
+    rating: 5,
+    comment: 'Trip ke Komodo sangat berkesan! Lihat komodo dari dekat, snorkeling di Pink Beach yang cantik, dan sunset di Padar Island. Tour guide Kak Rian sangat informatif tentang konservasi komodo.',
+    image: 'https://i.pravatar.cc/150?img=47',
+    tour: 'Komodo Island Explorer',
+    guideName: 'Kak Rian'
+  },
+  {
+    id: 6,
+    name: 'Bagus Setiawan',
+    location: 'Yogyakarta',
+    rating: 5,
+    comment: 'Liburan keluarga ke Lombok sangat menyenangkan! Gili Islands nya indah banget, resort nya nyaman, dan water sports nya seru. Mas Rizky tour guide nya juga baik sama anak-anak. Recommended!',
+    image: 'https://i.pravatar.cc/150?img=51',
+    tour: 'Lombok Beach Escape',
+    guideName: 'Mas Rizky'
+  },
+  {
+    id: 7,
+    name: 'Nina Marlina',
     location: 'Bali',
     rating: 5,
-    comment: 'Raja Ampat adalah surga! Diving experience terbaik dalam hidup saya. Tim sangat berpengalaman.',
-    image: 'https://i.pravatar.cc/150?img=25',
-    tour: 'Raja Ampat Diving',
+    comment: 'Pelayanan dari awal booking sampai selesai tour sangat memuaskan. Customer service nya responsif, guide nya profesional, dan semua jadwal sesuai plan. Great experience overall!',
+    image: 'https://i.pravatar.cc/150?img=26',
+    tour: 'Bali Paradise Tour',
+    guideName: 'Pak Made'
   },
+  {
+    id: 8,
+    name: 'Rudi Hermawan',
+    location: 'Makassar',
+    rating: 5,
+    comment: 'Bromo sunrise memang tidak pernah mengecewakan! Meskipun harus bangun pagi, pemandangannya sangat worth it. Mas Joko guide nya sangat membantu dan foto-fotonya bagus. Thanks IndoTrip!',
+    image: 'https://i.pravatar.cc/150?img=15',
+    tour: 'Bromo Sunrise Adventure',
+    guideName: 'Mas Joko'
+  }
 ];
 
 export const galleries = [
