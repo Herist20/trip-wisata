@@ -177,29 +177,162 @@ function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="section-container bg-gray-50">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="heading-secondary">Mengapa Memilih Kami?</h2>
-          <p className="text-lg text-text-light max-w-2xl mx-auto">
-            Kami memberikan layanan terbaik untuk pengalaman wisata yang tak terlupakan
-          </p>
+      {/* Why Choose Us Section - Trust Building */}
+      <section className="relative section-container bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23024F83' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={feature.id}
-              className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition-shadow"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-secondary text-2xl font-bold">{index + 1}</span>
-              </div>
-              <h3 className="text-xl font-semibold text-secondary mb-2">{feature.title}</h3>
-              <p className="text-text-light">{feature.description}</p>
+
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          {/* Left Side - Content (Mobile: First) */}
+          <div className="order-2 lg:order-1" data-aos="fade-right">
+            {/* Small Tag */}
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
+                Mengapa Memilih Kami
+              </span>
             </div>
-          ))}
+
+            {/* Accent Line */}
+            <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-primary-light rounded-full mb-6"></div>
+
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-6 leading-tight">
+              Pengalaman Wisata
+              <br />
+              <span className="text-primary">Terbaik di Indonesia</span>
+            </h2>
+
+            {/* Description */}
+            <p className="text-lg text-text-light mb-10 leading-relaxed">
+              Kami berkomitmen memberikan pengalaman liburan yang tak terlupakan dengan
+              layanan profesional, harga transparan, dan dukungan penuh dari awal hingga
+              akhir perjalanan Anda. Kepuasan dan kenyamanan Anda adalah prioritas utama kami.
+            </p>
+
+            {/* Keunggulan List */}
+            <div className="space-y-6">
+              {[
+                {
+                  icon: Users,
+                  title: 'Tour Guide Profesional & Berpengalaman',
+                  description: 'Tim tour guide bersertifikat dengan pengetahuan mendalam tentang destinasi dan budaya lokal',
+                  number: '01'
+                },
+                {
+                  icon: Shield,
+                  title: 'Harga Transparan Tanpa Biaya Tersembunyi',
+                  description: 'Semua biaya dijelaskan dengan jelas di awal, tidak ada biaya tambahan yang mengejutkan',
+                  number: '02'
+                },
+                {
+                  icon: CheckCircle,
+                  title: 'Asuransi Perjalanan Included',
+                  description: 'Setiap paket tour sudah termasuk asuransi perjalanan untuk keamanan dan ketenangan pikiran Anda',
+                  number: '03'
+                },
+                {
+                  icon: Award,
+                  title: 'Flexible Cancellation Policy',
+                  description: 'Kebijakan pembatalan yang fleksibel dengan refund penuh hingga 7 hari sebelum keberangkatan',
+                  number: '04'
+                },
+                {
+                  icon: MessageCircle,
+                  title: '24/7 Customer Support',
+                  description: 'Tim customer support kami siap membantu Anda kapan saja, sebelum, selama, dan setelah perjalanan',
+                  number: '05'
+                }
+              ].map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group flex gap-4 p-5 bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    {/* Number Badge & Icon */}
+                    <div className="flex-shrink-0">
+                      <div className="relative">
+                        {/* Number Badge */}
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-secondary font-bold text-xs rounded-full flex items-center justify-center shadow-lg z-10">
+                          {item.number}
+                        </div>
+
+                        {/* Icon Container */}
+                        <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <IconComponent className="w-7 h-7 text-primary" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 pt-1">
+                      <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-text-light leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Side - Image (Mobile: Second) */}
+          <div className="order-1 lg:order-2" data-aos="fade-left">
+            <div className="relative">
+              {/* Main Image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80"
+                  alt="Professional Tour Guide helping tourists"
+                  className="w-full h-[600px] object-cover"
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 to-transparent"></div>
+              </div>
+
+              {/* Floating Stats Cards */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-2xl" data-aos="zoom-in" data-aos-delay="200">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center">
+                    <TrendingUp className="w-8 h-8 text-secondary" />
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-secondary">4.9/5</p>
+                    <p className="text-sm text-text-light">Customer Rating</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-2xl" data-aos="zoom-in" data-aos-delay="300">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-secondary rounded-xl flex items-center justify-center">
+                    <Users className="w-8 h-8 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-secondary">500+</p>
+                    <p className="text-sm text-text-light">Happy Travelers</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -z-10 -top-8 -right-8 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+              <div className="absolute -z-10 -bottom-8 -left-8 w-40 h-40 bg-secondary/20 rounded-full blur-3xl"></div>
+            </div>
+          </div>
+
         </div>
       </section>
 
