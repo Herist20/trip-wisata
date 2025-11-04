@@ -54,6 +54,40 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Handle keyboard navigation for mobile menu
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+
+      // Trap focus within mobile menu
+      if (e.key === 'Tab') {
+        const mobileMenu = document.querySelector('[data-mobile-menu]');
+        if (!mobileMenu) return;
+
+        const focusableElements = mobileMenu.querySelectorAll(
+          'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
+
   const navLinks = [
     { to: '/', label: 'Home', section: 'home' },
     { to: '/tours', label: 'Tour Packages', section: 'tour-packages' },
@@ -84,14 +118,19 @@ function Header() {
             ? 'bg-white/90 backdrop-blur-md shadow-lg'
             : 'bg-transparent'
         }`}
+        role="banner"
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          aria-label="Main navigation"
+        >
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link
               to="/"
               className="flex items-center gap-2 group relative z-10"
               onClick={() => scrollToSection('home')}
+              aria-label="IndoTrip - Go to homepage"
             >
               <div className="relative">
                 <h1 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
@@ -99,7 +138,7 @@ function Header() {
                 }`}>
                   Indo<span className="text-primary">Trip</span>
                 </h1>
-                <div className={`absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full`}></div>
+                <div className={`absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full`} aria-hidden="true"></div>
               </div>
             </Link>
 
@@ -157,9 +196,15 @@ function Header() {
                     ? 'text-secondary hover:bg-secondary/10'
                     : 'text-white hover:bg-white/20'
               }`}
-              aria-label="Toggle menu"
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </nav>
@@ -170,14 +215,19 @@ function Header() {
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={toggleMenu}
+          aria-hidden="true"
         />
       )}
 
       {/* Mobile Navigation - Slide from right */}
-      <div
+      <aside
+        id="mobile-menu"
+        data-mobile-menu
         className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
+        aria-label="Mobile navigation"
+        aria-hidden={!isMenuOpen}
       >
         <div className="flex flex-col h-full">
           {/* Mobile Menu Header */}
@@ -188,9 +238,9 @@ function Header() {
             <button
               onClick={toggleMenu}
               className="p-2 text-secondary hover:bg-secondary/10 rounded-lg transition-colors"
-              aria-label="Close menu"
+              aria-label="Close navigation menu"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
 
@@ -244,7 +294,7 @@ function Header() {
             </p>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }
