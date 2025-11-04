@@ -146,11 +146,11 @@ function TourCard({ tour, onQuickView }) {
           </div>
 
           <Link
-            to={`/booking?tour=${tour.id}`}
+            to={`/tours/${tour.id}`}
             className="group/btn bg-secondary hover:bg-primary text-white hover:text-secondary font-semibold px-5 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
           >
             <span className="flex items-center gap-2">
-              Book Now
+              View Details
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </span>
           </Link>

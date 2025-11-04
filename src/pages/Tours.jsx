@@ -261,16 +261,24 @@ function Tours() {
                   </div>
                 </div>
 
-                {/* CTA Button */}
-                <Link
-                  to={`/booking?tour=${tour.id}`}
-                  className="block w-full bg-primary hover:bg-primary-light text-secondary font-bold py-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    Book This Tour
-                    <ArrowRight className="w-5 h-5" />
-                  </span>
-                </Link>
+                {/* CTA Buttons */}
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    to={`/tours/${tour.id}`}
+                    className="block w-full bg-secondary hover:bg-secondary-light text-white font-bold py-4 rounded-xl text-center transition-all duration-300 shadow-lg"
+                  >
+                    View Full Details
+                  </Link>
+                  <Link
+                    to={`/booking?tour=${tour.id}`}
+                    className="block w-full bg-primary hover:bg-primary-light text-secondary font-bold py-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      Book Now
+                      <ArrowRight className="w-5 h-5" />
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
