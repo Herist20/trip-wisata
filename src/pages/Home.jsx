@@ -151,22 +151,6 @@ function Home() {
               Hubungi Kami
             </Link>
           </div>
-
-          {/* Scroll Indicator */}
-          <button
-            onClick={scrollToContent}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer group"
-            data-aos="fade-up"
-            data-aos-delay="400"
-            aria-label="Scroll to content"
-          >
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">
-                Scroll untuk lebih lanjut
-              </span>
-              <ChevronDown className="w-6 h-6" />
-            </div>
-          </button>
         </div>
       </section>
 
