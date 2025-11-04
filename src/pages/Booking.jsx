@@ -349,7 +349,7 @@ function Booking() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Progress Indicator */}
-      <div className="bg-white border-b sticky top-20 z-40 shadow-sm">
+      <div className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
           {/* Booking Type Badge */}
           <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4 gap-2">
