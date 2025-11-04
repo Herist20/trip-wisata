@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Star, Clock, ArrowRight, CheckCircle, Calendar, Users, Eye } from 'lucide-react';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
-function TourCard({ tour, onQuickView }) {
+const TourCard = memo(function TourCard({ tour, onQuickView }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const formatDate = (dateString) => {
@@ -158,6 +158,6 @@ function TourCard({ tour, onQuickView }) {
       </div>
     </div>
   );
-}
+});
 
 export default TourCard;

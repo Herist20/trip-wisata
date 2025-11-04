@@ -675,16 +675,37 @@ function Home() {
       {/* Newsletter Section */}
       <Newsletter />
 
-      {/* CTA Section */}
-      <section className="section-container bg-gradient-custom text-white">
-        <div className="text-center max-w-3xl mx-auto" data-aos="fade-up">
-          <h2 className="text-4xl font-bold mb-6">Siap Untuk Petualangan Berikutnya?</h2>
-          <p className="text-xl mb-8">
-            Hubungi kami sekarang dan dapatkan penawaran spesial untuk paket tour impian Anda
-          </p>
-          <Link to="/booking" className="btn-primary inline-block">
-            Mulai Booking Sekarang
-          </Link>
+      {/* CTA Section - Full Width */}
+      <section className="w-full bg-gradient-to-r from-secondary via-secondary-light to-primary text-white py-20 md:py-28 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+              Siap Untuk Petualangan Berikutnya?
+            </h2>
+            <p className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto text-white/90">
+              Hubungi kami sekarang dan dapatkan penawaran spesial untuk paket tour impian Anda
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                to="/booking"
+                className="btn-primary inline-flex items-center gap-2 px-8 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Mulai Booking Sekarang
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+              <Link
+                to="/tours"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-bold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                Lihat Paket Tour
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
