@@ -4,6 +4,8 @@ import { ChevronRight, SlidersHorizontal, X, Loader2, MapPin, Clock, Star, Check
 import { tourPackages } from '../data/mockData';
 import TourCard from '../components/tours/TourCard';
 import FilterSidebar from '../components/tours/FilterSidebar';
+import { SkeletonCard } from '../components/common/Skeleton';
+import { EmptyTours } from '../components/common/EmptyState';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -388,20 +390,9 @@ function Tours() {
 
             {/* Loading State */}
             {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
-                    <div className="h-72 bg-gray-300"></div>
-                    <div className="p-6 space-y-4">
-                      <div className="h-6 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                      <div className="space-y-2">
-                        <div className="h-3 bg-gray-200 rounded"></div>
-                        <div className="h-3 bg-gray-200 rounded"></div>
-                      </div>
-                      <div className="h-12 bg-gray-300 rounded"></div>
-                    </div>
-                  </div>
+                  <SkeletonCard key={i} />
                 ))}
               </div>
             ) : filteredTours.length > 0 ? (
@@ -418,7 +409,7 @@ function Tours() {
                   <div className="text-center">
                     <button
                       onClick={handleLoadMore}
-                      className="inline-flex items-center gap-2 bg-secondary hover:bg-primary text-white hover:text-secondary font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                      className="inline-flex items-center gap-2 bg-secondary hover:bg-primary text-white hover:text-secondary font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg btn-animate hover-lift"
                     >
                       Load More Tours
                       <Loader2 className="w-5 h-5" />
@@ -431,23 +422,8 @@ function Tours() {
               </>
             ) : (
               // Empty State
-              <div className="text-center py-20 bg-white rounded-2xl shadow-lg" data-aos="fade-up">
-                <div className="max-w-md mx-auto">
-                  <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <SlidersHorizontal className="w-12 h-12 text-gray-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-secondary mb-3">No Tours Found</h3>
-                  <p className="text-text-light mb-6">
-                    Tidak ada paket tour yang sesuai dengan filter Anda. Coba sesuaikan filter atau
-                    reset untuk melihat semua paket tour.
-                  </p>
-                  <button
-                    onClick={handleResetFilters}
-                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-secondary font-bold px-6 py-3 rounded-xl transition-all duration-300"
-                  >
-                    Reset All Filters
-                  </button>
-                </div>
+              <div className="bg-white rounded-2xl shadow-lg" data-aos="fade-up">
+                <EmptyTours filters={filters} onReset={handleResetFilters} />
               </div>
             )}
           </div>
