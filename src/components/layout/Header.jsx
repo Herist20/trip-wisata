@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
 
   // Handle scroll event for glassmorphism effect
@@ -13,20 +12,6 @@ function Header() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
-
-      // Scroll spy for active section detection
-      const sections = ['home', 'tour-packages', 'booking', 'gallery', 'about'];
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -89,34 +74,20 @@ function Header() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { to: '/', label: 'Home', section: 'home' },
-    { to: '/tours', label: 'Tour Packages', section: 'tour-packages' },
-    { to: '/booking', label: 'Booking', section: 'booking' },
-    { to: '/gallery', label: 'Gallery', section: 'gallery' },
-    { to: '/about', label: 'About Us', section: 'about' },
+    { to: '/', label: 'Home' },
+    { to: '/tours', label: 'Tour Packages' },
+    { to: '/booking', label: 'Booking' },
+    { to: '/gallery', label: 'Gallery' },
+    { to: '/about', label: 'About Us' },
   ];
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80; // Header height offset
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/90 backdrop-blur-md shadow-lg'
-            : 'bg-transparent'
+            ? 'bg-white/95 backdrop-blur-md shadow-lg'
+            : 'bg-secondary/80 backdrop-blur-sm shadow-md'
         }`}
         role="banner"
       >
@@ -129,14 +100,13 @@ function Header() {
             <Link
               to="/"
               className="flex items-center gap-2 group relative z-10"
-              onClick={() => scrollToSection('home')}
               aria-label="IndoTrip - Go to homepage"
             >
               <div className="relative">
                 <h1 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
-                  isScrolled ? 'text-secondary' : 'text-white drop-shadow-lg'
+                  isScrolled ? 'text-secondary' : 'text-white'
                 }`}>
-                  Indo<span className="text-primary">Trip</span>
+                  Indo<span className={`${isScrolled ? 'text-primary' : 'text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]'}`}>Trip</span>
                 </h1>
                 <div className={`absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full`} aria-hidden="true"></div>
               </div>
@@ -144,34 +114,28 @@ function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => {
-                const isActive = location.pathname === link.to || activeSection === link.section;
-
-                return (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    onClick={(e) => {
-                      if (location.pathname === '/' && link.section) {
-                        e.preventDefault();
-                        scrollToSection(link.section);
-                      }
-                    }}
-                    className={`relative font-semibold transition-all duration-300 group ${
-                      isActive
-                        ? 'text-primary'
-                        : isScrolled
-                          ? 'text-secondary hover:text-primary'
-                          : 'text-white hover:text-primary drop-shadow-md'
-                    }`}
-                  >
-                    {link.label}
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}></span>
-                  </NavLink>
-                );
-              })}
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) => `relative font-semibold transition-all duration-300 group ${
+                    isActive
+                      ? 'text-primary'
+                      : isScrolled
+                        ? 'text-secondary hover:text-primary'
+                        : 'text-white hover:text-primary'
+                  }`}
+                >
+                  {({ isActive }) => (
+                    <>
+                      {link.label}
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}></span>
+                    </>
+                  )}
+                </NavLink>
+              ))}
 
               {/* CTA Button */}
               <Link
@@ -247,32 +211,20 @@ function Header() {
           {/* Mobile Menu Links */}
           <div className="flex-1 overflow-y-auto py-6 px-4">
             <div className="space-y-2">
-              {navLinks.map((link) => {
-                const isActive = location.pathname === link.to;
-
-                return (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    onClick={(e) => {
-                      if (location.pathname === '/' && link.section) {
-                        e.preventDefault();
-                        scrollToSection(link.section);
-                        toggleMenu();
-                      } else {
-                        toggleMenu();
-                      }
-                    }}
-                    className={`block py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                      isActive
-                        ? 'bg-primary text-secondary shadow-md'
-                        : 'text-text hover:bg-secondary/5 hover:text-primary'
-                    }`}
-                  >
-                    {link.label}
-                  </NavLink>
-                );
-              })}
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  onClick={toggleMenu}
+                  className={({ isActive }) => `block py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                    isActive
+                      ? 'bg-primary text-secondary shadow-md'
+                      : 'text-text hover:bg-secondary/5 hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
             </div>
 
             {/* Mobile CTA Button */}
