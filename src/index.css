@@ -405,17 +405,19 @@ select:focus-visible {
 
 /* Touch Target - Minimum 44x44px */
 @media (pointer: coarse) {
-  button:not(.w-6):not(.w-7):not(.w-8),
+  button:not(.w-2):not(.w-3):not(.w-4):not(.w-5):not(.w-6):not(.w-7):not(.w-8):not(.w-9):not(.w-10):not(.h-2):not(.h-3):not(.h-4):not(.h-5):not(.h-6):not(.h-7):not(.h-8):not(.h-9):not(.h-10),
   a {
     min-height: 44px;
     min-width: 44px;
   }
 
-  /* Remove min-size for checkbox and radio to allow custom sizing */
+  /* Remove min-size for checkbox, radio, and small indicator buttons */
   input[type="checkbox"],
-  input[type="radio"] {
-    min-height: unset;
-    min-width: unset;
+  input[type="radio"],
+  button[aria-label*="Go to"],
+  .carousel-dot {
+    min-height: unset !important;
+    min-width: unset !important;
   }
 }
 

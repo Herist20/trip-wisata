@@ -9,6 +9,7 @@ import Newsletter from '../components/home/Newsletter';
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [slidesPerView, setSlidesPerView] = useState(3);
 
   useEffect(() => {
     AOS.init({
@@ -18,27 +19,53 @@ function Home() {
     });
   }, []);
 
+  // Track screen size for responsive slides
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      if (window.innerWidth < 768) {
+        setSlidesPerView(1); // Mobile: 1 slide
+      } else if (window.innerWidth < 1024) {
+        setSlidesPerView(2); // Tablet: 2 slides
+      } else {
+        setSlidesPerView(3); // Desktop: 3 slides
+      }
+    };
+
+    updateSlidesPerView();
+    window.addEventListener('resize', updateSlidesPerView);
+    return () => window.removeEventListener('resize', updateSlidesPerView);
+  }, []);
+
   // Testimonial Carousel Auto-play
   useEffect(() => {
     if (!isHovering) {
+      const maxSlide = testimonials.length - slidesPerView;
       const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+        setCurrentSlide((prev) => {
+          if (prev >= maxSlide) return 0;
+          return prev + 1;
+        });
       }, 5000); // Change slide every 5 seconds
 
       return () => clearInterval(interval);
     }
-  }, [isHovering]);
+  }, [isHovering, slidesPerView]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+    const maxSlide = testimonials.length - slidesPerView;
+    setCurrentSlide((prev) => (prev >= maxSlide ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    const maxSlide = testimonials.length - slidesPerView;
+    setCurrentSlide((prev) => (prev <= 0 ? maxSlide : prev - 1));
   };
 
   const goToSlide = (index) => {
-    setCurrentSlide(index);
+    const maxSlide = testimonials.length - slidesPerView;
+    if (index <= maxSlide) {
+      setCurrentSlide(index);
+    }
   };
 
   const scrollToContent = () => {
@@ -487,7 +514,7 @@ function Home() {
       </section>
 
       {/* Testimonials Section - Carousel */}
-      <section className="relative section-container bg-gradient-to-br from-white to-gray-50 overflow-hidden">
+      <section className="relative section-container bg-gradient-to-br from-white to-gray-50">
         {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
@@ -505,45 +532,45 @@ function Home() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-20">
           {/* Carousel Wrapper */}
           <div
-            className="relative overflow-hidden"
+            className="relative overflow-x-hidden py-8 sm:py-10 md:py-12"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            {/* Cards Container - 3 visible on desktop */}
+            {/* Cards Container - Responsive */}
             <div className="flex transition-transform duration-700 ease-out"
               style={{
-                transform: `translateX(-${currentSlide * (100 / 3)}%)`
+                transform: `translateX(-${currentSlide * (100 / slidesPerView)}%)`
               }}
             >
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="w-full lg:w-1/3 flex-shrink-0 px-3"
+                  className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-2 sm:px-3"
                 >
                   {/* Testimonial Card */}
-                  <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full border-t-4 border-primary hover:-translate-y-2">
-                    <div className="p-8">
+                  <div className="group bg-white rounded-2xl transition-all duration-300 overflow-hidden h-full border-t-4 border-primary hover:-translate-y-2">
+                    <div className="p-5 sm:p-6 md:p-8">
                       {/* Quote Icon */}
-                      <div className="mb-6">
-                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                          <Quote className="w-8 h-8 text-primary group-hover:text-secondary" />
+                      <div className="mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                          <Quote className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary group-hover:text-secondary" />
                         </div>
                       </div>
 
                       {/* Review Text */}
-                      <p className="text-text-light italic text-base leading-relaxed mb-6 line-clamp-4">
+                      <p className="text-text-light italic text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 line-clamp-4">
                         "{testimonial.comment}"
                       </p>
 
                       {/* Rating Stars */}
-                      <div className="flex items-center gap-1 mb-6">
+                      <div className="flex items-center gap-1 mb-4 sm:mb-6">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`w-5 h-5 ${
+                            className={`w-4 h-4 sm:w-5 sm:h-5 ${
                               i < testimonial.rating
                                 ? 'fill-primary text-primary'
                                 : 'fill-gray-300 text-gray-300'
@@ -553,23 +580,23 @@ function Home() {
                       </div>
 
                       {/* Divider */}
-                      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+                      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-4 sm:mb-6"></div>
 
                       {/* Reviewer Info */}
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3 sm:gap-4">
                         {/* Photo */}
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
-                          className="w-16 h-16 rounded-full object-cover ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all"
+                          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover ring-2 sm:ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all"
                         />
 
                         {/* Name & Location */}
                         <div className="flex-1">
-                          <h4 className="font-bold text-secondary text-lg group-hover:text-primary transition-colors">
+                          <h4 className="font-bold text-secondary text-base sm:text-lg group-hover:text-primary transition-colors">
                             {testimonial.name}
                           </h4>
-                          <p className="text-sm text-text-light flex items-center gap-1">
+                          <p className="text-xs sm:text-sm text-text-light flex items-center gap-1">
                             <MapPin className="w-3 h-3" />
                             {testimonial.location}
                           </p>
@@ -577,7 +604,7 @@ function Home() {
                       </div>
 
                       {/* Tour Package Badge */}
-                      <div className="mt-6 pt-6 border-t border-gray-100">
+                      <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-100">
                         <div className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                           <div>
@@ -605,29 +632,29 @@ function Home() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white hover:bg-primary text-secondary hover:text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            className="absolute -left-1 sm:left-0 md:left-1 lg:-left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-primary text-secondary hover:text-white w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full shadow-lg sm:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white hover:bg-primary text-secondary hover:text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            className="absolute -right-1 sm:right-0 md:right-1 lg:-right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-primary text-secondary hover:text-white w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full shadow-lg sm:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Navigation Dots */}
-          <div className="flex items-center justify-center gap-2 mt-12">
-            {testimonials.map((_, index) => (
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-8 sm:mt-12">
+            {Array.from({ length: testimonials.length - slidesPerView + 1 }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 rounded-full ${
+                className={`carousel-dot transition-all duration-300 rounded-full p-0 border-0 ${
                   currentSlide === index
-                    ? 'w-8 h-3 bg-primary'
-                    : 'w-3 h-3 bg-gray-300 hover:bg-primary/50'
+                    ? 'w-5 h-2 sm:w-8 sm:h-3 bg-primary'
+                    : 'w-2 h-2 sm:w-3 sm:h-3 bg-gray-300 hover:bg-primary/50'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
