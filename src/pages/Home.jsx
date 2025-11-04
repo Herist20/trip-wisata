@@ -4,7 +4,7 @@ import { tourPackages, testimonials, features, contactInfo } from '../data/mockD
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Newsletter from '../components/home/Newsletter';
+// import Newsletter from '../components/home/Newsletter';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -683,8 +683,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <Newsletter />
+      {/* Newsletter Section - Commented Out */}
+      {/* <Newsletter /> */}
 
       {/* CTA Section - Full Width */}
       <section className="w-full bg-gradient-to-r from-secondary via-secondary-light to-primary text-white py-20 md:py-28 lg:py-32">

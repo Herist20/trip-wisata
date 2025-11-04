@@ -310,12 +310,12 @@ function ChatBot() {
           )}
         </div>
 
-        {/* Notification Badge */}
-        {!isOpen && (
+        {/* Notification Badge - Commented Out */}
+        {/* {!isOpen && (
           <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-bounce">
             <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
           </div>
-        )}
+        )} */}
       </button>
 
       {/* Tooltip - only when closed */}

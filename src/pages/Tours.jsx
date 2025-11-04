@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, SlidersHorizontal, X, Loader2, MapPin, Clock, Star, CheckCircle, Calendar, ArrowRight } from 'lucide-react';
+import { ChevronRight, SlidersHorizontal, X, Loader2, MapPin, Clock, Star, CheckCircle, Calendar, ArrowRight, Search } from 'lucide-react';
 import { tourPackages } from '../data/mockData';
 import TourCard from '../components/tours/TourCard';
 import FilterSidebar from '../components/tours/FilterSidebar';
@@ -25,6 +25,8 @@ function Tours() {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [quickViewTour, setQuickViewTour] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const toursPerPage = 9;
 
   useEffect(() => {
@@ -42,6 +44,20 @@ function Tours() {
     // Simulate processing delay
     setTimeout(() => {
       let filtered = [...tourPackages];
+
+      // Filter by search query
+      if (searchQuery.trim() !== '') {
+        const query = searchQuery.toLowerCase();
+        filtered = filtered.filter((tour) => {
+          return (
+            tour.title.toLowerCase().includes(query) ||
+            tour.description.toLowerCase().includes(query) ||
+            tour.destination.toLowerCase().includes(query) ||
+            tour.category.toLowerCase().includes(query) ||
+            tour.highlights.some(highlight => highlight.toLowerCase().includes(query))
+          );
+        });
+      }
 
       // Filter by destinations
       if (filters.destinations.length > 0) {
@@ -100,7 +116,7 @@ function Tours() {
       setCurrentPage(1);
       setIsLoading(false);
     }, 500);
-  }, [filters, sortBy]);
+  }, [filters, sortBy, searchQuery]);
 
   // Pagination
   useEffect(() => {
@@ -125,6 +141,7 @@ function Tours() {
       rating: null,
     });
     setSortBy('popular');
+    setSearchQuery('');
   };
 
   const handleApplyFilters = () => {
@@ -353,6 +370,29 @@ function Tours() {
 
           {/* Main Content Area */}
           <div className="flex-1">
+            {/* Search Bar */}
+            <div className="mb-6" data-aos="fade-up">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Cari paket tour berdasarkan nama, destinasi, atau kategori..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium transition-all hover:border-gray-400 shadow-sm"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-secondary transition-colors"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
+            </div>
+
             {/* Toolbar */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 bg-white p-4 rounded-xl shadow-md">
               <div>
@@ -360,6 +400,9 @@ function Tours() {
                   Menampilkan{' '}
                   <span className="font-bold text-secondary">{filteredTours.length}</span> paket
                   tour
+                  {searchQuery && (
+                    <span className="text-primary font-semibold"> untuk "{searchQuery}"</span>
+                  )}
                 </p>
               </div>
 
@@ -374,17 +417,44 @@ function Tours() {
                 </button>
 
                 {/* Sort Dropdown */}
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="flex-1 sm:flex-initial px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                >
-                  <option value="popular">Populer</option>
-                  <option value="price-low">Harga: Rendah ke Tinggi</option>
-                  <option value="price-high">Harga: Tinggi ke Rendah</option>
-                  <option value="rating">Rating Tertinggi</option>
-                  <option value="duration">Durasi Terpendek</option>
-                </select>
+                <div className="relative flex-1 sm:flex-initial">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => {
+                      setSortBy(e.target.value);
+                      setIsDropdownOpen(false);
+                    }}
+                    onClick={(e) => {
+                      // Toggle state saat diklik
+                      setIsDropdownOpen(!isDropdownOpen);
+                    }}
+                    onBlur={() => setIsDropdownOpen(false)}
+                    className="w-full px-4 py-2.5 pr-10 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium text-secondary appearance-none bg-white cursor-pointer transition-all hover:border-gray-400 shadow-sm"
+                  >
+                    <option value="popular">Populer</option>
+                    <option value="price-low">Harga: Rendah ke Tinggi</option>
+                    <option value="price-high">Harga: Tinggi ke Rendah</option>
+                    <option value="rating">Rating Tertinggi</option>
+                    <option value="duration">Durasi Terpendek</option>
+                  </select>
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg
+                      className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+                        isDropdownOpen ? 'rotate-180' : 'rotate-0'
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
