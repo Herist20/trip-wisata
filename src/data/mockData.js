@@ -61,7 +61,7 @@ export const tourPackages = [
   },
   {
     id: 4,
-    title: 'Raja Ampat Diving Experience',
+    title: 'Raja Ampat Diving',
     destination: 'Raja Ampat',
     duration: '5 Hari 4 Malam',
     durationShort: '5D4N',
@@ -519,7 +519,7 @@ export const testimonials = [
     rating: 5,
     comment: 'Raja Ampat adalah surga dunia! Diving spots nya luar biasa, instruktur diving sangat profesional dan sabar. Kapal yang disediakan juga nyaman untuk menginap. Highly recommended untuk para diver!',
     image: 'https://i.pravatar.cc/150?img=33',
-    tour: 'Raja Ampat Diving Experience',
+    tour: 'Raja Ampat Diving',
     guideName: 'Kak Anton'
   },
   {

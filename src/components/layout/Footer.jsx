@@ -30,9 +30,15 @@ function Footer() {
                 <h3 className="text-2xl font-bold mb-1">
                   Indo<span className="text-primary">Trip</span>
                 </h3>
-                <p className="text-sm text-white/70 group-hover:text-primary transition-colors">
+                <p className="text-sm text-white/70 group-hover:text-primary transition-colors mb-3">
                   Explore the Beauty of Indonesia
                 </p>
+                {/* Logo Image */}
+                <img
+                  src="/images/logo-asita.webp"
+                  alt="IndoTrip Logo"
+                  className="h-24 w-auto object-contain mt-2 opacity-90 group-hover:opacity-100 transition-opacity"
+                />
               </Link>
             </div>
 

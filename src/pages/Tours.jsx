@@ -390,7 +390,7 @@ function Tours() {
 
             {/* Loading State */}
             {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[...Array(6)].map((_, i) => (
                   <SkeletonCard key={i} />
                 ))}
@@ -398,7 +398,7 @@ function Tours() {
             ) : filteredTours.length > 0 ? (
               <>
                 {/* Tours Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                   {displayedTours.map((tour) => (
                     <TourCard key={tour.id} tour={tour} onQuickView={setQuickViewTour} />
                   ))}
