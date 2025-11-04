@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../contexts/LanguageContext';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 function Header() {
+  const { t } = useTranslation('common');
+  const { currentLanguage } = useLanguage(); // This will trigger re-render
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -74,11 +79,11 @@ function Header() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/tours', label: 'Tour Packages' },
-    { to: '/booking', label: 'Booking' },
-    { to: '/gallery', label: 'Gallery' },
-    { to: '/about', label: 'About Us' },
+    { to: '/', label: t('nav.home') },
+    { to: '/tours', label: t('nav.tourPackages') },
+    { to: '/booking', label: t('nav.booking') },
+    { to: '/gallery', label: t('nav.gallery') },
+    { to: '/about', label: t('nav.aboutUs') },
   ];
 
   return (
@@ -113,7 +118,7 @@ function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -137,6 +142,9 @@ function Header() {
                 </NavLink>
               ))}
 
+              {/* Language Switcher */}
+              <LanguageSwitcher isScrolled={isScrolled} />
+
               {/* CTA Button */}
               <Link
                 to="/booking"
@@ -146,7 +154,7 @@ function Header() {
                     : 'bg-primary text-secondary hover:bg-primary-light shadow-lg hover:shadow-xl'
                 }`}
               >
-                Book Now
+                {t('nav.bookNow')}
               </Link>
             </div>
 
@@ -227,14 +235,17 @@ function Header() {
               ))}
             </div>
 
-            {/* Mobile CTA Button */}
-            <div className="mt-6 px-4">
+            {/* Mobile Language Switcher & CTA */}
+            <div className="mt-6 px-4 space-y-4">
+              <div className="flex justify-center">
+                <LanguageSwitcher />
+              </div>
               <Link
                 to="/booking"
                 onClick={toggleMenu}
                 className="block w-full py-3 px-6 bg-primary text-secondary text-center font-semibold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 transform hover:scale-105"
               >
-                Book Now
+                {t('nav.bookNow')}
               </Link>
             </div>
           </div>
@@ -242,7 +253,7 @@ function Header() {
           {/* Mobile Menu Footer */}
           <div className="p-6 border-t border-gray-200 bg-gray-50">
             <p className="text-sm text-text-light text-center">
-              Explore the beauty of Indonesia
+              {t('mobileMenu.explore')}
             </p>
           </div>
         </div>

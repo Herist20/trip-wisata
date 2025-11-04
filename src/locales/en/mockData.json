@@ -1,0 +1,100 @@
+{
+  "features": {
+    "bestPrice": {
+      "title": "Best Price",
+      "description": "Best price guarantee and affordable for your dream vacation"
+    },
+    "professionalGuide": {
+      "title": "Professional Tour Guide",
+      "description": "Experienced and licensed to provide the best experience"
+    },
+    "selectedDestinations": {
+      "title": "Selected Destinations",
+      "description": "Choice of the best tourist destinations throughout Indonesia"
+    },
+    "travelInsurance": {
+      "title": "Travel Insurance",
+      "description": "Complete protection for your safety and comfort"
+    }
+  },
+  "categories": {
+    "all": "All Tours",
+    "beach": "Beach",
+    "mountain": "Mountain",
+    "culture": "Culture",
+    "island": "Island",
+    "diving": "Diving"
+  },
+  "contactInfo": {
+    "workingHours": "Monday - Saturday: 09:00 AM - 06:00 PM",
+    "labels": {
+      "officeAddress": "Office Address",
+      "email": "Email",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "workingHours": "Working Hours"
+    }
+  },
+  "stats": {
+    "happyTravelers": "Happy Travelers",
+    "destinations": "Destinations",
+    "professionalGuides": "Professional Tour Guides",
+    "satisfaction": "Customer Satisfaction"
+  },
+  "home": {
+    "hero": {
+      "title": "Explore the Beauty of Indonesia",
+      "subtitle": "Discover your dream adventure with us",
+      "cta": "Start Adventure"
+    },
+    "stats": {
+      "travelers": "500+",
+      "travelersLabel": "Happy Travelers",
+      "destinations": "20+",
+      "destinationsLabel": "Destinations",
+      "guides": "100%",
+      "guidesLabel": "Professional Tour Guides",
+      "satisfaction": "98%",
+      "satisfactionLabel": "Customer Satisfaction"
+    },
+    "featuredTours": {
+      "title": "Featured Tours",
+      "subtitle": "Best choices for your adventure",
+      "viewAll": "View All Tours"
+    },
+    "testimonials": {
+      "title": "What They Say",
+      "subtitle": "Real experiences from our customers"
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "subtitle": "Our commitment to the best experience"
+    },
+    "newsletter": {
+      "title": "Get Special Offers",
+      "subtitle": "Subscribe to get the latest promos and updates",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "success": "Thank you for subscribing!",
+      "error": "Invalid email"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Our Journey in Serving Travelers",
+    "description": "We are a trusted travel agency that has served thousands of travelers to explore the beauty of Indonesia."
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "subtitle": "Travel Documentation",
+    "allCategories": "All Categories",
+    "categories": {
+      "all": "All",
+      "beach": "Beach",
+      "mountain": "Mountain",
+      "culture": "Culture",
+      "food": "Food",
+      "activity": "Activity"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "features": {
+    "bestPrice": {
+      "title": "Harga Terbaik",
+      "description": "Jaminan harga terbaik dan terjangkau untuk liburan impian Anda"
+    },
+    "professionalGuide": {
+      "title": "Tour Guide Profesional",
+      "description": "Berpengalaman dan berlisensi untuk memberikan pengalaman terbaik"
+    },
+    "selectedDestinations": {
+      "title": "Destinasi Terpilih",
+      "description": "Pilihan destinasi wisata terbaik di seluruh Indonesia"
+    },
+    "travelInsurance": {
+      "title": "Asuransi Perjalanan",
+      "description": "Perlindungan lengkap untuk keamanan dan kenyamanan Anda"
+    }
+  },
+  "categories": {
+    "all": "Semua Tour",
+    "beach": "Pantai",
+    "mountain": "Gunung",
+    "culture": "Budaya",
+    "island": "Pulau",
+    "diving": "Diving"
+  },
+  "contactInfo": {
+    "workingHours": "Senin - Sabtu: 09.00 - 18.00 WIB",
+    "labels": {
+      "officeAddress": "Alamat Kantor",
+      "email": "Email",
+      "phone": "Telepon",
+      "whatsapp": "WhatsApp",
+      "workingHours": "Jam Operasional"
+    }
+  },
+  "stats": {
+    "happyTravelers": "Wisatawan Puas",
+    "destinations": "Destinasi",
+    "professionalGuides": "Tour Guide Profesional",
+    "satisfaction": "Kepuasan Pelanggan"
+  },
+  "home": {
+    "hero": {
+      "title": "Jelajahi Keindahan Indonesia",
+      "subtitle": "Temukan petualangan impian Anda bersama kami",
+      "cta": "Mulai Petualangan"
+    },
+    "stats": {
+      "travelers": "500+",
+      "travelersLabel": "Wisatawan Puas",
+      "destinations": "20+",
+      "destinationsLabel": "Destinasi",
+      "guides": "100%",
+      "guidesLabel": "Tour Guide Profesional",
+      "satisfaction": "98%",
+      "satisfactionLabel": "Kepuasan Pelanggan"
+    },
+    "featuredTours": {
+      "title": "Paket Tour Unggulan",
+      "subtitle": "Pilihan terbaik untuk petualangan Anda",
+      "viewAll": "Lihat Semua Tour"
+    },
+    "testimonials": {
+      "title": "Apa Kata Mereka",
+      "subtitle": "Pengalaman nyata dari pelanggan kami"
+    },
+    "whyChooseUs": {
+      "title": "Mengapa Memilih Kami",
+      "subtitle": "Komitmen kami untuk pengalaman terbaik"
+    },
+    "newsletter": {
+      "title": "Dapatkan Penawaran Spesial",
+      "subtitle": "Subscribe untuk mendapatkan promo dan update terbaru",
+      "placeholder": "Masukkan email Anda",
+      "button": "Subscribe",
+      "success": "Terima kasih telah subscribe!",
+      "error": "Email tidak valid"
+    }
+  },
+  "about": {
+    "title": "Tentang Kami",
+    "subtitle": "Perjalanan Kami Dalam Melayani Wisatawan",
+    "description": "Kami adalah agen perjalanan terpercaya yang telah melayani ribuan wisatawan untuk menjelajahi keindahan Indonesia."
+  },
+  "gallery": {
+    "title": "Galeri Foto",
+    "subtitle": "Dokumentasi Perjalanan Wisata",
+    "allCategories": "Semua Kategori",
+    "categories": {
+      "all": "Semua",
+      "beach": "Pantai",
+      "mountain": "Gunung",
+      "culture": "Budaya",
+      "food": "Kuliner",
+      "activity": "Aktivitas"
+    }
+  }
+}

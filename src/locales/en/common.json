@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "tourPackages": "Tour Packages",
+    "booking": "Booking",
+    "gallery": "Gallery",
+    "aboutUs": "About Us",
+    "bookNow": "Book Now"
+  },
+  "footer": {
+    "tagline": "Explore the Beauty of Bali",
+    "description": "Your trusted partner for your dream vacation throughout Indonesia with the best service and affordable prices.",
+    "followUs": "Follow Us",
+    "quickLinks": "Quick Links",
+    "popularTours": "Popular Tours",
+    "viewAllTours": "View All Tours",
+    "contactUs": "Contact Us",
+    "officeAddress": "Office Address",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "workingHours": "Working Hours",
+    "termsConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "allRightsReserved": "All rights reserved",
+    "madeWithLove": "Made with",
+    "inBali": "in Bali"
+  },
+  "emptyState": {
+    "gallery": {
+      "noPhotos": "No photos found",
+      "emptyGallery": "Gallery is empty",
+      "noResults": "No results found for \"{{query}}\". Try changing your search keywords.",
+      "noPhotosCategory": "No photos in this category yet. Please select another category.",
+      "resetSearch": "Reset Search"
+    },
+    "tours": {
+      "noTours": "No matching tours",
+      "noResults": "No tour packages match your filters. Try changing search criteria or remove some filters.",
+      "resetFilter": "Reset Filter",
+      "viewAllTours": "View All Tours"
+    },
+    "booking": {
+      "noSelection": "No tour selected yet",
+      "description": "Select your favorite tour package to start the booking process and an unforgettable adventure!",
+      "exploreTours": "Explore Tour Packages"
+    },
+    "search": {
+      "noResults": "No results for \"{{query}}\"",
+      "tryDifferent": "Try using different or more general keywords",
+      "suggestions": "Search suggestions:"
+    },
+    "network": {
+      "title": "Connection Lost",
+      "description": "An error occurred while loading data. Please ensure your internet connection is stable.",
+      "retry": "Try Again"
+    }
+  },
+  "notFound": {
+    "title": "Oops! Page Not Found",
+    "subtitle": "Looks like you got lost on your adventure...",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home",
+    "previousPage": "Previous Page",
+    "helpfulLinks": "Maybe you're looking for this page?",
+    "tourPackages": "Tour Packages",
+    "aboutUs": "About Us"
+  },
+  "common": {
+    "loading": "Loading...",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "close": "Close",
+    "open": "Open",
+    "menu": "Menu",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "continue": "Continue",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewDetails": "View Details",
+    "readMore": "Read More",
+    "showLess": "Show Less"
+  },
+  "searchSuggestions": {
+    "bali": "Bali",
+    "beach": "Beach",
+    "mountain": "Mountain"
+  },
+  "mobileMenu": {
+    "explore": "Explore the beauty of Indonesia"
+  }
+}

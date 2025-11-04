@@ -1,0 +1,168 @@
+{
+  "bookingType": {
+    "title": "Choose Booking Type",
+    "subtitle": "Would you like to book for individuals or groups?",
+    "individual": {
+      "title": "Individual Booking",
+      "description": "Ideal for personal trips, couples, or small families. Flexible and easily customized to your needs.",
+      "features": {
+        "participants": "1-9 participants",
+        "flexible": "Flexible schedule",
+        "guide": "Personal tour guide",
+        "customizable": "Customizable itinerary"
+      },
+      "cta": "Choose Individual"
+    },
+    "group": {
+      "title": "Group Booking",
+      "description": "Perfect for large groups, corporate gatherings, or special events. Get special prices for large groups.",
+      "features": {
+        "participants": "10+ participants",
+        "discount": "Group discount up to 20%",
+        "guides": "Multiple tour guides",
+        "coordinator": "Dedicated coordinator"
+      },
+      "cta": "Choose Group"
+    },
+    "backToHome": "Back to Home"
+  },
+  "steps": {
+    "tourSelection": "Tour Selection",
+    "personalInfo": "Personal Info",
+    "addOns": "Add-ons",
+    "payment": "Payment"
+  },
+  "step1": {
+    "title": "Select Tour Package",
+    "selectTour": "Select Tour Package",
+    "selectTourPlaceholder": "-- Select Tour --",
+    "departureDate": "Departure Date",
+    "participants": "Number of Participants",
+    "adults": "Adults",
+    "children": "Children",
+    "childrenAge": "(2-12 years, 70% of adult price)",
+    "infants": "Infants",
+    "infantsAge": "(0-2 years, free)",
+    "specialRequests": "Special Requests",
+    "specialRequestsPlaceholder": "Example: Vegetarian meals, wheelchair access, etc.",
+    "errors": {
+      "selectTour": "Please select a tour package",
+      "departureDate": "Please select departure date",
+      "adults": "At least 1 adult required",
+      "datePast": "Date cannot be in the past"
+    }
+  },
+  "step2": {
+    "title": "Personal Information",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter full name as per ID/Passport",
+    "email": "Email",
+    "emailPlaceholder": "email@example.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1 234 567 8900",
+    "nationality": "Nationality",
+    "dateOfBirth": "Date of Birth",
+    "emergencyContact": "Emergency Contact",
+    "emergencyContactName": "Emergency Contact Name",
+    "emergencyContactNamePlaceholder": "Full name",
+    "emergencyContactPhone": "Emergency Contact Phone",
+    "emergencyContactPhonePlaceholder": "+1 234 567 8900",
+    "errors": {
+      "fullName": "Full name is required",
+      "email": "Email is required",
+      "invalidEmail": "Invalid email format",
+      "phone": "Phone number is required",
+      "invalidPhone": "Invalid phone number format",
+      "dateOfBirth": "Date of birth is required",
+      "emergencyContactName": "Emergency contact name is required",
+      "emergencyContactPhone": "Emergency contact phone is required"
+    }
+  },
+  "step3": {
+    "title": "Additional Services",
+    "subtitle": "Enhance your travel experience",
+    "travelInsurance": {
+      "title": "Travel Insurance",
+      "description": "Comprehensive protection for your trip",
+      "price": "$30/person"
+    },
+    "airportPickup": {
+      "title": "Airport Pickup",
+      "description": "Transfer service from/to airport",
+      "price": "$25/group"
+    },
+    "extraNight": {
+      "title": "Extra 1 Night",
+      "description": "Extend your stay",
+      "price": "$50/night"
+    },
+    "photographyService": {
+      "title": "Photography Service",
+      "description": "Professional photographer for your trip",
+      "price": "$100/day"
+    },
+    "privateTour": {
+      "title": "Private Tour",
+      "description": "Upgrade to exclusive private tour",
+      "price": "$150"
+    },
+    "promoCode": "Promo Code",
+    "promoCodePlaceholder": "Enter promo code",
+    "applyPromo": "Apply",
+    "promoApplied": "Promo applied!",
+    "invalidPromo": "Invalid promo code"
+  },
+  "step4": {
+    "title": "Payment & Confirmation",
+    "paymentMethod": "Payment Method",
+    "creditCard": "Credit/Debit Card",
+    "bankTransfer": "Bank Transfer",
+    "eWallet": "E-Wallet",
+    "agreeTerms": "I agree to the",
+    "termsConditions": "Terms & Conditions",
+    "agreePrivacy": "I agree to the",
+    "privacyPolicy": "Privacy Policy",
+    "errors": {
+      "agreeTerms": "You must agree to terms and conditions",
+      "agreePrivacy": "You must agree to privacy policy"
+    }
+  },
+  "priceSummary": {
+    "title": "Price Summary",
+    "subtotal": "Subtotal",
+    "adults": "{{count}} Adult × ${{price}}",
+    "children": "{{count}} Children × ${{price}}",
+    "infants": "{{count}} Infants × Free",
+    "additionalServices": "Additional Services",
+    "discount": "Discount ({{percent}}%)",
+    "tax": "Tax (11%)",
+    "total": "Total",
+    "perPerson": "per person"
+  },
+  "buttons": {
+    "next": "Next",
+    "back": "Back",
+    "submit": "Confirm Booking",
+    "processing": "Processing...",
+    "downloadReceipt": "Download Receipt",
+    "backToHome": "Back to Home",
+    "viewTours": "View Other Tour Packages"
+  },
+  "success": {
+    "title": "Booking Successful!",
+    "subtitle": "Thank you for your trust",
+    "bookingNumber": "Booking Number",
+    "message": "We have sent a booking confirmation to your email. Our team will contact you shortly for further confirmation.",
+    "nextSteps": "Next Steps:",
+    "step1": "Check your email for booking details",
+    "step2": "Make payment according to instructions",
+    "step3": "Wait for confirmation from our team",
+    "step4": "Get ready for an exciting adventure!"
+  },
+  "tourDetails": {
+    "duration": "{{days}} Days {{nights}} Nights",
+    "location": "Location",
+    "rating": "Rating",
+    "reviews": "{{count}} reviews"
+  }
+}

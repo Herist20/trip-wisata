@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "tourPackages": "Paket Wisata",
+    "booking": "Pemesanan",
+    "gallery": "Galeri",
+    "aboutUs": "Tentang Kami",
+    "bookNow": "Pesan Sekarang"
+  },
+  "footer": {
+    "tagline": "Jelajahi Keindahan Bali",
+    "description": "Mitra terpercaya untuk perjalanan wisata impian Anda di seluruh Indonesia dengan layanan terbaik dan harga terjangkau.",
+    "followUs": "Ikuti Kami",
+    "quickLinks": "Tautan Cepat",
+    "popularTours": "Tour Populer",
+    "viewAllTours": "Lihat Semua Tour",
+    "contactUs": "Hubungi Kami",
+    "officeAddress": "Alamat Kantor",
+    "email": "Email",
+    "phone": "Telepon",
+    "whatsapp": "WhatsApp",
+    "workingHours": "Jam Operasional",
+    "termsConditions": "Syarat & Ketentuan",
+    "privacyPolicy": "Kebijakan Privasi",
+    "allRightsReserved": "Hak cipta dilindungi",
+    "madeWithLove": "Dibuat dengan",
+    "inBali": "di Bali"
+  },
+  "emptyState": {
+    "gallery": {
+      "noPhotos": "Tidak ada foto ditemukan",
+      "emptyGallery": "Galeri kosong",
+      "noResults": "Tidak menemukan hasil untuk \"{{query}}\". Coba ubah kata kunci pencarian Anda.",
+      "noPhotosCategory": "Belum ada foto di kategori ini. Silakan pilih kategori lain.",
+      "resetSearch": "Reset Pencarian"
+    },
+    "tours": {
+      "noTours": "Tidak ada tour yang sesuai",
+      "noResults": "Tidak menemukan paket tour yang sesuai dengan filter Anda. Coba ubah kriteria pencarian atau hapus beberapa filter.",
+      "resetFilter": "Reset Filter",
+      "viewAllTours": "Lihat Semua Tour"
+    },
+    "booking": {
+      "noSelection": "Belum ada tour dipilih",
+      "description": "Pilih paket tour favorit Anda untuk memulai proses booking dan petualangan yang tak terlupakan!",
+      "exploreTours": "Jelajahi Paket Tour"
+    },
+    "search": {
+      "noResults": "Tidak ada hasil untuk \"{{query}}\"",
+      "tryDifferent": "Coba gunakan kata kunci yang berbeda atau lebih umum",
+      "suggestions": "Saran pencarian:"
+    },
+    "network": {
+      "title": "Koneksi Terputus",
+      "description": "Terjadi kesalahan saat memuat data. Pastikan koneksi internet Anda stabil.",
+      "retry": "Coba Lagi"
+    }
+  },
+  "notFound": {
+    "title": "Oops! Halaman Tidak Ditemukan",
+    "subtitle": "Sepertinya Anda tersesat dalam petualangan...",
+    "description": "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+    "backToHome": "Kembali ke Beranda",
+    "previousPage": "Halaman Sebelumnya",
+    "helpfulLinks": "Mungkin Anda mencari halaman ini?",
+    "tourPackages": "Paket Tour",
+    "aboutUs": "Tentang Kami"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "search": "Cari",
+    "filter": "Filter",
+    "sort": "Urutkan",
+    "close": "Tutup",
+    "open": "Buka",
+    "menu": "Menu",
+    "submit": "Kirim",
+    "cancel": "Batal",
+    "confirm": "Konfirmasi",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "back": "Kembali",
+    "continue": "Lanjutkan",
+    "save": "Simpan",
+    "edit": "Edit",
+    "delete": "Hapus",
+    "viewDetails": "Lihat Detail",
+    "readMore": "Baca Selengkapnya",
+    "showLess": "Tampilkan Lebih Sedikit"
+  },
+  "searchSuggestions": {
+    "bali": "Bali",
+    "beach": "Pantai",
+    "mountain": "Gunung"
+  },
+  "mobileMenu": {
+    "explore": "Jelajahi keindahan Indonesia"
+  }
+}

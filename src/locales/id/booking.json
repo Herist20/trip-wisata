@@ -1,0 +1,168 @@
+{
+  "bookingType": {
+    "title": "Pilih Tipe Booking",
+    "subtitle": "Apakah Anda ingin melakukan booking untuk perorangan atau grup?",
+    "individual": {
+      "title": "Booking Perorangan",
+      "description": "Ideal untuk wisata pribadi, pasangan, atau keluarga kecil. Fleksibel dan mudah disesuaikan dengan kebutuhan Anda.",
+      "features": {
+        "participants": "1-9 peserta",
+        "flexible": "Jadwal fleksibel",
+        "guide": "Tour guide pribadi",
+        "customizable": "Customizable itinerary"
+      },
+      "cta": "Pilih Perorangan"
+    },
+    "group": {
+      "title": "Booking Grup",
+      "description": "Sempurna untuk rombongan, gathering perusahaan, atau acara khusus. Dapatkan harga spesial untuk grup besar.",
+      "features": {
+        "participants": "10+ peserta",
+        "discount": "Diskon grup hingga 20%",
+        "guides": "Multiple tour guides",
+        "coordinator": "Dedicated coordinator"
+      },
+      "cta": "Pilih Grup"
+    },
+    "backToHome": "Kembali ke Beranda"
+  },
+  "steps": {
+    "tourSelection": "Tour Selection",
+    "personalInfo": "Personal Info",
+    "addOns": "Add-ons",
+    "payment": "Payment"
+  },
+  "step1": {
+    "title": "Pilih Paket Tour",
+    "selectTour": "Pilih Paket Tour",
+    "selectTourPlaceholder": "-- Pilih Tour --",
+    "departureDate": "Tanggal Keberangkatan",
+    "participants": "Jumlah Peserta",
+    "adults": "Dewasa",
+    "children": "Anak-anak",
+    "childrenAge": "(2-12 tahun, 70% dari harga dewasa)",
+    "infants": "Bayi",
+    "infantsAge": "(0-2 tahun, gratis)",
+    "specialRequests": "Permintaan Khusus",
+    "specialRequestsPlaceholder": "Contoh: Vegetarian meals, wheelchair access, dll.",
+    "errors": {
+      "selectTour": "Please select a tour package",
+      "departureDate": "Please select departure date",
+      "adults": "At least 1 adult required",
+      "datePast": "Date cannot be in the past"
+    }
+  },
+  "step2": {
+    "title": "Informasi Pribadi",
+    "fullName": "Nama Lengkap",
+    "fullNamePlaceholder": "Masukkan nama lengkap sesuai KTP/Passport",
+    "email": "Email",
+    "emailPlaceholder": "email@example.com",
+    "phone": "Nomor Telepon",
+    "phonePlaceholder": "+62 812 3456 7890",
+    "nationality": "Kewarganegaraan",
+    "dateOfBirth": "Tanggal Lahir",
+    "emergencyContact": "Kontak Darurat",
+    "emergencyContactName": "Nama Kontak Darurat",
+    "emergencyContactNamePlaceholder": "Nama lengkap",
+    "emergencyContactPhone": "Nomor Telepon Darurat",
+    "emergencyContactPhonePlaceholder": "+62 812 3456 7890",
+    "errors": {
+      "fullName": "Full name is required",
+      "email": "Email is required",
+      "invalidEmail": "Invalid email format",
+      "phone": "Phone number is required",
+      "invalidPhone": "Invalid phone number format",
+      "dateOfBirth": "Date of birth is required",
+      "emergencyContactName": "Emergency contact name is required",
+      "emergencyContactPhone": "Emergency contact phone is required"
+    }
+  },
+  "step3": {
+    "title": "Layanan Tambahan",
+    "subtitle": "Tingkatkan pengalaman perjalanan Anda",
+    "travelInsurance": {
+      "title": "Asuransi Perjalanan",
+      "description": "Perlindungan komprehensif untuk perjalanan Anda",
+      "price": "$30/orang"
+    },
+    "airportPickup": {
+      "title": "Antar Jemput Bandara",
+      "description": "Layanan transfer dari/ke bandara",
+      "price": "$25/grup"
+    },
+    "extraNight": {
+      "title": "Tambahan 1 Malam",
+      "description": "Perpanjang masa menginap Anda",
+      "price": "$50/malam"
+    },
+    "photographyService": {
+      "title": "Layanan Fotografi",
+      "description": "Fotografer profesional untuk perjalanan Anda",
+      "price": "$100/hari"
+    },
+    "privateTour": {
+      "title": "Tour Pribadi",
+      "description": "Upgrade ke tour eksklusif pribadi",
+      "price": "$150"
+    },
+    "promoCode": "Kode Promo",
+    "promoCodePlaceholder": "Masukkan kode promo",
+    "applyPromo": "Terapkan",
+    "promoApplied": "Promo diterapkan!",
+    "invalidPromo": "Kode promo tidak valid"
+  },
+  "step4": {
+    "title": "Pembayaran & Konfirmasi",
+    "paymentMethod": "Metode Pembayaran",
+    "creditCard": "Kartu Kredit/Debit",
+    "bankTransfer": "Transfer Bank",
+    "eWallet": "E-Wallet",
+    "agreeTerms": "Saya setuju dengan",
+    "termsConditions": "Syarat & Ketentuan",
+    "agreePrivacy": "Saya setuju dengan",
+    "privacyPolicy": "Kebijakan Privasi",
+    "errors": {
+      "agreeTerms": "You must agree to terms and conditions",
+      "agreePrivacy": "You must agree to privacy policy"
+    }
+  },
+  "priceSummary": {
+    "title": "Ringkasan Harga",
+    "subtotal": "Subtotal",
+    "adults": "{{count}} Dewasa × ${{price}}",
+    "children": "{{count}} Anak × ${{price}}",
+    "infants": "{{count}} Bayi × Gratis",
+    "additionalServices": "Layanan Tambahan",
+    "discount": "Diskon ({{percent}}%)",
+    "tax": "Pajak (11%)",
+    "total": "Total",
+    "perPerson": "per orang"
+  },
+  "buttons": {
+    "next": "Selanjutnya",
+    "back": "Kembali",
+    "submit": "Konfirmasi Booking",
+    "processing": "Memproses...",
+    "downloadReceipt": "Unduh Bukti Booking",
+    "backToHome": "Kembali ke Beranda",
+    "viewTours": "Lihat Paket Tour Lainnya"
+  },
+  "success": {
+    "title": "Booking Berhasil!",
+    "subtitle": "Terima kasih atas kepercayaan Anda",
+    "bookingNumber": "Nomor Booking",
+    "message": "Kami telah mengirimkan konfirmasi booking ke email Anda. Tim kami akan segera menghubungi Anda untuk konfirmasi lebih lanjut.",
+    "nextSteps": "Langkah Selanjutnya:",
+    "step1": "Cek email Anda untuk detail booking",
+    "step2": "Lakukan pembayaran sesuai instruksi",
+    "step3": "Tunggu konfirmasi dari tim kami",
+    "step4": "Siap-siap untuk petualangan seru!"
+  },
+  "tourDetails": {
+    "duration": "{{days}} Hari {{nights}} Malam",
+    "location": "Lokasi",
+    "rating": "Rating",
+    "reviews": "{{count}} ulasan"
+  }
+}

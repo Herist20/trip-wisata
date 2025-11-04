@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "Paket Tour",
+    "subtitle": "Jelajahi Keindahan Indonesia",
+    "description": "Temukan petualangan impian Anda dari ribuan destinasi menakjubkan"
+  },
+  "filters": {
+    "title": "Filter",
+    "destination": "Destinasi",
+    "duration": "Durasi (Hari)",
+    "priceRange": "Rentang Harga (USD)",
+    "category": "Kategori",
+    "rating": "Rating",
+    "applyFilters": "Terapkan Filter",
+    "resetFilters": "Reset Filter",
+    "minDays": "Hari Minimum",
+    "maxDays": "Hari Maksimum",
+    "minPrice": "Harga Minimum",
+    "maxPrice": "Harga Maksimum"
+  },
+  "categories": {
+    "beach": "Pantai",
+    "mountain": "Gunung",
+    "culture": "Budaya",
+    "adventure": "Petualangan",
+    "diving": "Diving",
+    "photography": "Fotografi"
+  },
+  "ratings": {
+    "4.5": "4.5+ Bintang",
+    "4.0": "4.0+ Bintang",
+    "3.5": "3.5+ Bintang"
+  },
+  "sort": {
+    "label": "Urutkan",
+    "popular": "Paling Populer",
+    "priceLow": "Harga Terendah",
+    "priceHigh": "Harga Tertinggi",
+    "rating": "Rating Tertinggi",
+    "duration": "Durasi Terpendek"
+  },
+  "search": {
+    "placeholder": "Cari destinasi, aktivitas, atau kategori...",
+    "button": "Cari Tour"
+  },
+  "results": {
+    "showing": "Menampilkan",
+    "of": "dari",
+    "tours": "tour",
+    "noResults": "Tidak ada tour yang ditemukan"
+  },
+  "card": {
+    "duration": "{{days}} Hari {{nights}} Malam",
+    "from": "Mulai dari",
+    "perPerson": "/orang",
+    "viewDetails": "Lihat Detail",
+    "bookNow": "Pesan Sekarang",
+    "reviews": "{{count}} ulasan",
+    "badges": {
+      "bestSeller": "Best Seller",
+      "new": "New",
+      "promo": "Promo",
+      "popular": "Popular"
+    }
+  },
+  "pagination": {
+    "previous": "Sebelumnya",
+    "next": "Selanjutnya",
+    "page": "Halaman",
+    "of": "dari"
+  },
+  "quickView": {
+    "title": "Lihat Cepat",
+    "close": "Tutup",
+    "highlights": "Sorotan",
+    "whatsIncluded": "Yang Termasuk",
+    "bookThisTour": "Pesan Tour Ini"
+  }
+}

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters, isMobile, onClose }) {
+  const { t } = useTranslation('tours');
   const [expandedSections, setExpandedSections] = useState({
     destination: true,
     duration: true,
@@ -25,18 +27,18 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
   ];
 
   const categories = [
-    { id: 'beach', name: 'Beach', icon: '🏖️' },
-    { id: 'mountain', name: 'Mountain', icon: '⛰️' },
-    { id: 'culture', name: 'Culture', icon: '🏛️' },
-    { id: 'adventure', name: 'Adventure', icon: '🏄' },
-    { id: 'diving', name: 'Diving', icon: '🤿' },
-    { id: 'photography', name: 'Photography', icon: '📷' },
+    { id: 'beach', name: t('categories.beach'), icon: '🏖️' },
+    { id: 'mountain', name: t('categories.mountain'), icon: '⛰️' },
+    { id: 'culture', name: t('categories.culture'), icon: '🏛️' },
+    { id: 'adventure', name: t('categories.adventure'), icon: '🏄' },
+    { id: 'diving', name: t('categories.diving'), icon: '🤿' },
+    { id: 'photography', name: t('categories.photography'), icon: '📷' },
   ];
 
   const ratings = [
-    { value: 4.5, label: '4.5+ Stars' },
-    { value: 4.0, label: '4.0+ Stars' },
-    { value: 3.5, label: '3.5+ Stars' },
+    { value: 4.5, label: t('ratings.4.5') },
+    { value: 4.0, label: t('ratings.4.0') },
+    { value: 3.5, label: t('ratings.3.5') },
   ];
 
   const handleDestinationChange = (destination) => {
@@ -88,7 +90,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
       <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-secondary to-secondary-light">
         <div className="flex items-center gap-2 text-white">
           <Filter className="w-5 h-5" />
-          <h3 className="font-bold text-lg">Filters</h3>
+          <h3 className="font-bold text-lg">{t('filters.title')}</h3>
         </div>
         {isMobile && (
           <button
@@ -103,7 +105,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
       {/* Filter Sections */}
       <div className="divide-y divide-gray-200">
         {/* Destination Filter */}
-        <FilterSection title="Destination" sectionKey="destination">
+        <FilterSection title={t('filters.destination')} sectionKey="destination">
           <div className="max-h-48 overflow-y-auto space-y-2">
             {destinations.map((destination) => (
               <label
@@ -123,11 +125,11 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
         </FilterSection>
 
         {/* Duration Filter */}
-        <FilterSection title="Duration (Days)" sectionKey="duration">
+        <FilterSection title={t('filters.duration')} sectionKey="duration">
           <div className="space-y-4">
             <div>
               <label className="text-xs text-text-light mb-2 block">
-                Min Days: {filters.durationRange[0]}
+                {t('filters.minDays')}: {filters.durationRange[0]}
               </label>
               <input
                 type="range"
@@ -145,7 +147,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
             </div>
             <div>
               <label className="text-xs text-text-light mb-2 block">
-                Max Days: {filters.durationRange[1]}
+                {t('filters.maxDays')}: {filters.durationRange[1]}
               </label>
               <input
                 type="range"
@@ -165,11 +167,11 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
         </FilterSection>
 
         {/* Price Filter */}
-        <FilterSection title="Price Range (USD)" sectionKey="price">
+        <FilterSection title={t('filters.priceRange')} sectionKey="price">
           <div className="space-y-4">
             <div>
               <label className="text-xs text-text-light mb-2 block">
-                Min Price: ${filters.priceRange[0]}
+                {t('filters.minPrice')}: ${filters.priceRange[0]}
               </label>
               <input
                 type="range"
@@ -188,7 +190,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
             </div>
             <div>
               <label className="text-xs text-text-light mb-2 block">
-                Max Price: ${filters.priceRange[1]}
+                {t('filters.maxPrice')}: ${filters.priceRange[1]}
               </label>
               <input
                 type="range"
@@ -209,7 +211,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
         </FilterSection>
 
         {/* Category Filter */}
-        <FilterSection title="Category" sectionKey="category">
+        <FilterSection title={t('filters.category')} sectionKey="category">
           <div className="space-y-2">
             {categories.map((category) => (
               <label
@@ -230,7 +232,7 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
         </FilterSection>
 
         {/* Rating Filter */}
-        <FilterSection title="Rating" sectionKey="rating">
+        <FilterSection title={t('filters.rating')} sectionKey="rating">
           <div className="space-y-2">
             {ratings.map((rating) => (
               <label
@@ -257,13 +259,13 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
           onClick={onApplyFilters}
           className="w-full bg-primary hover:bg-primary-light text-secondary font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md"
         >
-          Apply Filters
+          {t('filters.applyFilters')}
         </button>
         <button
           onClick={onResetFilters}
           className="w-full bg-white hover:bg-gray-100 text-secondary font-semibold py-3 rounded-xl border-2 border-gray-300 transition-all duration-300"
         >
-          Reset Filters
+          {t('filters.resetFilters')}
         </button>
       </div>
     </div>

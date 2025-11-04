@@ -1,19 +1,21 @@
 import { Search, Package, Image, ShoppingCart, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function EmptyGallery({ searchQuery, onReset }) {
+  const { t } = useTranslation('common');
   return (
     <div className="text-center py-20 animate-fade-in-up">
       <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
         <Image className="w-16 h-16 text-gray-400" />
       </div>
       <h3 className="text-2xl font-bold text-secondary mb-3">
-        {searchQuery ? 'Tidak ada foto ditemukan' : 'Galeri kosong'}
+        {searchQuery ? t('emptyState.gallery.noPhotos') : t('emptyState.gallery.emptyGallery')}
       </h3>
       <p className="text-text-light mb-6 max-w-md mx-auto">
         {searchQuery
-          ? `Tidak menemukan hasil untuk "${searchQuery}". Coba ubah kata kunci pencarian Anda.`
-          : 'Belum ada foto di kategori ini. Silakan pilih kategori lain.'}
+          ? t('emptyState.gallery.noResults', { query: searchQuery })
+          : t('emptyState.gallery.noPhotosCategory')}
       </p>
       {searchQuery && onReset && (
         <button
@@ -21,7 +23,7 @@ export function EmptyGallery({ searchQuery, onReset }) {
           className="btn-primary btn-animate inline-flex items-center gap-2"
         >
           <Search className="w-5 h-5" />
-          Reset Pencarian
+          {t('emptyState.gallery.resetSearch')}
         </button>
       )}
     </div>
@@ -29,17 +31,17 @@ export function EmptyGallery({ searchQuery, onReset }) {
 }
 
 export function EmptyTours({ filters, onReset }) {
+  const { t } = useTranslation('common');
   return (
     <div className="text-center py-20 animate-fade-in-up">
       <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
         <Package className="w-16 h-16 text-gray-400" />
       </div>
       <h3 className="text-2xl font-bold text-secondary mb-3">
-        Tidak ada tour yang sesuai
+        {t('emptyState.tours.noTours')}
       </h3>
       <p className="text-text-light mb-6 max-w-md mx-auto">
-        Tidak menemukan paket tour yang sesuai dengan filter Anda. Coba ubah
-        kriteria pencarian atau hapus beberapa filter.
+        {t('emptyState.tours.noResults')}
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         {onReset && (
@@ -47,7 +49,7 @@ export function EmptyTours({ filters, onReset }) {
             onClick={onReset}
             className="btn-outline btn-animate inline-flex items-center gap-2"
           >
-            Reset Filter
+            {t('emptyState.tours.resetFilter')}
           </button>
         )}
         <Link
@@ -55,7 +57,7 @@ export function EmptyTours({ filters, onReset }) {
           className="btn-primary btn-animate inline-flex items-center gap-2"
         >
           <Package className="w-5 h-5" />
-          Lihat Semua Tour
+          {t('emptyState.tours.viewAllTours')}
         </Link>
       </div>
     </div>
@@ -63,51 +65,52 @@ export function EmptyTours({ filters, onReset }) {
 }
 
 export function EmptyBooking() {
+  const { t } = useTranslation('common');
   return (
     <div className="text-center py-20 animate-fade-in-up">
       <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
         <ShoppingCart className="w-16 h-16 text-gray-400" />
       </div>
       <h3 className="text-2xl font-bold text-secondary mb-3">
-        Belum ada tour dipilih
+        {t('emptyState.booking.noSelection')}
       </h3>
       <p className="text-text-light mb-6 max-w-md mx-auto">
-        Pilih paket tour favorit Anda untuk memulai proses booking dan
-        petualangan yang tak terlupakan!
+        {t('emptyState.booking.description')}
       </p>
       <Link
         to="/tours"
         className="btn-primary btn-animate inline-flex items-center gap-2"
       >
         <Package className="w-5 h-5" />
-        Jelajahi Paket Tour
+        {t('emptyState.booking.exploreTours')}
       </Link>
     </div>
   );
 }
 
 export function EmptySearch({ query }) {
+  const { t } = useTranslation('common');
   return (
     <div className="text-center py-20 animate-fade-in-up">
       <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
         <Search className="w-16 h-16 text-gray-400" />
       </div>
       <h3 className="text-2xl font-bold text-secondary mb-3">
-        Tidak ada hasil untuk &quot;{query}&quot;
+        {t('emptyState.search.noResults', { query })}
       </h3>
       <p className="text-text-light mb-6 max-w-md mx-auto">
-        Coba gunakan kata kunci yang berbeda atau lebih umum
+        {t('emptyState.search.tryDifferent')}
       </p>
       <div className="flex flex-wrap gap-2 justify-center">
-        <span className="text-sm text-text-light">Saran pencarian:</span>
+        <span className="text-sm text-text-light">{t('emptyState.search.suggestions')}</span>
         <button className="px-4 py-1 bg-gray-100 text-secondary rounded-full text-sm hover:bg-gray-200 transition-colors">
-          Bali
+          {t('searchSuggestions.bali')}
         </button>
         <button className="px-4 py-1 bg-gray-100 text-secondary rounded-full text-sm hover:bg-gray-200 transition-colors">
-          Pantai
+          {t('searchSuggestions.beach')}
         </button>
         <button className="px-4 py-1 bg-gray-100 text-secondary rounded-full text-sm hover:bg-gray-200 transition-colors">
-          Gunung
+          {t('searchSuggestions.mountain')}
         </button>
       </div>
     </div>
@@ -115,24 +118,24 @@ export function EmptySearch({ query }) {
 }
 
 export function NetworkError({ onRetry }) {
+  const { t } = useTranslation('common');
   return (
     <div className="text-center py-20 animate-fade-in-up">
       <div className="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
         <AlertCircle className="w-16 h-16 text-red-500" />
       </div>
       <h3 className="text-2xl font-bold text-secondary mb-3">
-        Koneksi Terputus
+        {t('emptyState.network.title')}
       </h3>
       <p className="text-text-light mb-6 max-w-md mx-auto">
-        Terjadi kesalahan saat memuat data. Pastikan koneksi internet Anda
-        stabil.
+        {t('emptyState.network.description')}
       </p>
       {onRetry && (
         <button
           onClick={onRetry}
           className="btn-primary btn-animate inline-flex items-center gap-2"
         >
-          Coba Lagi
+          {t('emptyState.network.retry')}
         </button>
       )}
     </div>

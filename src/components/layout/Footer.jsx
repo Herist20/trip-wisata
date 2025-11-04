@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle, Clock } from 'lucide-react';
 import { contactInfo } from '../../data/mockData';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 function Footer() {
+  const { t } = useTranslation('common');
+  const { currentLanguage } = useLanguage(); // Force re-render on language change
   const currentYear = new Date().getFullYear();
 
   const popularTours = [
@@ -31,7 +35,7 @@ function Footer() {
                   Tour<span className="text-primary">Bali</span>
                 </h3>
                 <p className="text-sm text-white/70 group-hover:text-primary transition-colors mb-3">
-                  Explore the Beauty of Bali
+                  {t('footer.tagline')}
                 </p>
                 {/* Logo Image */}
                 <img
@@ -44,13 +48,12 @@ function Footer() {
 
             {/* Description */}
             <p className="text-sm text-white/80 leading-relaxed">
-              Mitra terpercaya untuk perjalanan wisata impian Anda di seluruh Indonesia dengan
-              layanan terbaik dan harga terjangkau.
+              {t('footer.description')}
             </p>
 
             {/* Social Media Icons */}
             <div>
-              <h4 className="text-sm font-semibold mb-3 text-white/90">Follow Us</h4>
+              <h4 className="text-sm font-semibold mb-3 text-white/90">{t('footer.followUs')}</h4>
               <div className="flex gap-3">
                 <a
                   href={contactInfo.social.instagram}
@@ -92,7 +95,7 @@ function Footer() {
 
           {/* Column 2: Quick Links */}
           <div className="space-y-5">
-            <h4 className="text-lg font-bold text-white">Quick Links</h4>
+            <h4 className="text-lg font-bold text-white">{t('footer.quickLinks')}</h4>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -100,7 +103,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Home
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
@@ -109,7 +112,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Tour Packages
+                  {t('nav.tourPackages')}
                 </Link>
               </li>
               <li>
@@ -118,7 +121,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Booking
+                  {t('nav.booking')}
                 </Link>
               </li>
               <li>
@@ -127,7 +130,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Gallery
+                  {t('nav.gallery')}
                 </Link>
               </li>
               <li>
@@ -136,7 +139,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  About Us
+                  {t('nav.aboutUs')}
                 </Link>
               </li>
               <li className="pt-2 border-t border-white/10">
@@ -145,7 +148,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Terms & Conditions
+                  {t('footer.termsConditions')}
                 </Link>
               </li>
               <li>
@@ -154,7 +157,7 @@ function Footer() {
                   className="text-white/80 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
                 >
                   <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300"></span>
-                  Privacy Policy
+                  {t('footer.privacyPolicy')}
                 </Link>
               </li>
             </ul>
@@ -162,7 +165,7 @@ function Footer() {
 
           {/* Column 3: Popular Tours */}
           <div className="space-y-5">
-            <h4 className="text-lg font-bold text-white">Popular Tours</h4>
+            <h4 className="text-lg font-bold text-white">{t('footer.popularTours')}</h4>
             <ul className="space-y-3">
               {popularTours.map((tour) => (
                 <li key={tour.id}>
@@ -181,7 +184,7 @@ function Footer() {
                 to="/tours"
                 className="inline-flex items-center text-primary hover:text-primary-light text-sm font-semibold group"
               >
-                View All Tours
+                {t('footer.viewAllTours')}
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
@@ -189,19 +192,19 @@ function Footer() {
 
           {/* Column 4: Contact Info */}
           <div className="space-y-5">
-            <h4 className="text-lg font-bold text-white">Contact Us</h4>
+            <h4 className="text-lg font-bold text-white">{t('footer.contactUs')}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 group">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="text-white/60 text-xs mb-1">Office Address</p>
+                  <p className="text-white/60 text-xs mb-1">{t('footer.officeAddress')}</p>
                   <span className="text-white/80 text-sm leading-relaxed">{contactInfo.address}</span>
                 </div>
               </li>
               <li className="flex items-start gap-3 group">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="text-white/60 text-xs mb-1">Email</p>
+                  <p className="text-white/60 text-xs mb-1">{t('footer.email')}</p>
                   <a
                     href={`mailto:${contactInfo.email}`}
                     className="text-white/80 hover:text-primary transition-colors text-sm"
@@ -213,7 +216,7 @@ function Footer() {
               <li className="flex items-start gap-3 group">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="text-white/60 text-xs mb-1">Phone</p>
+                  <p className="text-white/60 text-xs mb-1">{t('footer.phone')}</p>
                   <a
                     href={`tel:${contactInfo.phone}`}
                     className="text-white/80 hover:text-primary transition-colors text-sm"
@@ -225,7 +228,7 @@ function Footer() {
               <li className="flex items-start gap-3 group">
                 <MessageCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="text-white/60 text-xs mb-1">WhatsApp</p>
+                  <p className="text-white/60 text-xs mb-1">{t('footer.whatsapp')}</p>
                   <a
                     href={contactInfo.social.whatsapp}
                     target="_blank"
@@ -239,7 +242,7 @@ function Footer() {
               <li className="flex items-start gap-3 group">
                 <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="text-white/60 text-xs mb-1">Working Hours</p>
+                  <p className="text-white/60 text-xs mb-1">{t('footer.workingHours')}</p>
                   <span className="text-white/80 text-sm">{contactInfo.workingHours}</span>
                 </div>
               </li>
@@ -261,12 +264,12 @@ function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <p className="text-white/70">
-              &copy; {currentYear} <span className="text-white font-semibold">Tour Bali</span>. All rights reserved.
+              &copy; {currentYear} <span className="text-white font-semibold">Tour Bali</span>. {t('footer.allRightsReserved')}.
             </p>
             <div className="flex items-center gap-2 text-white/70">
-              <span>Made with</span>
+              <span>{t('footer.madeWithLove')}</span>
               <span className="text-primary text-lg">♥</span>
-              <span>in Bali</span>
+              <span>{t('footer.inBali')}</span>
             </div>
           </div>
         </div>

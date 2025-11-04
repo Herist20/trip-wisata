@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "Tour Packages",
+    "subtitle": "Explore the Beauty of Indonesia",
+    "description": "Discover your dream adventure from thousands of amazing destinations"
+  },
+  "filters": {
+    "title": "Filters",
+    "destination": "Destination",
+    "duration": "Duration (Days)",
+    "priceRange": "Price Range (USD)",
+    "category": "Category",
+    "rating": "Rating",
+    "applyFilters": "Apply Filters",
+    "resetFilters": "Reset Filters",
+    "minDays": "Min Days",
+    "maxDays": "Max Days",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price"
+  },
+  "categories": {
+    "beach": "Beach",
+    "mountain": "Mountain",
+    "culture": "Culture",
+    "adventure": "Adventure",
+    "diving": "Diving",
+    "photography": "Photography"
+  },
+  "ratings": {
+    "4.5": "4.5+ Stars",
+    "4.0": "4.0+ Stars",
+    "3.5": "3.5+ Stars"
+  },
+  "sort": {
+    "label": "Sort By",
+    "popular": "Most Popular",
+    "priceLow": "Lowest Price",
+    "priceHigh": "Highest Price",
+    "rating": "Highest Rating",
+    "duration": "Shortest Duration"
+  },
+  "search": {
+    "placeholder": "Search destinations, activities, or categories...",
+    "button": "Search Tours"
+  },
+  "results": {
+    "showing": "Showing",
+    "of": "of",
+    "tours": "tours",
+    "noResults": "No tours found"
+  },
+  "card": {
+    "duration": "{{days}} Days {{nights}} Nights",
+    "from": "From",
+    "perPerson": "/person",
+    "viewDetails": "View Details",
+    "bookNow": "Book Now",
+    "reviews": "{{count}} reviews",
+    "badges": {
+      "bestSeller": "Best Seller",
+      "new": "New",
+      "promo": "Promo",
+      "popular": "Popular"
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of"
+  },
+  "quickView": {
+    "title": "Quick View",
+    "close": "Close",
+    "highlights": "Highlights",
+    "whatsIncluded": "What's Included",
+    "bookThisTour": "Book This Tour"
+  }
+}

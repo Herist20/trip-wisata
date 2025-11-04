@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft, Compass } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function NotFound() {
+  const { t } = useTranslation('common');
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -34,13 +37,13 @@ function NotFound() {
         {/* Text Content */}
         <div className="mb-8" data-aos="fade-up" data-aos-delay="400">
           <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
-            Oops! Halaman Tidak Ditemukan
+            {t('notFound.title')}
           </h2>
           <p className="text-lg text-text-light mb-2">
-            Sepertinya Anda tersesat dalam petualangan...
+            {t('notFound.subtitle')}
           </p>
           <p className="text-text-light">
-            Halaman yang Anda cari tidak ada atau telah dipindahkan.
+            {t('notFound.description')}
           </p>
         </div>
 
@@ -55,14 +58,14 @@ function NotFound() {
             className="btn-primary btn-animate inline-flex items-center justify-center gap-2 hover-lift"
           >
             <Home className="w-5 h-5" />
-            Kembali ke Beranda
+            {t('notFound.backToHome')}
           </Link>
           <button
             onClick={() => window.history.back()}
             className="btn-outline btn-animate inline-flex items-center justify-center gap-2 hover-lift"
           >
             <ArrowLeft className="w-5 h-5" />
-            Halaman Sebelumnya
+            {t('notFound.previousPage')}
           </button>
         </div>
 
@@ -73,32 +76,32 @@ function NotFound() {
           data-aos-delay="800"
         >
           <p className="text-sm font-semibold text-secondary mb-4">
-            Mungkin Anda mencari halaman ini?
+            {t('notFound.helpfulLinks')}
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
               to="/tours"
               className="px-4 py-2 bg-gray-100 hover:bg-primary hover:text-secondary text-text rounded-lg transition-all hover-scale"
             >
-              Paket Tour
+              {t('notFound.tourPackages')}
             </Link>
             <Link
               to="/gallery"
               className="px-4 py-2 bg-gray-100 hover:bg-primary hover:text-secondary text-text rounded-lg transition-all hover-scale"
             >
-              Galeri
+              {t('nav.gallery')}
             </Link>
             <Link
               to="/about"
               className="px-4 py-2 bg-gray-100 hover:bg-primary hover:text-secondary text-text rounded-lg transition-all hover-scale"
             >
-              Tentang Kami
+              {t('notFound.aboutUs')}
             </Link>
             <Link
               to="/booking"
               className="px-4 py-2 bg-gray-100 hover:bg-primary hover:text-secondary text-text rounded-lg transition-all hover-scale"
             >
-              Booking
+              {t('nav.booking')}
             </Link>
           </div>
         </div>
