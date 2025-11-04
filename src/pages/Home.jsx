@@ -4,6 +4,7 @@ import { tourPackages, testimonials, features, contactInfo } from '../data/mockD
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Newsletter from '../components/home/Newsletter';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -670,6 +671,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Newsletter Section */}
+      <Newsletter />
 
       {/* CTA Section */}
       <section className="section-container bg-gradient-custom text-white">
