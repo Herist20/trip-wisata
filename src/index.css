@@ -405,12 +405,17 @@ select:focus-visible {
 
 /* Touch Target - Minimum 44x44px */
 @media (pointer: coarse) {
-  button,
-  a,
-  input[type="checkbox"],
-  input[type="radio"] {
+  button:not(.w-6):not(.w-7):not(.w-8),
+  a {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Remove min-size for checkbox and radio to allow custom sizing */
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: unset;
+    min-width: unset;
   }
 }
 

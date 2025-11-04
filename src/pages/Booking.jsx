@@ -525,23 +525,23 @@ function Booking() {
                         <p className="font-medium text-secondary">Adults</p>
                         <p className="text-sm text-text-light">Age 18+</p>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           type="button"
                           onClick={() => handleInputChange('adults', Math.max(1, formData.adults - 1))}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Minus className="w-5 h-5 mx-auto" />
+                          <Minus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
-                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                        <span className="text-base sm:text-xl font-bold text-secondary w-8 sm:w-12 text-center">
                           {formData.adults}
                         </span>
                         <button
                           type="button"
                           onClick={() => handleInputChange('adults', formData.adults + 1)}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Plus className="w-5 h-5 mx-auto" />
+                          <Plus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </div>
@@ -552,23 +552,23 @@ function Booking() {
                         <p className="font-medium text-secondary">Children</p>
                         <p className="text-sm text-text-light">Age 4-17</p>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           type="button"
                           onClick={() => handleInputChange('children', Math.max(0, formData.children - 1))}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Minus className="w-5 h-5 mx-auto" />
+                          <Minus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
-                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                        <span className="text-base sm:text-xl font-bold text-secondary w-8 sm:w-12 text-center">
                           {formData.children}
                         </span>
                         <button
                           type="button"
                           onClick={() => handleInputChange('children', formData.children + 1)}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Plus className="w-5 h-5 mx-auto" />
+                          <Plus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </div>
@@ -579,23 +579,23 @@ function Booking() {
                         <p className="font-medium text-secondary">Infants</p>
                         <p className="text-sm text-text-light">Age 0-3 (Free)</p>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           type="button"
                           onClick={() => handleInputChange('infants', Math.max(0, formData.infants - 1))}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Minus className="w-5 h-5 mx-auto" />
+                          <Minus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
-                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                        <span className="text-base sm:text-xl font-bold text-secondary w-8 sm:w-12 text-center">
                           {formData.infants}
                         </span>
                         <button
                           type="button"
                           onClick={() => handleInputChange('infants', formData.infants + 1)}
-                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                          className="w-7 h-7 sm:w-10 sm:h-10 border border-gray-300 sm:border-2 rounded-md sm:rounded-lg hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
                         >
-                          <Plus className="w-5 h-5 mx-auto" />
+                          <Plus className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </div>
@@ -828,54 +828,54 @@ function Booking() {
                     ].map((service) => (
                       <label
                         key={service.id}
-                        className="flex items-start gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors"
+                        className="flex items-start gap-2 sm:gap-4 p-3 sm:p-4 border border-gray-200 sm:border-2 rounded-lg sm:rounded-xl cursor-pointer hover:border-primary transition-colors"
                       >
                         <input
                           type="checkbox"
                           checked={formData[service.id]}
                           onChange={(e) => handleInputChange(service.id, e.target.checked)}
-                          className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                          className="mt-0.5 sm:mt-1 w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary rounded focus:ring-primary flex-shrink-0"
                         />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <p className="font-semibold text-secondary">{service.label}</p>
-                            <p className="font-bold text-primary">+${service.price}</p>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-0.5 sm:mb-1 gap-2">
+                            <p className="font-semibold text-secondary text-xs sm:text-base">{service.label}</p>
+                            <p className="font-bold text-primary text-xs sm:text-base whitespace-nowrap">+${service.price}</p>
                           </div>
-                          <p className="text-sm text-text-light">{service.desc}</p>
+                          <p className="text-[10px] sm:text-sm text-text-light">{service.desc}</p>
                         </div>
                       </label>
                     ))}
                   </div>
 
                   {/* Promo Code */}
-                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl">
-                    <h3 className="font-semibold text-secondary mb-4 flex items-center gap-2">
-                      <Tag className="w-5 h-5 text-primary" />
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 sm:p-6 rounded-xl">
+                    <h3 className="font-semibold text-secondary mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                      <Tag className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       Have a Promo Code?
                     </h3>
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <input
                         type="text"
                         value={formData.promoCode}
                         onChange={(e) => handleInputChange('promoCode', e.target.value.toUpperCase())}
                         placeholder="ENTER CODE"
-                        className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white"
+                        className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-primary transition-colors bg-white text-sm sm:text-base"
                       />
                       <button
                         type="button"
                         onClick={handleApplyPromo}
-                        className="px-6 py-3 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-xl transition-colors"
+                        className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg sm:rounded-xl transition-colors text-sm sm:text-base whitespace-nowrap"
                       >
-                        Apply
+                        Apply Code
                       </button>
                     </div>
                     {promoApplied && (
-                      <p className="text-green-600 text-sm mt-2 flex items-center gap-1">
-                        <CheckCircle className="w-4 h-4" />
+                      <p className="text-green-600 text-xs sm:text-sm mt-2 flex items-center gap-1">
+                        <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         Promo code applied! {promoDiscount}% discount
                       </p>
                     )}
-                    <p className="text-xs text-text-light mt-3">
+                    <p className="text-[10px] sm:text-xs text-text-light mt-2 sm:mt-3">
                       Try: WELCOME20, SAVE10, or HOLIDAY15
                     </p>
                   </div>
@@ -932,17 +932,17 @@ function Booking() {
                         return (
                           <label
                             key={method.id}
-                            className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors"
+                            className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 border border-gray-200 sm:border-2 rounded-lg sm:rounded-xl cursor-pointer hover:border-primary transition-colors"
                           >
                             <input
                               type="radio"
                               name="paymentMethod"
                               checked={formData.paymentMethod === method.id}
                               onChange={() => handleInputChange('paymentMethod', method.id)}
-                              className="w-5 h-5 text-primary focus:ring-primary"
+                              className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary focus:ring-primary flex-shrink-0"
                             />
-                            <MethodIcon className="w-5 h-5 text-primary" />
-                            <span className="font-medium text-secondary">{method.label}</span>
+                            <MethodIcon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                            <span className="font-medium text-secondary text-xs sm:text-base">{method.label}</span>
                           </label>
                         );
                       })}
@@ -951,38 +951,38 @@ function Booking() {
 
                   {/* Terms & Conditions */}
                   <div className="space-y-3 border-t pt-6">
-                    <label className="flex items-start gap-3 cursor-pointer">
+                    <label className="flex items-start gap-2 sm:gap-3 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={formData.agreeTerms}
                         onChange={(e) => handleInputChange('agreeTerms', e.target.checked)}
-                        className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                        className="mt-0.5 sm:mt-1 w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary rounded focus:ring-primary flex-shrink-0"
                       />
-                      <span className="text-sm text-text-light">
+                      <span className="text-xs sm:text-sm text-text-light">
                         I agree to the <Link to="/terms" className="text-primary hover:underline">Terms & Conditions</Link>
                       </span>
                     </label>
                     {errors.agreeTerms && (
-                      <p className="text-red-500 text-sm flex items-center gap-1 ml-8">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-red-500 text-xs sm:text-sm flex items-center gap-1 ml-6 sm:ml-8">
+                        <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         {errors.agreeTerms}
                       </p>
                     )}
 
-                    <label className="flex items-start gap-3 cursor-pointer">
+                    <label className="flex items-start gap-2 sm:gap-3 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={formData.agreePrivacy}
                         onChange={(e) => handleInputChange('agreePrivacy', e.target.checked)}
-                        className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                        className="mt-0.5 sm:mt-1 w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary rounded focus:ring-primary flex-shrink-0"
                       />
-                      <span className="text-sm text-text-light">
+                      <span className="text-xs sm:text-sm text-text-light">
                         I agree to the <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
                       </span>
                     </label>
                     {errors.agreePrivacy && (
-                      <p className="text-red-500 text-sm flex items-center gap-1 ml-8">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-red-500 text-xs sm:text-sm flex items-center gap-1 ml-6 sm:ml-8">
+                        <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         {errors.agreePrivacy}
                       </p>
                     )}

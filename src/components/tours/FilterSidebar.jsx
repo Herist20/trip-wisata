@@ -114,9 +114,9 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
                   type="checkbox"
                   checked={filters.destinations.includes(destination)}
                   onChange={() => handleDestinationChange(destination)}
-                  className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-2"
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-2 flex-shrink-0"
                 />
-                <span className="text-sm text-text-light">{destination}</span>
+                <span className="text-xs sm:text-sm text-text-light">{destination}</span>
               </label>
             ))}
           </div>
@@ -220,10 +220,10 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
                   type="checkbox"
                   checked={filters.categories.includes(category.id)}
                   onChange={() => handleCategoryChange(category.id)}
-                  className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-2"
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-2 flex-shrink-0"
                 />
-                <span className="text-lg">{category.icon}</span>
-                <span className="text-sm text-text-light">{category.name}</span>
+                <span className="text-base sm:text-lg">{category.icon}</span>
+                <span className="text-xs sm:text-sm text-text-light">{category.name}</span>
               </label>
             ))}
           </div>
@@ -242,9 +242,9 @@ function FilterSidebar({ filters, onFilterChange, onResetFilters, onApplyFilters
                   name="rating"
                   checked={filters.rating === rating.value}
                   onChange={() => handleRatingChange(rating.value)}
-                  className="w-4 h-4 text-primary border-gray-300 focus:ring-primary focus:ring-2"
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary border-gray-300 focus:ring-primary focus:ring-2 flex-shrink-0"
                 />
-                <span className="text-sm text-text-light">{rating.label}</span>
+                <span className="text-xs sm:text-sm text-text-light">{rating.label}</span>
               </label>
             ))}
           </div>
