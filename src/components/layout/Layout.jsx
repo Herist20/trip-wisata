@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import ChatBot from '../common/ChatBot';
 
 function Layout() {
   const location = useLocation();
@@ -39,6 +40,9 @@ function Layout() {
       </main>
 
       <Footer />
+
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 }

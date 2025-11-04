@@ -693,32 +693,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Floating WhatsApp Button */}
-      <a
-        href={contactInfo.social.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 group"
-        aria-label="Chat on WhatsApp"
-        data-aos="zoom-in"
-        data-aos-delay="500"
-      >
-        <div className="relative">
-          {/* Pulsing Ring Animation */}
-          <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
-
-          {/* Main Button */}
-          <div className="relative bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white p-4 rounded-full shadow-2xl hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 flex items-center gap-3">
-            <MessageCircle className="w-6 h-6" />
-
-            {/* Tooltip */}
-            <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-secondary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
-              Chat dengan Kami di WhatsApp
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-45 w-2 h-2 bg-secondary"></div>
-            </div>
-          </div>
-        </div>
-      </a>
     </div>
   );
 }
