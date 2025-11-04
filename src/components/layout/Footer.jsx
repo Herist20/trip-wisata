@@ -28,15 +28,15 @@ function Footer() {
             <div>
               <Link to="/" className="inline-block group">
                 <h3 className="text-2xl font-bold mb-1">
-                  Indo<span className="text-primary">Trip</span>
+                  Tour<span className="text-primary">Bali</span>
                 </h3>
                 <p className="text-sm text-white/70 group-hover:text-primary transition-colors mb-3">
-                  Explore the Beauty of Indonesia
+                  Explore the Beauty of Bali
                 </p>
                 {/* Logo Image */}
                 <img
                   src="/images/logo-asita.webp"
-                  alt="IndoTrip Logo"
+                  alt="Tour Bali Logo"
                   className="h-24 w-auto object-contain mt-2 opacity-90 group-hover:opacity-100 transition-opacity"
                 />
               </Link>
@@ -261,12 +261,12 @@ function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <p className="text-white/70">
-              &copy; {currentYear} <span className="text-white font-semibold">IndoTrip</span>. All rights reserved.
+              &copy; {currentYear} <span className="text-white font-semibold">Tour Bali</span>. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-white/70">
               <span>Made with</span>
               <span className="text-primary text-lg">♥</span>
-              <span>in Indonesia</span>
+              <span>in Bali</span>
             </div>
           </div>
         </div>

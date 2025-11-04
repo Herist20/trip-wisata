@@ -557,7 +557,7 @@ export const testimonials = [
     name: 'Rudi Hermawan',
     location: 'Makassar',
     rating: 5,
-    comment: 'Bromo sunrise memang tidak pernah mengecewakan! Meskipun harus bangun pagi, pemandangannya sangat worth it. Mas Joko guide nya sangat membantu dan foto-fotonya bagus. Thanks IndoTrip!',
+    comment: 'Bromo sunrise memang tidak pernah mengecewakan! Meskipun harus bangun pagi, pemandangannya sangat worth it. Mas Joko guide nya sangat membantu dan foto-fotonya bagus. Thanks Tour Bali!',
     image: 'https://i.pravatar.cc/150?img=15',
     tour: 'Bromo Sunrise Adventure',
     guideName: 'Mas Joko'

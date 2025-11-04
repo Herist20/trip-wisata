@@ -100,13 +100,13 @@ function Header() {
             <Link
               to="/"
               className="flex items-center gap-2 group relative z-10"
-              aria-label="IndoTrip - Go to homepage"
+              aria-label="Tour Bali - Go to homepage"
             >
               <div className="relative">
                 <h1 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
                   isScrolled ? 'text-secondary' : 'text-white'
                 }`}>
-                  Indo<span className={`${isScrolled ? 'text-primary' : 'text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]'}`}>Trip</span>
+                  Tour<span className={`${isScrolled ? 'text-primary' : 'text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]'}`}>Bali</span>
                 </h1>
                 <div className={`absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full`} aria-hidden="true"></div>
               </div>
@@ -197,7 +197,7 @@ function Header() {
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <h2 className="text-xl font-bold text-secondary">
-              Indo<span className="text-primary">Trip</span>
+              Tour<span className="text-primary">Bali</span>
             </h2>
             <button
               onClick={toggleMenu}
