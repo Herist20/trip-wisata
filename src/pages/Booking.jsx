@@ -1,112 +1,473 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Calendar, Users, Mail, Phone, User, MessageSquare, CheckCircle } from 'lucide-react';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import {
+  Check, ChevronLeft, ChevronRight, Calendar, Users, User, Mail, Phone, Globe,
+  Cake, AlertCircle, MapPin, Clock, Star, Shield, RotateCcw, CreditCard,
+  Building2, Wallet, Tag, FileText, CheckCircle, Download, Home as HomeIcon,
+  Loader2, Plus, Minus, X
+} from 'lucide-react';
 import { tourPackages } from '../data/mockData';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function Booking() {
   const [searchParams] = useSearchParams();
-  const tourId = searchParams.get('tour');
-  const [selectedTour, setSelectedTour] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const tourIdParam = searchParams.get('tour');
+  const adultsParam = searchParams.get('adults');
+  const childrenParam = searchParams.get('children');
+  const dateParam = searchParams.get('date');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  // Multi-step state
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [bookingNumber, setBookingNumber] = useState('');
+
+  // Form data state
+  const [formData, setFormData] = useState({
+    // Step 1
+    tourId: tourIdParam || '',
+    departureDate: dateParam || '',
+    adults: parseInt(adultsParam) || 2,
+    children: parseInt(childrenParam) || 0,
+    infants: 0,
+    specialRequests: '',
+
+    // Step 2
+    fullName: '',
+    email: '',
+    phone: '',
+    nationality: 'Indonesia',
+    dateOfBirth: '',
+    emergencyContactName: '',
+    emergencyContactPhone: '',
+
+    // Step 3
+    travelInsurance: false,
+    airportPickup: false,
+    extraNight: false,
+    photographyService: false,
+    privateTour: false,
+    promoCode: '',
+
+    // Step 4
+    paymentMethod: 'credit-card',
+    agreeTerms: false,
+    agreePrivacy: false,
+  });
+
+  const [errors, setErrors] = useState({});
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [promoDiscount, setPromoDiscount] = useState(0);
+
+  const selectedTour = tourPackages.find(t => t.id === parseInt(formData.tourId));
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+    AOS.init({ duration: 800, once: true });
+    window.scrollTo(0, 0);
+  }, [currentStep]);
 
-    if (tourId) {
-      const tour = tourPackages.find((t) => t.id === parseInt(tourId));
-      setSelectedTour(tour);
-    }
-  }, [tourId]);
+  // Price calculations
+  const basePrice = selectedTour ? selectedTour.priceUSD : 0;
+  const childPrice = basePrice * 0.7;
+  const infantPrice = 0;
 
-  const onSubmit = (data) => {
-    console.log('Booking Data:', data);
-    setIsSubmitted(true);
-    reset();
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+  const subtotal = (formData.adults * basePrice) + (formData.children * childPrice) + (formData.infants * infantPrice);
+
+  const additionalServices = {
+    travelInsurance: formData.travelInsurance ? 30 : 0,
+    airportPickup: formData.airportPickup ? 25 : 0,
+    extraNight: formData.extraNight ? 50 : 0,
+    photographyService: formData.photographyService ? 100 : 0,
+    privateTour: formData.privateTour ? 150 : 0,
   };
+
+  const additionalTotal = Object.values(additionalServices).reduce((a, b) => a + b, 0);
+  const discountAmount = promoApplied ? subtotal * (promoDiscount / 100) : 0;
+  const taxableAmount = subtotal + additionalTotal - discountAmount;
+  const tax = taxableAmount * 0.11;
+  const grandTotal = taxableAmount + tax;
+
+  // Validation functions
+  const validateStep1 = () => {
+    const newErrors = {};
+    if (!formData.tourId) newErrors.tourId = 'Please select a tour package';
+    if (!formData.departureDate) newErrors.departureDate = 'Please select departure date';
+    if (formData.adults < 1) newErrors.adults = 'At least 1 adult required';
+
+    const selectedDate = new Date(formData.departureDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) newErrors.departureDate = 'Date cannot be in the past';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateStep2 = () => {
+    const newErrors = {};
+    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    else if (!/^[+\d][\d\s-]{8,}$/.test(formData.phone)) {
+      newErrors.phone = 'Invalid phone number format';
+    }
+    if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
+    if (!formData.emergencyContactName.trim()) newErrors.emergencyContactName = 'Emergency contact name is required';
+    if (!formData.emergencyContactPhone.trim()) newErrors.emergencyContactPhone = 'Emergency contact phone is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateStep4 = () => {
+    const newErrors = {};
+    if (!formData.agreeTerms) newErrors.agreeTerms = 'You must agree to terms and conditions';
+    if (!formData.agreePrivacy) newErrors.agreePrivacy = 'You must agree to privacy policy';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    let isValid = false;
+
+    if (currentStep === 1) isValid = validateStep1();
+    else if (currentStep === 2) isValid = validateStep2();
+    else if (currentStep === 3) isValid = true; // Optional step
+    else if (currentStep === 4) isValid = validateStep4();
+
+    if (isValid && currentStep < 4) {
+      setCurrentStep(currentStep + 1);
+    } else if (isValid && currentStep === 4) {
+      handleSubmit();
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      setErrors({});
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error for this field
+    if (errors[field]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleApplyPromo = () => {
+    const validPromoCodes = {
+      'WELCOME20': 20,
+      'SAVE10': 10,
+      'HOLIDAY15': 15,
+    };
+
+    const discount = validPromoCodes[formData.promoCode.toUpperCase()];
+    if (discount) {
+      setPromoApplied(true);
+      setPromoDiscount(discount);
+    } else {
+      alert('Invalid promo code');
+      setPromoApplied(false);
+      setPromoDiscount(0);
+    }
+  };
+
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      const randomBookingNumber = 'BK' + Date.now().toString().slice(-8);
+      setBookingNumber(randomBookingNumber);
+      setIsSubmitting(false);
+      setShowSuccessModal(true);
+    }, 2000);
+  };
+
+  const steps = [
+    { number: 1, title: 'Tour Selection', icon: MapPin },
+    { number: 2, title: 'Personal Info', icon: User },
+    { number: 3, title: 'Add-ons', icon: Plus },
+    { number: 4, title: 'Payment', icon: CreditCard },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-custom text-white py-20">
-        <div className="section-container text-center" data-aos="fade-up">
-          <h1 className="heading-primary text-white mb-4">Booking Paket Tour</h1>
-          <p className="text-xl max-w-2xl mx-auto">
-            Isi formulir di bawah untuk memulai petualangan Anda
-          </p>
-        </div>
-      </section>
+      {/* Progress Indicator */}
+      <div className="bg-white border-b sticky top-0 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            {steps.map((step, index) => {
+              const StepIcon = step.icon;
+              const isCompleted = currentStep > step.number;
+              const isCurrent = currentStep === step.number;
 
-      {/* Booking Form Section */}
-      <section className="section-container">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Form */}
-            <div className="lg:col-span-2">
-              <div className="bg-white p-8 rounded-xl shadow-md" data-aos="fade-up">
-                <h2 className="text-2xl font-bold text-secondary mb-6">Informasi Pemesanan</h2>
-
-                {isSubmitted && (
-                  <div className="mb-6 p-4 bg-primary/20 border-2 border-primary rounded-lg flex items-center gap-3">
-                    <CheckCircle className="w-6 h-6 text-primary" />
-                    <p className="text-secondary font-semibold">
-                      Terima kasih! Booking Anda telah diterima. Kami akan menghubungi Anda segera.
+              return (
+                <div key={step.number} className="flex items-center flex-1">
+                  <div className="flex flex-col items-center flex-1">
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all ${
+                        isCompleted
+                          ? 'bg-primary border-primary'
+                          : isCurrent
+                          ? 'border-primary bg-primary/10'
+                          : 'border-gray-300 bg-white'
+                      }`}
+                    >
+                      {isCompleted ? (
+                        <Check className="w-6 h-6 text-secondary" />
+                      ) : (
+                        <StepIcon
+                          className={`w-6 h-6 ${
+                            isCurrent ? 'text-primary' : 'text-gray-400'
+                          }`}
+                        />
+                      )}
+                    </div>
+                    <p
+                      className={`mt-2 text-sm font-medium hidden sm:block ${
+                        isCurrent ? 'text-primary' : 'text-text-light'
+                      }`}
+                    >
+                      {step.title}
                     </p>
                   </div>
-                )}
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`h-0.5 flex-1 mx-2 transition-all ${
+                        isCompleted ? 'bg-primary' : 'bg-gray-300'
+                      }`}
+                    ></div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Form Area - Left (2/3) */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8" data-aos="fade-right">
+              {/* Step 1: Tour Selection */}
+              {currentStep === 1 && (
+                <div className="space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2">
+                    Select Your Tour
+                  </h2>
+                  <p className="text-text-light mb-6">
+                    Choose your preferred tour package and departure date
+                  </p>
+
                   {/* Tour Selection */}
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
-                      Pilih Paket Tour *
+                      Tour Package *
                     </label>
                     <select
-                      {...register('tour', { required: 'Pilih paket tour' })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      defaultValue={tourId || ''}
+                      value={formData.tourId}
+                      onChange={(e) => handleInputChange('tourId', e.target.value)}
+                      className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                        errors.tourId ? 'border-red-500' : 'border-gray-200'
+                      }`}
                     >
-                      <option value="">-- Pilih Paket Tour --</option>
+                      <option value="">-- Select Tour Package --</option>
                       {tourPackages.map((tour) => (
                         <option key={tour.id} value={tour.id}>
-                          {tour.title} - Rp {tour.price.toLocaleString('id-ID')}
+                          {tour.title} - ${tour.priceUSD} ({tour.durationShort})
                         </option>
                       ))}
                     </select>
-                    {errors.tour && (
-                      <p className="text-red-500 text-sm mt-1">{errors.tour.message}</p>
+                    {errors.tourId && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.tourId}
+                      </p>
                     )}
                   </div>
+
+                  {/* Departure Date */}
+                  <div>
+                    <label className="block text-sm font-semibold text-secondary mb-2">
+                      <Calendar className="w-4 h-4 inline mr-1" />
+                      Departure Date *
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.departureDate}
+                      onChange={(e) => handleInputChange('departureDate', e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                        errors.departureDate ? 'border-red-500' : 'border-gray-200'
+                      }`}
+                    />
+                    {errors.departureDate && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.departureDate}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Participants */}
+                  <div className="space-y-4 bg-gray-50 p-6 rounded-xl">
+                    <h3 className="font-semibold text-secondary flex items-center gap-2">
+                      <Users className="w-5 h-5" />
+                      Number of Participants
+                    </h3>
+
+                    {/* Adults */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-secondary">Adults</p>
+                        <p className="text-sm text-text-light">Age 18+</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('adults', Math.max(1, formData.adults - 1))}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Minus className="w-5 h-5 mx-auto" />
+                        </button>
+                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                          {formData.adults}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('adults', formData.adults + 1)}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Plus className="w-5 h-5 mx-auto" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Children */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-secondary">Children</p>
+                        <p className="text-sm text-text-light">Age 4-17</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('children', Math.max(0, formData.children - 1))}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Minus className="w-5 h-5 mx-auto" />
+                        </button>
+                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                          {formData.children}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('children', formData.children + 1)}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Plus className="w-5 h-5 mx-auto" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Infants */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-secondary">Infants</p>
+                        <p className="text-sm text-text-light">Age 0-3 (Free)</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('infants', Math.max(0, formData.infants - 1))}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Minus className="w-5 h-5 mx-auto" />
+                        </button>
+                        <span className="text-xl font-bold text-secondary w-12 text-center">
+                          {formData.infants}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('infants', formData.infants + 1)}
+                          className="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Plus className="w-5 h-5 mx-auto" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {errors.adults && (
+                      <p className="text-red-500 text-sm flex items-center gap-1">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.adults}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Special Requests */}
+                  <div>
+                    <label className="block text-sm font-semibold text-secondary mb-2">
+                      Special Requests (Optional)
+                    </label>
+                    <textarea
+                      value={formData.specialRequests}
+                      onChange={(e) => handleInputChange('specialRequests', e.target.value)}
+                      rows="4"
+                      placeholder="Any dietary restrictions, accessibility needs, or special requests..."
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors resize-none"
+                    ></textarea>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2: Personal Information */}
+              {currentStep === 2 && (
+                <div className="space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2">
+                    Personal Information
+                  </h2>
+                  <p className="text-text-light mb-6">
+                    Please provide your contact details
+                  </p>
 
                   {/* Full Name */}
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
-                      <User className="inline w-4 h-4 mr-1 mb-1" />
-                      Nama Lengkap *
+                      <User className="w-4 h-4 inline mr-1" />
+                      Full Name *
                     </label>
                     <input
                       type="text"
-                      {...register('fullName', { required: 'Nama lengkap wajib diisi' })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="Masukkan nama lengkap"
+                      value={formData.fullName}
+                      onChange={(e) => handleInputChange('fullName', e.target.value)}
+                      placeholder="John Doe"
+                      className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                        errors.fullName ? 'border-red-500' : 'border-gray-200'
+                      }`}
                     />
                     {errors.fullName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
+                      <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.fullName}
+                      </p>
                     )}
                   </div>
 
@@ -114,138 +475,558 @@ function Booking() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        <Mail className="inline w-4 h-4 mr-1 mb-1" />
+                        <Mail className="w-4 h-4 inline mr-1" />
                         Email *
                       </label>
                       <input
                         type="email"
-                        {...register('email', {
-                          required: 'Email wajib diisi',
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: 'Format email tidak valid',
-                          },
-                        })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="email@example.com"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        placeholder="john@example.com"
+                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                          errors.email ? 'border-red-500' : 'border-gray-200'
+                        }`}
                       />
                       {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                        <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.email}
+                        </p>
                       )}
                     </div>
+
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        <Phone className="inline w-4 h-4 mr-1 mb-1" />
-                        No. Telepon *
+                        <Phone className="w-4 h-4 inline mr-1" />
+                        Phone Number *
                       </label>
                       <input
                         type="tel"
-                        {...register('phone', { required: 'No. telepon wajib diisi' })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="08123456789"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        placeholder="+1 234 567 8900"
+                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                          errors.phone ? 'border-red-500' : 'border-gray-200'
+                        }`}
                       />
                       {errors.phone && (
-                        <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+                        <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.phone}
+                        </p>
                       )}
                     </div>
                   </div>
 
-                  {/* Date & Participants */}
+                  {/* Nationality & Date of Birth */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        <Calendar className="inline w-4 h-4 mr-1 mb-1" />
-                        Tanggal Keberangkatan *
+                        <Globe className="w-4 h-4 inline mr-1" />
+                        Nationality *
+                      </label>
+                      <select
+                        value={formData.nationality}
+                        onChange={(e) => handleInputChange('nationality', e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors"
+                      >
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-secondary mb-2">
+                        <Cake className="w-4 h-4 inline mr-1" />
+                        Date of Birth *
                       </label>
                       <input
                         type="date"
-                        {...register('departureDate', { required: 'Tanggal wajib diisi' })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        value={formData.dateOfBirth}
+                        onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+                        max={new Date().toISOString().split('T')[0]}
+                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
+                          errors.dateOfBirth ? 'border-red-500' : 'border-gray-200'
+                        }`}
                       />
-                      {errors.departureDate && (
-                        <p className="text-red-500 text-sm mt-1">{errors.departureDate.message}</p>
+                      {errors.dateOfBirth && (
+                        <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.dateOfBirth}
+                        </p>
                       )}
                     </div>
+                  </div>
+
+                  {/* Emergency Contact */}
+                  <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 space-y-4">
+                    <h3 className="font-semibold text-secondary flex items-center gap-2">
+                      <AlertCircle className="w-5 h-5 text-yellow-600" />
+                      Emergency Contact
+                    </h3>
+
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        <Users className="inline w-4 h-4 mr-1 mb-1" />
-                        Jumlah Peserta *
+                        Contact Name *
                       </label>
                       <input
-                        type="number"
-                        {...register('participants', {
-                          required: 'Jumlah peserta wajib diisi',
-                          min: { value: 1, message: 'Minimal 1 peserta' },
-                        })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="1"
-                        min="1"
+                        type="text"
+                        value={formData.emergencyContactName}
+                        onChange={(e) => handleInputChange('emergencyContactName', e.target.value)}
+                        placeholder="Jane Doe"
+                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white ${
+                          errors.emergencyContactName ? 'border-red-500' : 'border-gray-200'
+                        }`}
                       />
-                      {errors.participants && (
-                        <p className="text-red-500 text-sm mt-1">{errors.participants.message}</p>
+                      {errors.emergencyContactName && (
+                        <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.emergencyContactName}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-secondary mb-2">
+                        Contact Phone *
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.emergencyContactPhone}
+                        onChange={(e) => handleInputChange('emergencyContactPhone', e.target.value)}
+                        placeholder="+1 234 567 8900"
+                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white ${
+                          errors.emergencyContactPhone ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                      />
+                      {errors.emergencyContactPhone && (
+                        <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.emergencyContactPhone}
+                        </p>
                       )}
                     </div>
                   </div>
+                </div>
+              )}
 
-                  {/* Message */}
-                  <div>
-                    <label className="block text-sm font-semibold text-secondary mb-2">
-                      <MessageSquare className="inline w-4 h-4 mr-1 mb-1" />
-                      Pesan Tambahan
-                    </label>
-                    <textarea
-                      {...register('message')}
-                      rows="4"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="Tuliskan pertanyaan atau permintaan khusus Anda..."
-                    ></textarea>
+              {/* Step 3: Additional Services */}
+              {currentStep === 3 && (
+                <div className="space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2">
+                    Additional Services
+                  </h2>
+                  <p className="text-text-light mb-6">
+                    Enhance your experience with our optional add-ons
+                  </p>
+
+                  <div className="space-y-4">
+                    {[
+                      { id: 'travelInsurance', label: 'Travel Insurance', price: 30, desc: 'Comprehensive coverage for your trip' },
+                      { id: 'airportPickup', label: 'Airport Pickup', price: 25, desc: 'Convenient transfer from airport to hotel' },
+                      { id: 'extraNight', label: 'Extra Night Accommodation', price: 50, desc: 'Additional night at premium hotel' },
+                      { id: 'photographyService', label: 'Professional Photography', price: 100, desc: 'Capture memories with pro photographer' },
+                      { id: 'privateTour', label: 'Private Tour Upgrade', price: 150, desc: 'Exclusive private tour experience' },
+                    ].map((service) => (
+                      <label
+                        key={service.id}
+                        className="flex items-start gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData[service.id]}
+                          onChange={(e) => handleInputChange(service.id, e.target.checked)}
+                          className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="font-semibold text-secondary">{service.label}</p>
+                            <p className="font-bold text-primary">+${service.price}</p>
+                          </div>
+                          <p className="text-sm text-text-light">{service.desc}</p>
+                        </div>
+                      </label>
+                    ))}
                   </div>
 
-                  {/* Submit Button */}
-                  <button type="submit" className="w-full btn-primary">
-                    Kirim Booking
-                  </button>
-                </form>
-              </div>
-            </div>
-
-            {/* Sidebar - Selected Tour Info */}
-            <div className="lg:col-span-1">
-              <div className="bg-white p-6 rounded-xl shadow-md sticky top-24" data-aos="fade-up">
-                <h3 className="text-xl font-bold text-secondary mb-4">Ringkasan Booking</h3>
-                {selectedTour ? (
-                  <div>
-                    <img
-                      src={selectedTour.image}
-                      alt={selectedTour.title}
-                      className="w-full h-40 object-cover rounded-lg mb-4"
-                    />
-                    <h4 className="font-semibold text-secondary mb-2">{selectedTour.title}</h4>
-                    <p className="text-sm text-text-light mb-1">{selectedTour.destination}</p>
-                    <p className="text-sm text-text-light mb-4">{selectedTour.duration}</p>
-                    <div className="border-t pt-4">
-                      <p className="text-sm text-text-light mb-1">Harga per orang:</p>
-                      <p className="text-2xl font-bold text-primary mb-4">
-                        Rp {selectedTour.price.toLocaleString('id-ID')}
+                  {/* Promo Code */}
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl">
+                    <h3 className="font-semibold text-secondary mb-4 flex items-center gap-2">
+                      <Tag className="w-5 h-5 text-primary" />
+                      Have a Promo Code?
+                    </h3>
+                    <div className="flex gap-3">
+                      <input
+                        type="text"
+                        value={formData.promoCode}
+                        onChange={(e) => handleInputChange('promoCode', e.target.value.toUpperCase())}
+                        placeholder="ENTER CODE"
+                        className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyPromo}
+                        className="px-6 py-3 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-xl transition-colors"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {promoApplied && (
+                      <p className="text-green-600 text-sm mt-2 flex items-center gap-1">
+                        <CheckCircle className="w-4 h-4" />
+                        Promo code applied! {promoDiscount}% discount
                       </p>
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-xs font-semibold text-secondary mb-2">Termasuk:</p>
-                        <ul className="text-xs text-text-light space-y-1">
-                          {selectedTour.features.map((feature, idx) => (
-                            <li key={idx}>• {feature}</li>
-                          ))}
-                        </ul>
-                      </div>
+                    )}
+                    <p className="text-xs text-text-light mt-3">
+                      Try: WELCOME20, SAVE10, or HOLIDAY15
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 4: Payment & Confirmation */}
+              {currentStep === 4 && (
+                <div className="space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2">
+                    Payment & Confirmation
+                  </h2>
+                  <p className="text-text-light mb-6">
+                    Review your booking and complete payment
+                  </p>
+
+                  {/* Order Summary Recap */}
+                  <div className="bg-gray-50 p-6 rounded-xl space-y-3">
+                    <h3 className="font-bold text-secondary mb-4">Booking Summary</h3>
+                    {selectedTour && (
+                      <>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light">Tour:</span>
+                          <span className="font-medium text-secondary">{selectedTour.title}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light">Date:</span>
+                          <span className="font-medium text-secondary">
+                            {new Date(formData.departureDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light">Participants:</span>
+                          <span className="font-medium text-secondary">
+                            {formData.adults} Adults, {formData.children} Children, {formData.infants} Infants
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Payment Method */}
+                  <div>
+                    <h3 className="font-semibold text-secondary mb-4">Payment Method</h3>
+                    <div className="space-y-3">
+                      {[
+                        { id: 'credit-card', label: 'Credit Card', icon: CreditCard },
+                        { id: 'bank-transfer', label: 'Bank Transfer', icon: Building2 },
+                        { id: 'e-wallet', label: 'E-Wallet (GoPay/OVO/Dana)', icon: Wallet },
+                      ].map((method) => {
+                        const MethodIcon = method.icon;
+                        return (
+                          <label
+                            key={method.id}
+                            className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors"
+                          >
+                            <input
+                              type="radio"
+                              name="paymentMethod"
+                              checked={formData.paymentMethod === method.id}
+                              onChange={() => handleInputChange('paymentMethod', method.id)}
+                              className="w-5 h-5 text-primary focus:ring-primary"
+                            />
+                            <MethodIcon className="w-5 h-5 text-primary" />
+                            <span className="font-medium text-secondary">{method.label}</span>
+                          </label>
+                        );
+                      })}
                     </div>
                   </div>
+
+                  {/* Terms & Conditions */}
+                  <div className="space-y-3 border-t pt-6">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.agreeTerms}
+                        onChange={(e) => handleInputChange('agreeTerms', e.target.checked)}
+                        className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                      />
+                      <span className="text-sm text-text-light">
+                        I agree to the <Link to="/terms" className="text-primary hover:underline">Terms & Conditions</Link>
+                      </span>
+                    </label>
+                    {errors.agreeTerms && (
+                      <p className="text-red-500 text-sm flex items-center gap-1 ml-8">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.agreeTerms}
+                      </p>
+                    )}
+
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.agreePrivacy}
+                        onChange={(e) => handleInputChange('agreePrivacy', e.target.checked)}
+                        className="mt-1 w-5 h-5 text-primary rounded focus:ring-primary"
+                      />
+                      <span className="text-sm text-text-light">
+                        I agree to the <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+                      </span>
+                    </label>
+                    {errors.agreePrivacy && (
+                      <p className="text-red-500 text-sm flex items-center gap-1 ml-8">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.agreePrivacy}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Navigation Buttons */}
+              <div className="flex items-center justify-between pt-8 border-t mt-8">
+                {currentStep > 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    disabled={isSubmitting}
+                    className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-secondary font-semibold rounded-xl hover:border-secondary transition-colors disabled:opacity-50"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                    Back
+                  </button>
                 ) : (
-                  <p className="text-text-light text-center py-8">Pilih paket tour terlebih dahulu</p>
+                  <div></div>
                 )}
+
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={isSubmitting}
+                  className="flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-secondary font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:transform-none"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Processing...
+                    </>
+                  ) : currentStep === 4 ? (
+                    <>
+                      Confirm Booking
+                      <CheckCircle className="w-5 h-5" />
+                    </>
+                  ) : (
+                    <>
+                      Next Step
+                      <ChevronRight className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Order Summary Sidebar - Right (1/3) */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-32 space-y-4" data-aos="fade-left">
+              <div className="bg-white rounded-2xl shadow-xl p-6 border-2 border-gray-100">
+                <h3 className="text-xl font-bold text-secondary mb-6">Order Summary</h3>
+
+                {selectedTour ? (
+                  <>
+                    {/* Tour Info */}
+                    <div className="mb-6">
+                      <img
+                        src={selectedTour.image}
+                        alt={selectedTour.title}
+                        className="w-full h-40 object-cover rounded-xl mb-4"
+                      />
+                      <h4 className="font-bold text-secondary mb-1">{selectedTour.title}</h4>
+                      <div className="flex items-center gap-2 text-sm text-text-light mb-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{selectedTour.destination}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-text-light">
+                        <Clock className="w-4 h-4" />
+                        <span>{selectedTour.duration}</span>
+                      </div>
+                    </div>
+
+                    {/* Participants */}
+                    {(formData.adults > 0 || formData.children > 0 || formData.infants > 0) && (
+                      <div className="mb-6 space-y-2">
+                        {formData.adults > 0 && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">{formData.adults} Adult(s) × ${basePrice}</span>
+                            <span className="font-semibold text-secondary">${(formData.adults * basePrice).toFixed(2)}</span>
+                          </div>
+                        )}
+                        {formData.children > 0 && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">{formData.children} Child(ren) × ${childPrice.toFixed(2)}</span>
+                            <span className="font-semibold text-secondary">${(formData.children * childPrice).toFixed(2)}</span>
+                          </div>
+                        )}
+                        {formData.infants > 0 && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">{formData.infants} Infant(s)</span>
+                            <span className="font-semibold text-green-600">Free</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Additional Services */}
+                    {additionalTotal > 0 && (
+                      <div className="mb-6 space-y-2 border-t pt-4">
+                        <p className="text-sm font-semibold text-secondary mb-2">Add-ons:</p>
+                        {formData.travelInsurance && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">Travel Insurance</span>
+                            <span className="font-semibold text-secondary">$30.00</span>
+                          </div>
+                        )}
+                        {formData.airportPickup && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">Airport Pickup</span>
+                            <span className="font-semibold text-secondary">$25.00</span>
+                          </div>
+                        )}
+                        {formData.extraNight && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">Extra Night</span>
+                            <span className="font-semibold text-secondary">$50.00</span>
+                          </div>
+                        )}
+                        {formData.photographyService && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">Photography Service</span>
+                            <span className="font-semibold text-secondary">$100.00</span>
+                          </div>
+                        )}
+                        {formData.privateTour && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light">Private Tour Upgrade</span>
+                            <span className="font-semibold text-secondary">$150.00</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Price Breakdown */}
+                    <div className="space-y-3 mb-6 border-t pt-4">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-light">Subtotal</span>
+                        <span className="font-semibold text-secondary">${subtotal.toFixed(2)}</span>
+                      </div>
+
+                      {additionalTotal > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light">Additional Services</span>
+                          <span className="font-semibold text-secondary">${additionalTotal.toFixed(2)}</span>
+                        </div>
+                      )}
+
+                      {promoApplied && discountAmount > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-green-600">Discount ({promoDiscount}%)</span>
+                          <span className="font-semibold text-green-600">-${discountAmount.toFixed(2)}</span>
+                        </div>
+                      )}
+
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-light">Tax (11%)</span>
+                        <span className="font-semibold text-secondary">${tax.toFixed(2)}</span>
+                      </div>
+                    </div>
+
+                    {/* Grand Total */}
+                    <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 rounded-xl mb-6">
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-bold text-secondary">Grand Total</span>
+                        <span className="text-3xl font-bold text-primary">${grandTotal.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <p className="text-text-light text-center py-8">Select a tour to see pricing</p>
+                )}
+
+                {/* Trust Badges */}
+                <div className="space-y-3 pt-6 border-t">
+                  <div className="flex items-center gap-2 text-sm text-text-light">
+                    <Shield className="w-4 h-4 text-green-600" />
+                    <span>Secure Payment</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-text-light">
+                    <RotateCcw className="w-4 h-4 text-blue-600" />
+                    <span>Money-back Guarantee</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-text-light">
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                    <span>Instant Confirmation</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl" data-aos="zoom-in">
+            {/* Success Animation */}
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+              <CheckCircle className="w-12 h-12 text-green-600" />
+            </div>
+
+            <h2 className="text-3xl font-bold text-secondary text-center mb-4">
+              Booking Confirmed!
+            </h2>
+
+            <p className="text-text-light text-center mb-6">
+              Your booking has been successfully confirmed. We've sent a confirmation email to <strong>{formData.email}</strong>
+            </p>
+
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl mb-6 text-center">
+              <p className="text-sm text-text-light mb-2">Booking Number</p>
+              <p className="text-3xl font-bold text-primary tracking-wider">{bookingNumber}</p>
+            </div>
+
+            <div className="space-y-3">
+              <button
+                onClick={() => alert('Download receipt feature (demo)')}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
+              >
+                <Download className="w-5 h-5" />
+                Download Receipt
+              </button>
+
+              <Link
+                to="/"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-light text-secondary font-bold rounded-xl transition-all"
+              >
+                <HomeIcon className="w-5 h-5" />
+                Back to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
