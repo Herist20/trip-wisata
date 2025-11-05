@@ -70,7 +70,7 @@ export const tourPackages = [
     priceUSD: 899,
     rating: 5.0,
     reviews: 156,
-    image: 'https://images.unsplash.com/photo-1583737209957-84b8833b0a3b?w=800',
+    image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     description: 'Eksplorasi bawah laut terbaik di dunia dengan keanekaragaman hayati yang luar biasa.',
     features: ['Resort Bintang 5', 'Diving Equipment', 'Instruktur Bersertifikat', 'All Inclusive'],
     highlights: ['10+ Diving Spots', 'Underwater Photography', 'Private Boat Tour'],
@@ -170,7 +170,7 @@ export const tourPackages = [
     priceUSD: 379,
     rating: 4.7,
     reviews: 87,
-    image: 'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+    image: 'https://images.unsplash.com/photo-1619238445475-4742e8c8ebd3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688',
     description: 'Jelajahi budaya unik Toraja dengan arsitektur tradisional dan upacara adat yang khas.',
     features: ['Cultural Guide', 'Traditional Village Tours', 'Hotel Stay', 'All Meals'],
     highlights: ['Tongkonan Houses', 'Burial Sites', 'Traditional Ceremonies'],
@@ -210,7 +210,7 @@ export const tourPackages = [
     priceUSD: 119,
     rating: 4.5,
     reviews: 215,
-    image: 'https://images.unsplash.com/photo-1555400082-6aa8e4295dd0?w=800',
+    image: 'https://images.unsplash.com/photo-1613057263089-7a8c82f2825d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     description: 'Nikmati kesejukan Bandung dengan kunjungan ke kebun teh, kawah, dan kuliner khas.',
     features: ['Hotel Bintang 3', 'Private Car', 'Breakfast', 'Entrance Tickets'],
     highlights: ['Tangkuban Perahu', 'Tea Plantation', 'Factory Outlets'],
@@ -270,7 +270,7 @@ export const tourPackages = [
     priceUSD: 619,
     rating: 4.7,
     reviews: 76,
-    image: 'https://images.unsplash.com/photo-1473496169904-658ba7f44ca7?w=800',
+    image: 'https://images.unsplash.com/photo-1678150913309-cbebdf17d804?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     description: 'Kombinasi sempurna antara pantai eksotis dan budaya tradisional Sumba yang autentik.',
     features: ['Hotel & Resort', 'Cultural Guide', 'All Transportation', 'Meals'],
     highlights: ['Weekuri Lagoon', 'Traditional Villages', 'Nihiwatu Beach'],
@@ -671,10 +671,10 @@ export const tourDetails = {
     // Bali Paradise Tour
     gallery: [
       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800',
-      'https://images.unsplash.com/photo-1555400082-6aa8e4295dd0?w=800',
+      'https://images.unsplash.com/photo-1553902000-e036b7d05af5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
       'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
-      'https://images.unsplash.com/photo-1473496169904-658ba7f44ca7?w=800',
+      'https://images.unsplash.com/photo-1720518816836-e351848c5357?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1185',
     ],
     fullDescription: 'Rasakan keajaiban Bali dalam paket tour 4 hari 3 malam yang dirancang khusus untuk memberikan pengalaman terbaik. Dari pantai-pantai eksotis hingga pura-pura bersejarah, dari sawah terasering yang memukau hingga hutan monyet yang menarik, setiap momen di Bali akan menjadi kenangan tak terlupakan.\n\nPaket tour ini mencakup akomodasi di hotel bintang 4 dengan pemandangan spektakuler, makan 3 kali sehari dengan menu pilihan, dan transportasi nyaman dengan AC. Tour guide profesional kami akan menemani Anda sepanjang perjalanan, memberikan insight mendalam tentang budaya dan sejarah Bali.\n\nNikmati sunset di Tanah Lot, jelajahi Ubud dengan keindahan alamnya, dan rasakan keramahan masyarakat Bali yang legendaris. Paket ini perfect untuk honeymoon, family vacation, atau solo travelers yang ingin explore.',
     meetingPoint: 'Ngurah Rai International Airport (DPS) - Arrival Hall',
@@ -1113,7 +1113,7 @@ export const galleryImages = [
   },
   {
     id: 15,
-    url: 'https://images.unsplash.com/photo-1562739247-f9f5f70e8cc2?w=1200',
+    url: 'https://images.unsplash.com/photo-1553902000-e036b7d05af5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     category: 'cultural',
     location: 'Tanah Lot Temple, Bali',
     tourPackage: 'Bali Paradise Tour',
@@ -1124,7 +1124,7 @@ export const galleryImages = [
   },
   {
     id: 16,
-    url: 'https://images.unsplash.com/photo-1604214893114-c67c1b43f2e6?w=1200',
+    url: 'https://images.unsplash.com/photo-1720518816836-e351848c5357?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1185',
     category: 'cultural',
     location: 'Uluwatu Temple, Bali',
     tourPackage: 'Bali Paradise Tour',
@@ -1146,7 +1146,7 @@ export const galleryImages = [
   },
   {
     id: 18,
-    url: 'https://images.unsplash.com/photo-1568632234097-bbd892b46e86?w=1200',
+    url: 'https://images.unsplash.com/photo-1619238445475-4742e8c8ebd3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688',
     category: 'cultural',
     location: 'Tana Toraja, Sulawesi',
     tourPackage: 'Toraja Highland Culture',
@@ -1238,7 +1238,7 @@ export const galleryImages = [
   },
   {
     id: 26,
-    url: 'https://images.unsplash.com/photo-1599021109159-7f7c6c1a8744?w=1200',
+    url: 'https://images.unsplash.com/photo-1707529332935-bfa3925f15ac?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1326',
     category: 'culinary',
     location: 'Yogyakarta',
     tourPackage: 'Yogyakarta Heritage Tour',
@@ -1260,7 +1260,7 @@ export const galleryImages = [
   },
   {
     id: 28,
-    url: 'https://images.unsplash.com/photo-1562158147-f8fb09b8cc97?w=1200',
+    url: 'https://images.unsplash.com/photo-1624234763734-c9629a2777c1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     category: 'culinary',
     location: 'Bali',
     tourPackage: 'Bali Food Tour',
@@ -1354,7 +1354,7 @@ export const galleryImages = [
   // More Cultural
   {
     id: 36,
-    url: 'https://images.unsplash.com/photo-1558461184-c01ef8a7a004?w=1200',
+    url: 'https://images.unsplash.com/photo-1565970141926-c001afaf8577?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
     category: 'cultural',
     location: 'Ubud, Bali',
     tourPackage: 'Bali Paradise Tour',
@@ -1492,7 +1492,7 @@ export const galleryImages = [
   },
   {
     id: 48,
-    url: 'https://images.unsplash.com/photo-1496484091629-00c0be1e1a1b?w=1200',
+    url: 'https://images.unsplash.com/photo-1585643965050-da69dc20c5cf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172',
     category: 'beach',
     location: 'Bali',
     tourPackage: 'Bali Paradise Tour',
