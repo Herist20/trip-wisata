@@ -32,6 +32,26 @@
     "addOns": "Add-ons",
     "payment": "Payment"
   },
+  "stepLabels": {
+    "tour": "Tour",
+    "info": "Info",
+    "addOns": "Tambahan",
+    "pay": "Bayar"
+  },
+  "ageIndicator": "Usia 18+",
+  "promoHint": "Coba:",
+  "labels": {
+    "tour": "Tour:",
+    "date": "Tanggal:",
+    "participants": "Peserta:",
+    "addOns": "Tambahan:",
+    "free": "Gratis"
+  },
+  "trustBadges": {
+    "securePayment": "Pembayaran Aman",
+    "moneyBack": "Garansi Uang Kembali",
+    "instantConfirm": "Konfirmasi Instan"
+  },
   "step1": {
     "title": "Pilih Paket Tour",
     "selectTour": "Pilih Paket Tour",
@@ -67,6 +87,15 @@
     "emergencyContactNamePlaceholder": "Nama lengkap",
     "emergencyContactPhone": "Nomor Telepon Darurat",
     "emergencyContactPhonePlaceholder": "+62 812 3456 7890",
+    "countries": {
+      "indonesia": "Indonesia",
+      "malaysia": "Malaysia",
+      "singapore": "Singapura",
+      "unitedStates": "Amerika Serikat",
+      "unitedKingdom": "Inggris Raya",
+      "australia": "Australia",
+      "other": "Lainnya"
+    },
     "errors": {
       "fullName": "Full name is required",
       "email": "Email is required",
@@ -110,7 +139,9 @@
     "promoCodePlaceholder": "Masukkan kode promo",
     "applyPromo": "Terapkan",
     "promoApplied": "Promo diterapkan!",
-    "invalidPromo": "Kode promo tidak valid"
+    "invalidPromo": "Kode promo tidak valid",
+    "discountApplied": "Promo berhasil! Diskon {{percent}}%",
+    "promoHintExamples": "WELCOME20, SAVE10, atau HOLIDAY15"
   },
   "step4": {
     "title": "Pembayaran & Konfirmasi",
@@ -133,6 +164,10 @@
     "adults": "{{count}} Dewasa × ${{price}}",
     "children": "{{count}} Anak × ${{price}}",
     "infants": "{{count}} Bayi × Gratis",
+    "adultsLine": "{{count}} Dewasa × ${{price}}",
+    "childrenLine": "{{count}} Anak × ${{price}}",
+    "infantsLine": "{{count}} Bayi",
+    "participantsSummary": "{{adults}} Dewasa, {{children}} Anak, {{infants}} Bayi",
     "additionalServices": "Layanan Tambahan",
     "discount": "Diskon ({{percent}}%)",
     "tax": "Pajak (11%)",
@@ -164,5 +199,7 @@
     "location": "Lokasi",
     "rating": "Rating",
     "reviews": "{{count}} ulasan"
-  }
+  },
+  "changeType": "Ubah Tipe",
+  "downloadReceiptDemo": "Fitur unduh struk (demo)"
 }

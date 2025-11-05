@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, SlidersHorizontal, X, Loader2, MapPin, Clock, Star, CheckCircle, Calendar, ArrowRight, Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../contexts/LanguageContext';
 import { tourPackages } from '../data/mockData';
 import TourCard from '../components/tours/TourCard';
 import FilterSidebar from '../components/tours/FilterSidebar';
@@ -10,6 +12,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function Tours() {
+  const { t } = useTranslation('tours');
+  const { currentLanguage } = useLanguage();
   const [filters, setFilters] = useState({
     destinations: [],
     durationRange: [1, 7],
@@ -193,7 +197,7 @@ function Tours() {
           <div className="p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <h3 className="font-bold text-xl text-secondary mb-4">Tour Information</h3>
+                <h3 className="font-bold text-xl text-secondary mb-4">{t('quickView.tourInformation')}</h3>
 
                 {/* Rating */}
                 <div className="flex items-center gap-2 mb-4">
@@ -210,7 +214,7 @@ function Tours() {
                     ))}
                   </div>
                   <span className="font-semibold text-secondary">{tour.rating}</span>
-                  <span className="text-text-light">({tour.reviews} reviews)</span>
+                  <span className="text-text-light">({tour.reviews} {t('quickView.reviewsCount')})</span>
                 </div>
 
                 {/* Duration */}
@@ -224,7 +228,7 @@ function Tours() {
 
                 {/* Highlights */}
                 <div>
-                  <h4 className="font-semibold text-secondary mb-3">Tour Highlights</h4>
+                  <h4 className="font-semibold text-secondary mb-3">{t('quickView.highlights')}</h4>
                   <div className="space-y-2">
                     {tour.highlights.map((highlight, idx) => (
                       <div key={idx} className="flex items-center gap-2">
@@ -237,25 +241,25 @@ function Tours() {
               </div>
 
               <div>
-                <h3 className="font-bold text-xl text-secondary mb-4">Booking Information</h3>
+                <h3 className="font-bold text-xl text-secondary mb-4">{t('quickView.bookingInformation')}</h3>
 
                 {/* Price */}
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl mb-6">
-                  <p className="text-sm text-text-light mb-2">Starting from</p>
+                  <p className="text-sm text-text-light mb-2">{t('card.startingFrom')}</p>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="text-4xl font-bold text-primary">${tour.priceUSD}</span>
                     <span className="text-lg text-text-light line-through">
                       ${Math.round(tour.priceUSD * 1.3)}
                     </span>
                   </div>
-                  <p className="text-sm text-text-light">per person</p>
+                  <p className="text-sm text-text-light">{t('card.perPerson')}</p>
                 </div>
 
                 {/* Departure Dates */}
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-3">
                     <Calendar className="w-5 h-5 text-primary" />
-                    <h4 className="font-semibold text-secondary">Next Departures</h4>
+                    <h4 className="font-semibold text-secondary">{t('card.nextDepartures')}</h4>
                   </div>
                   <div className="space-y-2">
                     {tour.departureDates.map((date, idx) => (
@@ -272,7 +276,7 @@ function Tours() {
                         </span>
                         {tour.availability <= 10 && (
                           <span className="text-xs font-semibold text-red-500">
-                            {tour.availability} slots left
+                            {tour.availability} {t('card.slotsLeft')}
                           </span>
                         )}
                       </div>
@@ -286,14 +290,14 @@ function Tours() {
                     to={`/tours/${tour.id}`}
                     className="block w-full bg-secondary hover:bg-secondary-light text-white font-bold py-4 rounded-xl text-center transition-all duration-300 shadow-lg"
                   >
-                    View Full Details
+                    {t('quickView.viewFullDetails')}
                   </Link>
                   <Link
                     to={`/booking?tour=${tour.id}`}
                     className="block w-full bg-primary hover:bg-primary-light text-secondary font-bold py-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
                     <span className="flex items-center justify-center gap-2">
-                      Book Now
+                      {t('quickView.bookNow')}
                       <ArrowRight className="w-5 h-5" />
                     </span>
                   </Link>
@@ -326,18 +330,18 @@ function Tours() {
           {/* Breadcrumb */}
           <nav className="flex items-center justify-center gap-2 text-white/80 mb-4" data-aos="fade-down">
             <Link to="/" className="hover:text-primary transition-colors">
-              Home
+              {t('breadcrumb.home')}
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-primary font-semibold">Tour Packages</span>
+            <span className="text-primary font-semibold">{t('breadcrumb.tourPackages')}</span>
           </nav>
 
           {/* Heading */}
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" data-aos="fade-up">
-            Jelajahi Paket Tour Kami
+            {t('hero.title')}
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Temukan destinasi impian Anda dari 24+ pilihan paket tour menarik di seluruh Indonesia
+            {t('hero.subtitle')}
           </p>
         </div>
       </section>
@@ -376,7 +380,7 @@ function Tours() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Cari paket tour berdasarkan nama, destinasi, atau kategori..."
+                  placeholder={t('searchBar.placeholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium transition-all hover:border-gray-400 shadow-sm"
@@ -385,7 +389,7 @@ function Tours() {
                   <button
                     onClick={() => setSearchQuery('')}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-secondary transition-colors"
-                    aria-label="Clear search"
+                    aria-label={t('aria.clearSearch')}
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -397,11 +401,10 @@ function Tours() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 bg-white p-4 rounded-xl shadow-md">
               <div>
                 <p className="text-text-light">
-                  Menampilkan{' '}
-                  <span className="font-bold text-secondary">{filteredTours.length}</span> paket
-                  tour
+                  {t('toolbar.showing')}{' '}
+                  <span className="font-bold text-secondary">{filteredTours.length}</span> {t('toolbar.tourPackages')}
                   {searchQuery && (
-                    <span className="text-primary font-semibold"> untuk "{searchQuery}"</span>
+                    <span className="text-primary font-semibold"> {t('toolbar.for')} "{searchQuery}"</span>
                   )}
                 </p>
               </div>
@@ -413,7 +416,7 @@ function Tours() {
                   className="lg:hidden flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary-light transition-colors"
                 >
                   <SlidersHorizontal className="w-5 h-5" />
-                  Filters
+                  {t('toolbar.filtersButton')}
                 </button>
 
                 {/* Sort Dropdown */}
@@ -431,11 +434,11 @@ function Tours() {
                     onBlur={() => setIsDropdownOpen(false)}
                     className="w-full px-4 py-2.5 pr-10 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium text-secondary appearance-none bg-white cursor-pointer transition-all hover:border-gray-400 shadow-sm"
                   >
-                    <option value="popular">Populer</option>
-                    <option value="price-low">Harga: Rendah ke Tinggi</option>
-                    <option value="price-high">Harga: Tinggi ke Rendah</option>
-                    <option value="rating">Rating Tertinggi</option>
-                    <option value="duration">Durasi Terpendek</option>
+                    <option value="popular">{t('sortOptions.popular')}</option>
+                    <option value="price-low">{t('sortOptions.priceLow')}</option>
+                    <option value="price-high">{t('sortOptions.priceHigh')}</option>
+                    <option value="rating">{t('sortOptions.rating')}</option>
+                    <option value="duration">{t('sortOptions.duration')}</option>
                   </select>
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                     <svg
@@ -481,11 +484,11 @@ function Tours() {
                       onClick={handleLoadMore}
                       className="inline-flex items-center gap-2 bg-secondary hover:bg-primary text-white hover:text-secondary font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg btn-animate hover-lift"
                     >
-                      Load More Tours
+                      {t('loadMore.button')}
                       <Loader2 className="w-5 h-5" />
                     </button>
                     <p className="text-sm text-text-light mt-4">
-                      Showing {displayedTours.length} of {filteredTours.length} tours
+                      {t('loadMore.showing', { displayed: displayedTours.length, total: filteredTours.length })}
                     </p>
                   </div>
                 )}

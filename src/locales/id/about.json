@@ -1,0 +1,125 @@
+{
+  "hero": {
+    "title": "Tentang Kami",
+    "subtitle": "Mewujudkan Impian Perjalanan Anda Sejak 2015"
+  },
+  "ourStory": {
+    "badge": "Our Journey",
+    "title": "Perjalanan Kami Dimulai dengan Passion",
+    "paragraphs": [
+      "Berawal dari kecintaan mendalam terhadap keindahan Indonesia, kami mendirikan Trip Wisata pada tahun 2015 dengan visi sederhana namun mulia: memperkenalkan pesona nusantara kepada lebih banyak orang. Dari sebuah kantor kecil dan dua paket tour pertama, kami memulai perjalanan yang luar biasa ini.",
+      "Setiap destinasi yang kami tawarkan dipilih dengan cermat, setiap pengalaman dirancang dengan detail. Kami tidak hanya ingin mengajak Anda berwisata, tetapi menghadirkan petualangan yang berkesan, pengetahuan budaya yang mendalam, dan kenangan indah yang akan Anda bawa pulang selamanya.",
+      "Dengan tim profesional yang memiliki pengalaman lebih dari 10 tahun di industri pariwisata, kami memahami bahwa setiap traveler memiliki kebutuhan dan impian yang unik. Itulah mengapa kami selalu berusaha memberikan layanan yang personal, fleksibel, dan melebihi ekspektasi.",
+      "Hari ini, dengan bangga kami melayani ratusan wisatawan setiap tahunnya, membawa mereka menjelajahi 20+ destinasi menakjubkan di seluruh Indonesia. Dan perjalanan kami masih terus berlanjut, dengan semangat yang sama seperti hari pertama."
+    ],
+    "timelineTitle": "Timeline Perjalanan Kami"
+  },
+  "timeline": [
+    {
+      "year": "2015",
+      "event": "Founded",
+      "description": "Dimulai dengan 2 paket tour dan passion yang besar"
+    },
+    {
+      "year": "2018",
+      "event": "Expansion",
+      "description": "Berkembang ke 10 destinasi di seluruh Indonesia"
+    },
+    {
+      "year": "2020",
+      "event": "Digital Transformation",
+      "description": "Launching sistem booking online untuk kemudahan pelanggan"
+    },
+    {
+      "year": "2024",
+      "event": "Major Milestone",
+      "description": "20+ destinasi dan 500+ pelanggan bahagia"
+    }
+  ],
+  "values": {
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip fundamental yang menjadi fondasi setiap layanan dan keputusan kami",
+    "items": [
+      {
+        "title": "Integrity",
+        "description": "Kami beroperasi dengan kejujuran dan transparansi penuh. Tidak ada biaya tersembunyi, semua informasi disampaikan dengan jelas kepada setiap pelanggan."
+      },
+      {
+        "title": "Excellence",
+        "description": "Komitmen kami adalah memberikan layanan terbaik di kelasnya. Setiap detail perjalanan dirancang untuk melampaui ekspektasi Anda."
+      },
+      {
+        "title": "Sustainability",
+        "description": "Kami peduli pada kelestarian alam dan budaya. Setiap tour dirancang untuk mendukung pariwisata berkelanjutan dan memberdayakan komunitas lokal."
+      },
+      {
+        "title": "Customer-Centric",
+        "description": "Kepuasan Anda adalah prioritas utama kami. Tim kami siap 24/7 untuk memastikan setiap perjalanan Anda berjalan sempurna."
+      }
+    ]
+  },
+  "team": {
+    "title": "Tim Profesional Kami",
+    "subtitle": "Bertemu dengan orang-orang berdedikasi yang membuat setiap perjalanan Anda istimewa",
+    "members": [
+      {
+        "name": "Andi Wijaya",
+        "position": "CEO & Founder",
+        "bio": "Dengan 15+ tahun pengalaman di industri pariwisata, Andi memimpin visi perusahaan untuk memberikan pengalaman wisata terbaik."
+      },
+      {
+        "name": "Siti Rahman",
+        "position": "Operations Manager",
+        "bio": "Bertanggung jawab atas operasional harian dan memastikan setiap tour berjalan lancar dengan standar kualitas tertinggi."
+      },
+      {
+        "name": "Made Prasetya",
+        "position": "Senior Tour Guide",
+        "bio": "Dengan pengetahuan mendalam tentang budaya Indonesia, Made telah memandu 200+ tour dengan rating sempurna."
+      },
+      {
+        "name": "Dewi Kusuma",
+        "position": "Senior Tour Guide",
+        "bio": "Berpengalaman 10 tahun sebagai tour guide, Dewi ahli dalam cultural tours dan adventure expeditions."
+      }
+    ]
+  },
+  "stats": {
+    "travelers": "Happy Travelers",
+    "destinations": "Destinations",
+    "guides": "Professional Guides",
+    "rating": "Average Rating"
+  },
+  "certifications": {
+    "title": "Sertifikasi & Partner",
+    "subtitle": "Terpercaya dan diakui oleh berbagai lembaga pariwisata terkemuka",
+    "partners": [
+      "Ministry of Tourism",
+      "ASITA Member",
+      "Verified Tour Operator",
+      "Green Tourism Certified",
+      "Trip Advisor Partner",
+      "Safety First Certified"
+    ],
+    "badges": [
+      {
+        "title": "Licensed & Insured",
+        "description": "Terdaftar resmi dengan asuransi perjalanan lengkap"
+      },
+      {
+        "title": "Quality Assured",
+        "description": "Standar kualitas internasional dalam setiap layanan"
+      },
+      {
+        "title": "Sustainable Tourism",
+        "description": "Komitmen pada pariwisata berkelanjutan dan ramah lingkungan"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Siap Memulai Petualangan Anda?",
+    "subtitle": "Bergabunglah dengan ratusan traveler yang telah mempercayai kami untuk mewujudkan impian perjalanan mereka",
+    "contactButton": "Hubungi Kami",
+    "toursButton": "Lihat Paket Tour"
+  }
+}

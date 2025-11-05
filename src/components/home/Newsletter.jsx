@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Mail, Shield, Gift, CheckCircle, Loader2, Sparkles } from 'lucide-react';
+import { Mail, Shield, Gift, CheckCircle, Loader2, Sparkles, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../contexts/LanguageContext';
 import AOS from 'aos';
 
 function Newsletter() {
@@ -7,6 +9,8 @@ function Newsletter() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const { t } = useTranslation('common');
+  const { currentLanguage } = useLanguage();
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,12 +23,12 @@ function Newsletter() {
 
     // Validation
     if (!email) {
-      setError('Email tidak boleh kosong');
+      setError(t('newsletter.errorEmpty'));
       return;
     }
 
     if (!validateEmail(email)) {
-      setError('Format email tidak valid');
+      setError(t('newsletter.errorInvalid'));
       return;
     }
 
@@ -44,7 +48,7 @@ function Newsletter() {
         setIsSuccess(false);
       }, 5000);
     } catch (err) {
-      setError('Terjadi kesalahan. Silakan coba lagi.');
+      setError(t('newsletter.errorGeneric'));
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +98,7 @@ function Newsletter() {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Dapatkan Penawaran Spesial
+            {t('newsletter.title')}
           </h2>
 
           {/* Subheading */}
@@ -102,10 +106,10 @@ function Newsletter() {
             className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed"
             data-aos="fade-up"
             data-aos-delay="200"
+            dangerouslySetInnerHTML={{
+              __html: t('newsletter.subtitle').replace('20%', '<span class="text-primary font-bold">20%</span>')
+            }}
           >
-            Subscribe newsletter kami dan dapatkan{' '}
-            <span className="text-primary font-bold">diskon hingga 20%</span> untuk booking pertama
-          </p>
 
           {/* Trust Badge */}
           <div
@@ -115,7 +119,7 @@ function Newsletter() {
           >
             <Users className="w-4 h-4 text-primary" />
             <p className="text-sm text-white/80 font-medium">
-              Join <span className="text-primary font-bold">5000+</span> happy subscribers
+              {t('newsletter.subscribersCount', { count: '5000' })}
             </p>
           </div>
 
@@ -137,7 +141,7 @@ function Newsletter() {
                       setEmail(e.target.value);
                       setError('');
                     }}
-                    placeholder="Masukkan email Anda"
+                    placeholder={t('newsletter.emailPlaceholder')}
                     className={`w-full px-6 py-4 sm:py-5 text-base sm:text-lg rounded-full bg-white/95 backdrop-blur-sm text-secondary placeholder-text-light focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all duration-300 shadow-lg ${
                       error ? 'ring-4 ring-red-500/50' : ''
                     }`}
@@ -154,11 +158,11 @@ function Newsletter() {
                   {isLoading ? (
                     <span className="flex items-center gap-2 justify-center">
                       <Loader2 className="w-5 h-5 animate-spin" />
-                      Loading...
+                      {t('newsletter.loading')}
                     </span>
                   ) : (
                     <span className="flex items-center gap-2 justify-center">
-                      Subscribe
+                      {t('newsletter.subscribeButton')}
                       <Gift className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                     </span>
                   )}
@@ -183,9 +187,9 @@ function Newsletter() {
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 animate-bounce">
                   <CheckCircle className="w-10 h-10 text-secondary" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Terima Kasih!</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">{t('newsletter.successTitle')}</h3>
                 <p className="text-white/90 text-center">
-                  Email Anda telah terdaftar. Cek inbox untuk mendapatkan kode diskon spesial!
+                  {t('newsletter.successMessage')}
                 </p>
               </div>
             </div>
@@ -200,13 +204,13 @@ function Newsletter() {
             {/* Privacy Note */}
             <div className="flex items-center gap-2 text-white/80">
               <Shield className="w-5 h-5 text-primary flex-shrink-0" />
-              <p className="text-sm">Kami tidak akan spam email Anda</p>
+              <p className="text-sm">{t('newsletter.privacyNote')}</p>
             </div>
 
             {/* Special Offer */}
             <div className="flex items-center gap-2 text-white/80">
               <Gift className="w-5 h-5 text-primary flex-shrink-0" />
-              <p className="text-sm">Penawaran eksklusif setiap bulan</p>
+              <p className="text-sm">{t('newsletter.exclusiveOffers')}</p>
             </div>
           </div>
         </div>
@@ -214,8 +218,5 @@ function Newsletter() {
     </section>
   );
 }
-
-// Add Users import
-import { Users } from 'lucide-react';
 
 export default Newsletter;

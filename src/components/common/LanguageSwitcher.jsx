@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Globe, Check } from 'lucide-react';
 
 function LanguageSwitcher({ isScrolled = false }) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -39,7 +39,7 @@ function LanguageSwitcher({ isScrolled = false }) {
             ? 'bg-secondary/10 hover:bg-secondary/20 text-secondary'
             : 'bg-white/10 hover:bg-white/20 text-white'
         }`}
-        aria-label="Change language"
+        aria-label={t('aria.changeLanguage')}
         aria-expanded={isOpen}
       >
         <Globe className="w-5 h-5" />

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import Layout from './components/layout/Layout';
 import LoadingBar from './components/common/LoadingBar';
 import { prefetchDNS, clearExpiredCache } from './utils/performance';
@@ -17,11 +18,13 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading fallback component
 function PageLoader() {
+  const { t } = useTranslation('common');
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center">
         <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-secondary font-semibold">Loading...</p>
+        <p className="text-secondary font-semibold">{t('loading')}</p>
       </div>
     </div>
   );

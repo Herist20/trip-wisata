@@ -95,5 +95,71 @@
   },
   "mobileMenu": {
     "explore": "Explore the beauty of Indonesia"
-  }
+  },
+  "newsletter": {
+    "title": "Get Special Offers",
+    "subtitle": "Subscribe to our newsletter and get up to 20% discount for your first booking",
+    "emailPlaceholder": "Enter your email",
+    "subscribeButton": "Subscribe",
+    "loading": "Loading...",
+    "errorEmpty": "Email cannot be empty",
+    "errorInvalid": "Invalid email format",
+    "errorGeneric": "An error occurred. Please try again.",
+    "successTitle": "Thank You!",
+    "successMessage": "Your email has been registered. Check your inbox for a special discount code!",
+    "privacyNote": "We will not spam your email",
+    "exclusiveOffers": "Exclusive offers every month",
+    "subscribersCount": "Join {{count}}+ happy subscribers"
+  },
+  "chatbot": {
+    "greeting1": "Hello! 👋 Welcome to Tour Bali.",
+    "greeting2": "I am Tour Bali's virtual assistant. I am ready to help you plan your dream vacation to beautiful destinations in Bali! ✈️",
+    "greeting3": "How can I help you today?",
+    "quickReplies": {
+      "tourPackages": "Tour Packages",
+      "priceInfo": "Price Info",
+      "locationContact": "Location & Contact",
+      "howToBook": "How to Book"
+    },
+    "responses": {
+      "tourPackages": "We provide various interesting tour packages to popular destinations like Bali, Bromo, Raja Ampat, and many more! 🏝️\n\nWould you like to see our tour packages list?",
+      "priceInfo": "Our tour package prices start from IDR 1,500,000 per person! 💰\n\nPrice includes:\n✓ Accommodation\n✓ Transportation\n✓ Tour Guide\n✓ Meals\n✓ Attraction tickets",
+      "howToBook": "Booking a tour package is very easy! 😊\n\n1️⃣ Choose tour package\n2️⃣ Select departure date\n3️⃣ Fill in participant data\n4️⃣ Choose payment method\n5️⃣ Confirm booking\n\nAre you ready to book?"
+    },
+    "followUpButtons": {
+      "viewTours": "Yes, view tour packages",
+      "priceInfo": "Price info",
+      "bookNow": "Book now",
+      "chatCS": "Chat with CS",
+      "contactWhatsApp": "Contact via WhatsApp",
+      "viewMaps": "View on maps",
+      "bookNow2": "Yes, book now",
+      "askCS": "Ask CS first",
+      "mainMenu": "Main Menu"
+    },
+    "botName": "Tour Bali Bot",
+    "status": "Online - Ready to Help",
+    "selectTopic": "Select topic:",
+    "typeMessageWhatsApp": "Type message on WhatsApp",
+    "resetMessage": "Thank you! Is there anything else I can help with? 😊",
+    "tooltipMessage": "Hello! How can I help you?"
+  },
+  "aria": {
+    "mainNavigation": "Main navigation",
+    "logoLink": "Tour Bali - Go to homepage",
+    "mobileNavigation": "Mobile navigation",
+    "closeMenu": "Close navigation menu",
+    "changeLanguage": "Change language",
+    "closeChat": "Close chat",
+    "openWhatsApp": "Open WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "skipToContent": "Skip to main content",
+    "navigatedTo": "Navigated to {{page}}",
+    "openChatbot": "Open chatbot",
+    "closeChatbot": "Close chatbot"
+  },
+  "loading": "Loading..."
 }

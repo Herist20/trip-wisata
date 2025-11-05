@@ -32,6 +32,26 @@
     "addOns": "Add-ons",
     "payment": "Payment"
   },
+  "stepLabels": {
+    "tour": "Tour",
+    "info": "Info",
+    "addOns": "Add-ons",
+    "pay": "Pay"
+  },
+  "ageIndicator": "Age 18+",
+  "promoHint": "Try:",
+  "labels": {
+    "tour": "Tour:",
+    "date": "Date:",
+    "participants": "Participants:",
+    "addOns": "Add-ons:",
+    "free": "Free"
+  },
+  "trustBadges": {
+    "securePayment": "Secure Payment",
+    "moneyBack": "Money-back Guarantee",
+    "instantConfirm": "Instant Confirmation"
+  },
   "step1": {
     "title": "Select Tour Package",
     "selectTour": "Select Tour Package",
@@ -67,6 +87,15 @@
     "emergencyContactNamePlaceholder": "Full name",
     "emergencyContactPhone": "Emergency Contact Phone",
     "emergencyContactPhonePlaceholder": "+1 234 567 8900",
+    "countries": {
+      "indonesia": "Indonesia",
+      "malaysia": "Malaysia",
+      "singapore": "Singapore",
+      "unitedStates": "United States",
+      "unitedKingdom": "United Kingdom",
+      "australia": "Australia",
+      "other": "Other"
+    },
     "errors": {
       "fullName": "Full name is required",
       "email": "Email is required",
@@ -110,7 +139,9 @@
     "promoCodePlaceholder": "Enter promo code",
     "applyPromo": "Apply",
     "promoApplied": "Promo applied!",
-    "invalidPromo": "Invalid promo code"
+    "invalidPromo": "Invalid promo code",
+    "discountApplied": "Promo applied! {{percent}}% discount",
+    "promoHintExamples": "WELCOME20, SAVE10, or HOLIDAY15"
   },
   "step4": {
     "title": "Payment & Confirmation",
@@ -133,6 +164,10 @@
     "adults": "{{count}} Adult × ${{price}}",
     "children": "{{count}} Children × ${{price}}",
     "infants": "{{count}} Infants × Free",
+    "adultsLine": "{{count}} Adult(s) × ${{price}}",
+    "childrenLine": "{{count}} Child(ren) × ${{price}}",
+    "infantsLine": "{{count}} Infant(s)",
+    "participantsSummary": "{{adults}} Adults, {{children}} Children, {{infants}} Infants",
     "additionalServices": "Additional Services",
     "discount": "Discount ({{percent}}%)",
     "tax": "Tax (11%)",
@@ -164,5 +199,7 @@
     "location": "Location",
     "rating": "Rating",
     "reviews": "{{count}} reviews"
-  }
+  },
+  "changeType": "Change Type",
+  "downloadReceiptDemo": "Download receipt feature (demo)"
 }

@@ -13,11 +13,15 @@ import {
   List,
   Eye,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../contexts/LanguageContext';
 import { galleryImages } from '../data/mockData';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function Gallery() {
+  const { t } = useTranslation('gallery');
+  const { currentLanguage } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('recent');
@@ -41,30 +45,30 @@ function Gallery() {
 
   // Filter categories
   const categories = [
-    { id: 'all', name: 'All Photos', count: galleryImages.length },
+    { id: 'all', name: t('categories.all'), count: galleryImages.length },
     {
       id: 'beach',
-      name: 'Beach & Islands',
+      name: t('categories.beach'),
       count: galleryImages.filter((img) => img.category === 'beach').length,
     },
     {
       id: 'mountain',
-      name: 'Mountains & Hiking',
+      name: t('categories.mountain'),
       count: galleryImages.filter((img) => img.category === 'mountain').length,
     },
     {
       id: 'cultural',
-      name: 'Cultural Heritage',
+      name: t('categories.cultural'),
       count: galleryImages.filter((img) => img.category === 'cultural').length,
     },
     {
       id: 'adventure',
-      name: 'Adventure & Activities',
+      name: t('categories.adventure'),
       count: galleryImages.filter((img) => img.category === 'adventure').length,
     },
     {
       id: 'culinary',
-      name: 'Food & Culinary',
+      name: t('categories.culinary'),
       count: galleryImages.filter((img) => img.category === 'culinary').length,
     },
   ];
@@ -194,7 +198,7 @@ function Gallery() {
     } else {
       // Fallback: copy to clipboard
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      alert(t('linkCopied'));
     }
   };
 
@@ -225,14 +229,14 @@ function Gallery() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
             data-aos="fade-up"
           >
-            Galeri Perjalanan Kami
+            {t('hero.title')}
           </h1>
           <p
             className="text-xl md:text-2xl text-white/90"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Momen indah dari setiap petualangan
+            {t('hero.subtitle')}
           </p>
         </div>
       </section>
@@ -246,7 +250,7 @@ function Gallery() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Cari lokasi, tour package..."
+                placeholder={t('searchBar.placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -262,9 +266,9 @@ function Gallery() {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="appearance-none pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg bg-white cursor-pointer focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
-                  <option value="recent">Recent</option>
-                  <option value="popular">Popular</option>
-                  <option value="mostLiked">Most Liked</option>
+                  <option value="recent">{t('sort.recent')}</option>
+                  <option value="popular">{t('sort.popular')}</option>
+                  <option value="mostLiked">{t('sort.mostLiked')}</option>
                 </select>
                 <SortDesc className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
               </div>
@@ -339,15 +343,15 @@ function Gallery() {
         {/* Results Count */}
         <div className="mb-6 flex items-center justify-between">
           <p className="text-text-light">
-            Menampilkan{' '}
+            {t('display.showing')}{' '}
             <span className="font-semibold text-secondary">
               {Math.min(displayedImages, filteredImages.length)}
             </span>{' '}
-            dari{' '}
+            {t('display.of')}{' '}
             <span className="font-semibold text-secondary">
               {filteredImages.length}
             </span>{' '}
-            foto
+            {t('display.photos')}
           </p>
         </div>
 
@@ -434,10 +438,10 @@ function Gallery() {
               <Search className="w-12 h-12 text-gray-400" />
             </div>
             <h3 className="text-2xl font-bold text-secondary mb-2">
-              Tidak ada foto ditemukan
+              {t('emptyState.title')}
             </h3>
             <p className="text-text-light">
-              Coba ubah filter atau kata kunci pencarian Anda
+              {t('emptyState.subtitle')}
             </p>
           </div>
         )}
@@ -453,10 +457,10 @@ function Gallery() {
               {isLoading ? (
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Loading...
+                  {t('loadMore.loading')}
                 </div>
               ) : (
-                `Muat Lebih Banyak (${filteredImages.length - displayedImages} tersisa)`
+                `${t('loadMore.button')} (${filteredImages.length - displayedImages} ${t('loadMore.remaining')})`
               )}
             </button>
           </div>
@@ -537,10 +541,10 @@ function Gallery() {
                     {currentImage.caption}
                   </p>
                   <p className="text-white/70">
-                    Tour: {currentImage.tourPackage}
+                    {t('lightbox.tour')} {currentImage.tourPackage}
                   </p>
                   <p className="text-white/60 text-sm mt-2">
-                    Photo by {currentImage.photographer}
+                    {t('lightbox.photoBy')} {currentImage.photographer}
                   </p>
                 </div>
 
@@ -568,7 +572,7 @@ function Gallery() {
                     className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
                   >
                     <Share2 className="w-5 h-5 text-white" />
-                    <span className="text-white font-medium">Share</span>
+                    <span className="text-white font-medium">{t('lightbox.share')}</span>
                   </button>
 
                   <a
@@ -577,7 +581,7 @@ function Gallery() {
                     className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
                   >
                     <Download className="w-5 h-5 text-white" />
-                    <span className="text-white font-medium">Download</span>
+                    <span className="text-white font-medium">{t('lightbox.download')}</span>
                   </a>
                 </div>
               </div>

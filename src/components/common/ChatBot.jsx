@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Phone, Mail, MapPin, Clock, Package, DollarSign, Calendar } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { contactInfo } from '../../data/mockData';
 
 function ChatBot() {
@@ -7,6 +9,8 @@ function ChatBot() {
   const [messages, setMessages] = useState([]);
   const [showQuickReplies, setShowQuickReplies] = useState(true);
   const messagesEndRef = useRef(null);
+  const { t } = useTranslation('common');
+  const { currentLanguage } = useLanguage();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,65 +28,65 @@ function ChatBot() {
           {
             id: 1,
             type: 'bot',
-            text: 'Halo! 👋 Selamat datang di Tour Bali.',
+            text: t('chatbot.greeting1'),
             timestamp: new Date(),
           },
           {
             id: 2,
             type: 'bot',
-            text: 'Saya adalah asisten virtual Tour Bali. Saya siap membantu Anda merencanakan liburan impian ke destinasi indah di Bali! ✈️',
+            text: t('chatbot.greeting2'),
             timestamp: new Date(),
           },
           {
             id: 3,
             type: 'bot',
-            text: 'Ada yang bisa saya bantu hari ini?',
+            text: t('chatbot.greeting3'),
             timestamp: new Date(),
           },
         ]);
       }, 500);
     }
-  }, [isOpen]);
+  }, [isOpen, t]);
 
   const quickReplies = [
     {
       id: 1,
       icon: Package,
-      text: 'Paket Tour',
-      response: 'Kami menyediakan berbagai paket tour menarik ke destinasi populer seperti Bali, Bromo, Raja Ampat, dan banyak lagi! 🏝️\n\nApakah Anda ingin melihat daftar paket tour kami?',
+      text: t('chatbot.quickReplies.tourPackages'),
+      response: t('chatbot.responses.tourPackages'),
       followUp: [
-        { text: 'Ya, lihat paket tour', action: 'tours' },
-        { text: 'Info harga', action: 'price' },
+        { text: t('chatbot.followUpButtons.viewTours'), action: 'tours' },
+        { text: t('chatbot.followUpButtons.priceInfo'), action: 'price' },
       ],
     },
     {
       id: 2,
       icon: DollarSign,
-      text: 'Info Harga',
-      response: 'Harga paket tour kami mulai dari Rp 1.500.000 per orang! 💰\n\nHarga sudah termasuk:\n✓ Akomodasi\n✓ Transportasi\n✓ Tour Guide\n✓ Makan\n✓ Tiket masuk wisata',
+      text: t('chatbot.quickReplies.priceInfo'),
+      response: t('chatbot.responses.priceInfo'),
       followUp: [
-        { text: 'Booking sekarang', action: 'booking' },
-        { text: 'Chat dengan CS', action: 'whatsapp' },
+        { text: t('chatbot.followUpButtons.bookNow'), action: 'booking' },
+        { text: t('chatbot.followUpButtons.chatCS'), action: 'whatsapp' },
       ],
     },
     {
       id: 3,
       icon: MapPin,
-      text: 'Lokasi & Kontak',
-      response: `📍 Alamat Kantor:\n${contactInfo.address}\n\n📞 Telepon: ${contactInfo.phone}\n📧 Email: ${contactInfo.email}\n⏰ ${contactInfo.workingHours}`,
+      text: t('chatbot.quickReplies.locationContact'),
+      response: `📍 ${t('footer.officeAddress')}:\n${contactInfo.address}\n\n📞 ${t('footer.phone')}: ${contactInfo.phone}\n📧 ${t('footer.email')}: ${contactInfo.email}\n⏰ ${contactInfo.workingHours}`,
       followUp: [
-        { text: 'Hubungi via WhatsApp', action: 'whatsapp' },
-        { text: 'Lihat di maps', action: 'maps' },
+        { text: t('chatbot.followUpButtons.contactWhatsApp'), action: 'whatsapp' },
+        { text: t('chatbot.followUpButtons.viewMaps'), action: 'maps' },
       ],
     },
     {
       id: 4,
       icon: Calendar,
-      text: 'Cara Booking',
-      response: 'Booking paket tour sangat mudah! 😊\n\n1️⃣ Pilih paket tour\n2️⃣ Tentukan tanggal keberangkatan\n3️⃣ Isi data peserta\n4️⃣ Pilih metode pembayaran\n5️⃣ Konfirmasi booking\n\nApakah Anda siap untuk booking?',
+      text: t('chatbot.quickReplies.howToBook'),
+      response: t('chatbot.responses.howToBook'),
       followUp: [
-        { text: 'Ya, booking sekarang', action: 'booking' },
-        { text: 'Tanya CS dulu', action: 'whatsapp' },
+        { text: t('chatbot.followUpButtons.bookNow2'), action: 'booking' },
+        { text: t('chatbot.followUpButtons.askCS'), action: 'whatsapp' },
       ],
     },
   ];
@@ -122,7 +126,7 @@ function ChatBot() {
       const userMessage = {
         id: Date.now(),
         type: 'user',
-        text: 'Info harga',
+        text: t('chatbot.followUpButtons.priceInfo'),
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, userMessage]);
@@ -148,7 +152,7 @@ function ChatBot() {
       {
         id: Date.now(),
         type: 'bot',
-        text: 'Terima kasih! Ada yang bisa saya bantu lagi? 😊',
+        text: t('chatbot.resetMessage'),
         timestamp: new Date(),
       },
     ]);
@@ -170,17 +174,17 @@ function ChatBot() {
                   <Bot className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">Tour Bali Bot</h3>
+                  <h3 className="font-bold text-lg">{t('chatbot.botName')}</h3>
                   <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <p className="text-xs text-white/90">Online - Siap Membantu</p>
+                    <p className="text-xs text-white/90">{t('chatbot.status')}</p>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-white/20 rounded-full transition-colors"
-                aria-label="Close chat"
+                aria-label={t('aria.closeChat')}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -231,7 +235,7 @@ function ChatBot() {
                             onClick={handleReset}
                             className="text-xs bg-gray-100 hover:bg-gray-200 text-text-light px-3 py-1.5 rounded-full transition-all duration-200"
                           >
-                            Menu Utama
+                            {t('chatbot.followUpButtons.mainMenu')}
                           </button>
                         </div>
                       )}
@@ -243,7 +247,7 @@ function ChatBot() {
               {/* Quick Replies */}
               {showQuickReplies && messages.length > 0 && (
                 <div className="space-y-2 pt-2">
-                  <p className="text-xs font-semibold text-text-light text-center mb-2">Pilih topik:</p>
+                  <p className="text-xs font-semibold text-text-light text-center mb-2">{t('chatbot.selectTopic')}</p>
                   <div className="grid grid-cols-2 gap-2">
                     {quickReplies.map((reply) => {
                       const Icon = reply.icon;
@@ -275,13 +279,13 @@ function ChatBot() {
             <div className="flex items-center gap-2">
               <div className="flex-1 bg-gray-100 rounded-full px-4 py-2">
                 <p className="text-xs text-text-light text-center">
-                  Ketik pesan di WhatsApp
+                  {t('chatbot.typeMessageWhatsApp')}
                 </p>
               </div>
               <button
                 onClick={() => window.open(contactInfo.social.whatsapp, '_blank')}
                 className="w-10 h-10 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20BD5A] hover:to-[#0F7A6E] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-                aria-label="Open WhatsApp"
+                aria-label={t('aria.openWhatsApp')}
               >
                 <Send className="w-5 h-5" />
               </button>
@@ -294,7 +298,7 @@ function ChatBot() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group relative"
-        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        aria-label={isOpen ? t('aria.closeChatbot') : t('aria.openChatbot')}
       >
         {/* Pulsing Ring Animation - only when closed */}
         {!isOpen && (
@@ -323,7 +327,7 @@ function ChatBot() {
         <div className="absolute bottom-full right-0 mb-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium rounded-xl shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <div className="flex items-center gap-2">
             <Bot className="w-4 h-4" />
-            <span>Halo! Ada yang bisa dibantu?</span>
+            <span>{t('chatbot.tooltipMessage')}</span>
           </div>
           <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary"></div>
         </div>

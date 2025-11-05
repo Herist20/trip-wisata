@@ -7,10 +7,12 @@ import {
   Loader2, Plus, Minus, X
 } from 'lucide-react';
 import { tourPackages } from '../data/mockData';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function Booking() {
+  const { t } = useTranslation('booking');
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const tourIdParam = searchParams.get('tour');
@@ -93,14 +95,14 @@ function Booking() {
   // Validation functions
   const validateStep1 = () => {
     const newErrors = {};
-    if (!formData.tourId) newErrors.tourId = 'Please select a tour package';
-    if (!formData.departureDate) newErrors.departureDate = 'Please select departure date';
-    if (formData.adults < 1) newErrors.adults = 'At least 1 adult required';
+    if (!formData.tourId) newErrors.tourId = t('step1.errors.selectTour');
+    if (!formData.departureDate) newErrors.departureDate = t('step1.errors.departureDate');
+    if (formData.adults < 1) newErrors.adults = t('step1.errors.adults');
 
     const selectedDate = new Date(formData.departureDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    if (selectedDate < today) newErrors.departureDate = 'Date cannot be in the past';
+    if (selectedDate < today) newErrors.departureDate = t('step1.errors.datePast');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -108,18 +110,18 @@ function Booking() {
 
   const validateStep2 = () => {
     const newErrors = {};
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    if (!formData.fullName.trim()) newErrors.fullName = t('step2.errors.fullName');
+    if (!formData.email.trim()) newErrors.email = t('step2.errors.email');
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = t('step2.errors.invalidEmail');
     }
-    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.phone.trim()) newErrors.phone = t('step2.errors.phone');
     else if (!/^[+\d][\d\s-]{8,}$/.test(formData.phone)) {
-      newErrors.phone = 'Invalid phone number format';
+      newErrors.phone = t('step2.errors.invalidPhone');
     }
-    if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
-    if (!formData.emergencyContactName.trim()) newErrors.emergencyContactName = 'Emergency contact name is required';
-    if (!formData.emergencyContactPhone.trim()) newErrors.emergencyContactPhone = 'Emergency contact phone is required';
+    if (!formData.dateOfBirth) newErrors.dateOfBirth = t('step2.errors.dateOfBirth');
+    if (!formData.emergencyContactName.trim()) newErrors.emergencyContactName = t('step2.errors.emergencyContactName');
+    if (!formData.emergencyContactPhone.trim()) newErrors.emergencyContactPhone = t('step2.errors.emergencyContactPhone');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -127,8 +129,8 @@ function Booking() {
 
   const validateStep4 = () => {
     const newErrors = {};
-    if (!formData.agreeTerms) newErrors.agreeTerms = 'You must agree to terms and conditions';
-    if (!formData.agreePrivacy) newErrors.agreePrivacy = 'You must agree to privacy policy';
+    if (!formData.agreeTerms) newErrors.agreeTerms = t('step4.errors.agreeTerms');
+    if (!formData.agreePrivacy) newErrors.agreePrivacy = t('step4.errors.agreePrivacy');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -188,7 +190,7 @@ function Booking() {
       setPromoApplied(true);
       setPromoDiscount(discount);
     } else {
-      alert('Invalid promo code');
+      alert(t('step3.invalidPromo'));
       setPromoApplied(false);
       setPromoDiscount(0);
     }
@@ -207,10 +209,10 @@ function Booking() {
   };
 
   const steps = [
-    { number: 1, title: 'Tour Selection', icon: MapPin },
-    { number: 2, title: 'Personal Info', icon: User },
-    { number: 3, title: 'Add-ons', icon: Plus },
-    { number: 4, title: 'Payment', icon: CreditCard },
+    { number: 1, title: t('steps.tourSelection'), icon: MapPin },
+    { number: 2, title: t('steps.personalInfo'), icon: User },
+    { number: 3, title: t('steps.addOns'), icon: Plus },
+    { number: 4, title: t('steps.payment'), icon: CreditCard },
   ];
 
   // If booking type not selected, show selection screen
@@ -221,10 +223,10 @@ function Booking() {
           {/* Header */}
           <div className="text-center mb-12" data-aos="fade-down">
             <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-              Pilih Tipe Booking
+              {t('bookingType.title')}
             </h1>
             <p className="text-lg text-text-light max-w-2xl mx-auto">
-              Apakah Anda ingin melakukan booking untuk perorangan atau grup?
+              {t('bookingType.subtitle')}
             </p>
           </div>
 
@@ -244,37 +246,37 @@ function Booking() {
 
                 {/* Title */}
                 <h3 className="text-2xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
-                  Booking Perorangan
+                  {t('bookingType.individual.title')}
                 </h3>
 
                 {/* Description */}
                 <p className="text-text-light mb-6 leading-relaxed">
-                  Ideal untuk wisata pribadi, pasangan, atau keluarga kecil. Fleksibel dan mudah disesuaikan dengan kebutuhan Anda.
+                  {t('bookingType.individual.description')}
                 </p>
 
                 {/* Features */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>1-9 peserta</span>
+                    <span>{t('bookingType.individual.features.participants')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Jadwal fleksibel</span>
+                    <span>{t('bookingType.individual.features.flexible')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Tour guide pribadi</span>
+                    <span>{t('bookingType.individual.features.guide')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Customizable itinerary</span>
+                    <span>{t('bookingType.individual.features.customizable')}</span>
                   </div>
                 </div>
 
                 {/* CTA */}
                 <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl group-hover:from-primary group-hover:to-primary-light transition-all duration-300">
-                  <span className="font-bold text-secondary group-hover:text-white">Pilih Perorangan</span>
+                  <span className="font-bold text-secondary group-hover:text-white">{t('bookingType.individual.cta')}</span>
                   <ChevronRight className="w-6 h-6 text-primary group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </div>
               </div>
@@ -294,37 +296,37 @@ function Booking() {
 
                 {/* Title */}
                 <h3 className="text-2xl font-bold text-secondary mb-3 group-hover:text-secondary-light transition-colors">
-                  Booking Grup
+                  {t('bookingType.group.title')}
                 </h3>
 
                 {/* Description */}
                 <p className="text-text-light mb-6 leading-relaxed">
-                  Sempurna untuk rombongan, gathering perusahaan, atau acara khusus. Dapatkan harga spesial untuk grup besar.
+                  {t('bookingType.group.description')}
                 </p>
 
                 {/* Features */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
-                    <span>10+ peserta</span>
+                    <span>{t('bookingType.group.features.participants')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
-                    <span>Diskon grup hingga 20%</span>
+                    <span>{t('bookingType.group.features.discount')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
-                    <span>Multiple tour guides</span>
+                    <span>{t('bookingType.group.features.guides')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
-                    <span>Dedicated coordinator</span>
+                    <span>{t('bookingType.group.features.coordinator')}</span>
                   </div>
                 </div>
 
                 {/* CTA */}
                 <div className="flex items-center justify-between p-4 bg-gradient-to-r from-secondary/10 to-secondary/5 rounded-xl group-hover:from-secondary group-hover:to-secondary-light transition-all duration-300">
-                  <span className="font-bold text-secondary group-hover:text-white">Pilih Grup</span>
+                  <span className="font-bold text-secondary group-hover:text-white">{t('bookingType.group.cta')}</span>
                   <ChevronRight className="w-6 h-6 text-secondary group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </div>
               </div>
@@ -338,7 +340,7 @@ function Booking() {
               className="inline-flex items-center gap-2 text-text-light hover:text-primary transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
-              Kembali ke Beranda
+              {t('bookingType.backToHome')}
             </Link>
           </div>
         </div>
@@ -362,12 +364,12 @@ function Booking() {
                 {bookingType === 'individual' ? (
                   <>
                     <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm font-semibold">Perorangan</span>
+                    <span className="text-xs sm:text-sm font-semibold">{t('bookingType.individual.title')}</span>
                   </>
                 ) : (
                   <>
                     <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm font-semibold">Grup</span>
+                    <span className="text-xs sm:text-sm font-semibold">{t('bookingType.group.title')}</span>
                   </>
                 )}
               </div>
@@ -377,7 +379,7 @@ function Booking() {
               className="text-xs sm:text-sm text-text-light hover:text-primary transition-colors flex items-center gap-1"
             >
               <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Ubah Tipe</span>
+              <span className="hidden sm:inline">{t('changeType')}</span>
             </button>
           </div>
 
@@ -418,10 +420,10 @@ function Booking() {
                       {/* Show short version on mobile, full on desktop */}
                       <span className="hidden md:inline">{step.title}</span>
                       <span className="md:hidden">
-                        {step.number === 1 && 'Tour'}
-                        {step.number === 2 && 'Info'}
-                        {step.number === 3 && 'Add-ons'}
-                        {step.number === 4 && 'Pay'}
+                        {step.number === 1 && t('stepLabels.tour')}
+                        {step.number === 2 && t('stepLabels.info')}
+                        {step.number === 3 && t('stepLabels.addOns')}
+                        {step.number === 4 && t('stepLabels.pay')}
                       </span>
                     </p>
                   </div>
@@ -452,17 +454,17 @@ function Booking() {
                 <div className="space-y-4 sm:space-y-6">
                   <div>
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-2">
-                      Select Your Tour
+                      {t('step1.title')}
                     </h2>
                     <p className="text-sm sm:text-base text-text-light">
-                      Choose your preferred tour package and departure date
+                      {t('step1.selectTour')}
                     </p>
                   </div>
 
                   {/* Tour Selection */}
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
-                      Tour Package *
+                      {t('step1.selectTour')} *
                     </label>
                     <div className="relative">
                       <select
@@ -472,7 +474,7 @@ function Booking() {
                           errors.tourId ? 'border-red-500' : 'border-gray-200'
                         }`}
                       >
-                        <option value="">-- Select Tour Package --</option>
+                        <option value="">{t('step1.selectTourPlaceholder')}</option>
                         {tourPackages.map((tour) => (
                           <option key={tour.id} value={tour.id}>
                             {tour.title} - ${tour.priceUSD} ({tour.durationShort})
@@ -493,7 +495,7 @@ function Booking() {
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
                       <Calendar className="w-4 h-4 inline mr-1" />
-                      Departure Date *
+                      {t('step1.departureDate')} *
                     </label>
                     <input
                       type="date"
@@ -516,14 +518,14 @@ function Booking() {
                   <div className="space-y-4 bg-gray-50 p-6 rounded-xl">
                     <h3 className="font-semibold text-secondary flex items-center gap-2">
                       <Users className="w-5 h-5" />
-                      Number of Participants
+                      {t('step1.participants')}
                     </h3>
 
                     {/* Adults */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-secondary">Adults</p>
-                        <p className="text-sm text-text-light">Age 18+</p>
+                        <p className="font-medium text-secondary">{t('step1.adults')}</p>
+                        <p className="text-sm text-text-light">{t('ageIndicator')}</p>
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <button
@@ -549,8 +551,8 @@ function Booking() {
                     {/* Children */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-secondary">Children</p>
-                        <p className="text-sm text-text-light">Age 4-17</p>
+                        <p className="font-medium text-secondary">{t('step1.children')}</p>
+                        <p className="text-sm text-text-light">{t('step1.childrenAge')}</p>
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <button
@@ -576,8 +578,8 @@ function Booking() {
                     {/* Infants */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-secondary">Infants</p>
-                        <p className="text-sm text-text-light">Age 0-3 (Free)</p>
+                        <p className="font-medium text-secondary">{t('step1.infants')}</p>
+                        <p className="text-sm text-text-light">{t('step1.infantsAge')}</p>
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <button
@@ -611,13 +613,13 @@ function Booking() {
                   {/* Special Requests */}
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
-                      Special Requests (Optional)
+                      {t('step1.specialRequests')}
                     </label>
                     <textarea
                       value={formData.specialRequests}
                       onChange={(e) => handleInputChange('specialRequests', e.target.value)}
                       rows="4"
-                      placeholder="Any dietary restrictions, accessibility needs, or special requests..."
+                      placeholder={t('step1.specialRequestsPlaceholder')}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors resize-none"
                     ></textarea>
                   </div>
@@ -629,10 +631,10 @@ function Booking() {
                 <div className="space-y-4 sm:space-y-6">
                   <div>
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-2">
-                      Personal Information
+                      {t('step2.title')}
                     </h2>
                     <p className="text-sm sm:text-base text-text-light">
-                      Please provide your contact details
+                      {t('step2.fullName')}
                     </p>
                   </div>
 
@@ -640,13 +642,13 @@ function Booking() {
                   <div>
                     <label className="block text-sm font-semibold text-secondary mb-2">
                       <User className="w-4 h-4 inline mr-1" />
-                      Full Name *
+                      {t('step2.fullName')} *
                     </label>
                     <input
                       type="text"
                       value={formData.fullName}
                       onChange={(e) => handleInputChange('fullName', e.target.value)}
-                      placeholder="John Doe"
+                      placeholder={t('step2.fullNamePlaceholder')}
                       className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
                         errors.fullName ? 'border-red-500' : 'border-gray-200'
                       }`}
@@ -664,13 +666,13 @@ function Booking() {
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
                         <Mail className="w-4 h-4 inline mr-1" />
-                        Email *
+                        {t('step2.email')} *
                       </label>
                       <input
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        placeholder="john@example.com"
+                        placeholder={t('step2.emailPlaceholder')}
                         className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
                           errors.email ? 'border-red-500' : 'border-gray-200'
                         }`}
@@ -686,13 +688,13 @@ function Booking() {
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
                         <Phone className="w-4 h-4 inline mr-1" />
-                        Phone Number *
+                        {t('step2.phone')} *
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
-                        placeholder="+1 234 567 8900"
+                        placeholder={t('step2.phonePlaceholder')}
                         className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors ${
                           errors.phone ? 'border-red-500' : 'border-gray-200'
                         }`}
@@ -711,7 +713,7 @@ function Booking() {
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
                         <Globe className="w-4 h-4 inline mr-1" />
-                        Nationality *
+                        {t('step2.nationality')} *
                       </label>
                       <div className="relative">
                         <select
@@ -719,13 +721,13 @@ function Booking() {
                           onChange={(e) => handleInputChange('nationality', e.target.value)}
                           className="w-full px-4 py-3 pr-10 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors appearance-none bg-white"
                         >
-                          <option value="Indonesia">Indonesia</option>
-                          <option value="Malaysia">Malaysia</option>
-                          <option value="Singapore">Singapore</option>
-                          <option value="United States">United States</option>
-                          <option value="United Kingdom">United Kingdom</option>
-                          <option value="Australia">Australia</option>
-                          <option value="Other">Other</option>
+                          <option value="Indonesia">{t('step2.countries.indonesia')}</option>
+                          <option value="Malaysia">{t('step2.countries.malaysia')}</option>
+                          <option value="Singapore">{t('step2.countries.singapore')}</option>
+                          <option value="United States">{t('step2.countries.unitedStates')}</option>
+                          <option value="United Kingdom">{t('step2.countries.unitedKingdom')}</option>
+                          <option value="Australia">{t('step2.countries.australia')}</option>
+                          <option value="Other">{t('step2.countries.other')}</option>
                         </select>
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                       </div>
@@ -734,7 +736,7 @@ function Booking() {
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
                         <Cake className="w-4 h-4 inline mr-1" />
-                        Date of Birth *
+                        {t('step2.dateOfBirth')} *
                       </label>
                       <input
                         type="date"
@@ -758,18 +760,18 @@ function Booking() {
                   <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 space-y-4">
                     <h3 className="font-semibold text-secondary flex items-center gap-2">
                       <AlertCircle className="w-5 h-5 text-yellow-600" />
-                      Emergency Contact
+                      {t('step2.emergencyContact')}
                     </h3>
 
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        Contact Name *
+                        {t('step2.emergencyContactName')} *
                       </label>
                       <input
                         type="text"
                         value={formData.emergencyContactName}
                         onChange={(e) => handleInputChange('emergencyContactName', e.target.value)}
-                        placeholder="Jane Doe"
+                        placeholder={t('step2.emergencyContactNamePlaceholder')}
                         className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white ${
                           errors.emergencyContactName ? 'border-red-500' : 'border-gray-200'
                         }`}
@@ -784,13 +786,13 @@ function Booking() {
 
                     <div>
                       <label className="block text-sm font-semibold text-secondary mb-2">
-                        Contact Phone *
+                        {t('step2.emergencyContactPhone')} *
                       </label>
                       <input
                         type="tel"
                         value={formData.emergencyContactPhone}
                         onChange={(e) => handleInputChange('emergencyContactPhone', e.target.value)}
-                        placeholder="+1 234 567 8900"
+                        placeholder={t('step2.emergencyContactPhonePlaceholder')}
                         className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:border-primary transition-colors bg-white ${
                           errors.emergencyContactPhone ? 'border-red-500' : 'border-gray-200'
                         }`}
@@ -811,20 +813,20 @@ function Booking() {
                 <div className="space-y-4 sm:space-y-6">
                   <div>
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-2">
-                      Additional Services
+                      {t('step3.title')}
                     </h2>
                     <p className="text-sm sm:text-base text-text-light">
-                      Enhance your experience with our optional add-ons
+                      {t('step3.subtitle')}
                     </p>
                   </div>
 
                   <div className="space-y-4">
                     {[
-                      { id: 'travelInsurance', label: 'Travel Insurance', price: 30, desc: 'Comprehensive coverage for your trip' },
-                      { id: 'airportPickup', label: 'Airport Pickup', price: 25, desc: 'Convenient transfer from airport to hotel' },
-                      { id: 'extraNight', label: 'Extra Night Accommodation', price: 50, desc: 'Additional night at premium hotel' },
-                      { id: 'photographyService', label: 'Professional Photography', price: 100, desc: 'Capture memories with pro photographer' },
-                      { id: 'privateTour', label: 'Private Tour Upgrade', price: 150, desc: 'Exclusive private tour experience' },
+                      { id: 'travelInsurance', labelKey: 'travelInsurance.title', descKey: 'travelInsurance.description', priceKey: 'travelInsurance.price' },
+                      { id: 'airportPickup', labelKey: 'airportPickup.title', descKey: 'airportPickup.description', priceKey: 'airportPickup.price' },
+                      { id: 'extraNight', labelKey: 'extraNight.title', descKey: 'extraNight.description', priceKey: 'extraNight.price' },
+                      { id: 'photographyService', labelKey: 'photographyService.title', descKey: 'photographyService.description', priceKey: 'photographyService.price' },
+                      { id: 'privateTour', labelKey: 'privateTour.title', descKey: 'privateTour.description', priceKey: 'privateTour.price' },
                     ].map((service) => (
                       <label
                         key={service.id}
@@ -838,10 +840,10 @@ function Booking() {
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between mb-0.5 sm:mb-1 gap-2">
-                            <p className="font-semibold text-secondary text-xs sm:text-base">{service.label}</p>
-                            <p className="font-bold text-primary text-xs sm:text-base whitespace-nowrap">+${service.price}</p>
+                            <p className="font-semibold text-secondary text-xs sm:text-base">{t(`step3.${service.labelKey}`)}</p>
+                            <p className="font-bold text-primary text-xs sm:text-base whitespace-nowrap">{t(`step3.${service.priceKey}`)}</p>
                           </div>
-                          <p className="text-[10px] sm:text-sm text-text-light">{service.desc}</p>
+                          <p className="text-[10px] sm:text-sm text-text-light">{t(`step3.${service.descKey}`)}</p>
                         </div>
                       </label>
                     ))}
@@ -851,14 +853,14 @@ function Booking() {
                   <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 sm:p-6 rounded-xl">
                     <h3 className="font-semibold text-secondary mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
                       <Tag className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                      Have a Promo Code?
+                      {t('step3.promoCode')}
                     </h3>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <input
                         type="text"
                         value={formData.promoCode}
                         onChange={(e) => handleInputChange('promoCode', e.target.value.toUpperCase())}
-                        placeholder="ENTER CODE"
+                        placeholder={t('step3.promoCodePlaceholder')}
                         className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-primary transition-colors bg-white text-sm sm:text-base"
                       />
                       <button
@@ -866,17 +868,17 @@ function Booking() {
                         onClick={handleApplyPromo}
                         className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg sm:rounded-xl transition-colors text-sm sm:text-base whitespace-nowrap"
                       >
-                        Apply Code
+                        {t('step3.applyPromo')}
                       </button>
                     </div>
                     {promoApplied && (
                       <p className="text-green-600 text-xs sm:text-sm mt-2 flex items-center gap-1">
                         <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                        Promo code applied! {promoDiscount}% discount
+                        {t('step3.discountApplied', { percent: promoDiscount })}
                       </p>
                     )}
                     <p className="text-[10px] sm:text-xs text-text-light mt-2 sm:mt-3">
-                      Try: WELCOME20, SAVE10, or HOLIDAY15
+                      {t('promoHint')} {t('step3.promoHintExamples')}
                     </p>
                   </div>
                 </div>
@@ -887,32 +889,36 @@ function Booking() {
                 <div className="space-y-4 sm:space-y-6">
                   <div>
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-2">
-                      Payment & Confirmation
+                      {t('step4.title')}
                     </h2>
                     <p className="text-sm sm:text-base text-text-light">
-                      Review your booking and complete payment
+                      {t('step4.title')}
                     </p>
                   </div>
 
                   {/* Order Summary Recap */}
                   <div className="bg-gray-50 p-6 rounded-xl space-y-3">
-                    <h3 className="font-bold text-secondary mb-4">Booking Summary</h3>
+                    <h3 className="font-bold text-secondary mb-4">{t('priceSummary.title')}</h3>
                     {selectedTour && (
                       <>
                         <div className="flex justify-between text-sm">
-                          <span className="text-text-light">Tour:</span>
+                          <span className="text-text-light">{t('labels.tour')}</span>
                           <span className="font-medium text-secondary">{selectedTour.title}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-text-light">Date:</span>
+                          <span className="text-text-light">{t('labels.date')}</span>
                           <span className="font-medium text-secondary">
                             {new Date(formData.departureDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                           </span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-text-light">Participants:</span>
+                          <span className="text-text-light">{t('labels.participants')}</span>
                           <span className="font-medium text-secondary">
-                            {formData.adults} Adults, {formData.children} Children, {formData.infants} Infants
+                            {t('priceSummary.participantsSummary', {
+                              adults: formData.adults,
+                              children: formData.children,
+                              infants: formData.infants
+                            })}
                           </span>
                         </div>
                       </>
@@ -921,12 +927,12 @@ function Booking() {
 
                   {/* Payment Method */}
                   <div>
-                    <h3 className="font-semibold text-secondary mb-4">Payment Method</h3>
+                    <h3 className="font-semibold text-secondary mb-4">{t('step4.paymentMethod')}</h3>
                     <div className="space-y-3">
                       {[
-                        { id: 'credit-card', label: 'Credit Card', icon: CreditCard },
-                        { id: 'bank-transfer', label: 'Bank Transfer', icon: Building2 },
-                        { id: 'e-wallet', label: 'E-Wallet (GoPay/OVO/Dana)', icon: Wallet },
+                        { id: 'credit-card', labelKey: 'creditCard', icon: CreditCard },
+                        { id: 'bank-transfer', labelKey: 'bankTransfer', icon: Building2 },
+                        { id: 'e-wallet', labelKey: 'eWallet', icon: Wallet },
                       ].map((method) => {
                         const MethodIcon = method.icon;
                         return (
@@ -942,7 +948,7 @@ function Booking() {
                               className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary focus:ring-primary flex-shrink-0"
                             />
                             <MethodIcon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                            <span className="font-medium text-secondary text-xs sm:text-base">{method.label}</span>
+                            <span className="font-medium text-secondary text-xs sm:text-base">{t(`step4.${method.labelKey}`)}</span>
                           </label>
                         );
                       })}
@@ -959,7 +965,7 @@ function Booking() {
                         className="mt-0.5 sm:mt-1 w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary rounded focus:ring-primary flex-shrink-0"
                       />
                       <span className="text-xs sm:text-sm text-text-light">
-                        I agree to the <Link to="/terms" className="text-primary hover:underline">Terms & Conditions</Link>
+                        {t('step4.agreeTerms')} <Link to="/terms" className="text-primary hover:underline">{t('step4.termsConditions')}</Link>
                       </span>
                     </label>
                     {errors.agreeTerms && (
@@ -977,7 +983,7 @@ function Booking() {
                         className="mt-0.5 sm:mt-1 w-3.5 h-3.5 sm:w-5 sm:h-5 text-primary rounded focus:ring-primary flex-shrink-0"
                       />
                       <span className="text-xs sm:text-sm text-text-light">
-                        I agree to the <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+                        {t('step4.agreePrivacy')} <Link to="/privacy" className="text-primary hover:underline">{t('step4.privacyPolicy')}</Link>
                       </span>
                     </label>
                     {errors.agreePrivacy && (
@@ -1000,8 +1006,7 @@ function Booking() {
                     className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 border-2 border-gray-300 text-secondary font-semibold rounded-lg sm:rounded-xl hover:border-secondary transition-colors disabled:opacity-50 text-sm sm:text-base"
                   >
                     <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="hidden sm:inline">Back</span>
-                    <span className="sm:hidden">Kembali</span>
+                    {t('buttons.back')}
                   </button>
                 ) : (
                   <div></div>
@@ -1016,19 +1021,16 @@ function Booking() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
-                      <span className="hidden sm:inline">Processing...</span>
-                      <span className="sm:hidden">Proses...</span>
+                      {t('buttons.processing')}
                     </>
                   ) : currentStep === 4 ? (
                     <>
-                      <span className="hidden sm:inline">Confirm Booking</span>
-                      <span className="sm:hidden">Konfirmasi</span>
+                      {t('buttons.submit')}
                       <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     </>
                   ) : (
                     <>
-                      <span className="hidden sm:inline">Next Step</span>
-                      <span className="sm:hidden">Lanjut</span>
+                      {t('buttons.next')}
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </>
                   )}
@@ -1041,7 +1043,7 @@ function Booking() {
           <div className="lg:col-span-1">
             <div className="sticky top-32 space-y-4" data-aos="fade-left">
               <div className="bg-white rounded-2xl shadow-xl p-6 border-2 border-gray-100">
-                <h3 className="text-xl font-bold text-secondary mb-6">Order Summary</h3>
+                <h3 className="text-xl font-bold text-secondary mb-6">{t('priceSummary.title')}</h3>
 
                 {selectedTour ? (
                   <>
@@ -1068,20 +1070,20 @@ function Booking() {
                       <div className="mb-6 space-y-2">
                         {formData.adults > 0 && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">{formData.adults} Adult(s) × ${basePrice}</span>
+                            <span className="text-text-light">{t('priceSummary.adultsLine', { count: formData.adults, price: basePrice })}</span>
                             <span className="font-semibold text-secondary">${(formData.adults * basePrice).toFixed(2)}</span>
                           </div>
                         )}
                         {formData.children > 0 && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">{formData.children} Child(ren) × ${childPrice.toFixed(2)}</span>
+                            <span className="text-text-light">{t('priceSummary.childrenLine', { count: formData.children, price: childPrice.toFixed(2) })}</span>
                             <span className="font-semibold text-secondary">${(formData.children * childPrice).toFixed(2)}</span>
                           </div>
                         )}
                         {formData.infants > 0 && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">{formData.infants} Infant(s)</span>
-                            <span className="font-semibold text-green-600">Free</span>
+                            <span className="text-text-light">{t('priceSummary.infantsLine', { count: formData.infants })}</span>
+                            <span className="font-semibold text-green-600">{t('labels.free')}</span>
                           </div>
                         )}
                       </div>
@@ -1090,34 +1092,34 @@ function Booking() {
                     {/* Additional Services */}
                     {additionalTotal > 0 && (
                       <div className="mb-6 space-y-2 border-t pt-4">
-                        <p className="text-sm font-semibold text-secondary mb-2">Add-ons:</p>
+                        <p className="text-sm font-semibold text-secondary mb-2">{t('labels.addOns')}</p>
                         {formData.travelInsurance && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">Travel Insurance</span>
+                            <span className="text-text-light">{t('step3.travelInsurance.title')}</span>
                             <span className="font-semibold text-secondary">$30.00</span>
                           </div>
                         )}
                         {formData.airportPickup && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">Airport Pickup</span>
+                            <span className="text-text-light">{t('step3.airportPickup.title')}</span>
                             <span className="font-semibold text-secondary">$25.00</span>
                           </div>
                         )}
                         {formData.extraNight && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">Extra Night</span>
+                            <span className="text-text-light">{t('step3.extraNight.title')}</span>
                             <span className="font-semibold text-secondary">$50.00</span>
                           </div>
                         )}
                         {formData.photographyService && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">Photography Service</span>
+                            <span className="text-text-light">{t('step3.photographyService.title')}</span>
                             <span className="font-semibold text-secondary">$100.00</span>
                           </div>
                         )}
                         {formData.privateTour && (
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-light">Private Tour Upgrade</span>
+                            <span className="text-text-light">{t('step3.privateTour.title')}</span>
                             <span className="font-semibold text-secondary">$150.00</span>
                           </div>
                         )}
@@ -1127,26 +1129,26 @@ function Booking() {
                     {/* Price Breakdown */}
                     <div className="space-y-3 mb-6 border-t pt-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-text-light">Subtotal</span>
+                        <span className="text-text-light">{t('priceSummary.subtotal')}</span>
                         <span className="font-semibold text-secondary">${subtotal.toFixed(2)}</span>
                       </div>
 
                       {additionalTotal > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-text-light">Additional Services</span>
+                          <span className="text-text-light">{t('priceSummary.additionalServices')}</span>
                           <span className="font-semibold text-secondary">${additionalTotal.toFixed(2)}</span>
                         </div>
                       )}
 
                       {promoApplied && discountAmount > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-green-600">Discount ({promoDiscount}%)</span>
+                          <span className="text-green-600">{t('priceSummary.discount', { percent: promoDiscount })}</span>
                           <span className="font-semibold text-green-600">-${discountAmount.toFixed(2)}</span>
                         </div>
                       )}
 
                       <div className="flex justify-between text-sm">
-                        <span className="text-text-light">Tax (11%)</span>
+                        <span className="text-text-light">{t('priceSummary.tax')}</span>
                         <span className="font-semibold text-secondary">${tax.toFixed(2)}</span>
                       </div>
                     </div>
@@ -1154,28 +1156,28 @@ function Booking() {
                     {/* Grand Total */}
                     <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 rounded-xl mb-6">
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-secondary">Grand Total</span>
+                        <span className="text-lg font-bold text-secondary">{t('priceSummary.total')}</span>
                         <span className="text-3xl font-bold text-primary">${grandTotal.toFixed(2)}</span>
                       </div>
                     </div>
                   </>
                 ) : (
-                  <p className="text-text-light text-center py-8">Select a tour to see pricing</p>
+                  <p className="text-text-light text-center py-8">{t('step1.selectTourPlaceholder')}</p>
                 )}
 
                 {/* Trust Badges */}
                 <div className="space-y-3 pt-6 border-t">
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <Shield className="w-4 h-4 text-green-600" />
-                    <span>Secure Payment</span>
+                    <span>{t('trustBadges.securePayment')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <RotateCcw className="w-4 h-4 text-blue-600" />
-                    <span>Money-back Guarantee</span>
+                    <span>{t('trustBadges.moneyBack')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <CheckCircle className="w-4 h-4 text-primary" />
-                    <span>Instant Confirmation</span>
+                    <span>{t('trustBadges.instantConfirm')}</span>
                   </div>
                 </div>
               </div>
@@ -1194,25 +1196,25 @@ function Booking() {
             </div>
 
             <h2 className="text-3xl font-bold text-secondary text-center mb-4">
-              Booking Confirmed!
+              {t('success.title')}
             </h2>
 
             <p className="text-text-light text-center mb-6">
-              Your booking has been successfully confirmed. We've sent a confirmation email to <strong>{formData.email}</strong>
+              {t('success.message')}
             </p>
 
             <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl mb-6 text-center">
-              <p className="text-sm text-text-light mb-2">Booking Number</p>
+              <p className="text-sm text-text-light mb-2">{t('success.bookingNumber')}</p>
               <p className="text-3xl font-bold text-primary tracking-wider">{bookingNumber}</p>
             </div>
 
             <div className="space-y-3">
               <button
-                onClick={() => alert('Download receipt feature (demo)')}
+                onClick={() => alert(t('downloadReceiptDemo'))}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
               >
                 <Download className="w-5 h-5" />
-                Download Receipt
+                {t('buttons.downloadReceipt')}
               </button>
 
               <Link
@@ -1220,7 +1222,7 @@ function Booking() {
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-light text-secondary font-bold rounded-xl transition-all"
               >
                 <HomeIcon className="w-5 h-5" />
-                Back to Home
+                {t('buttons.backToHome')}
               </Link>
             </div>
           </div>

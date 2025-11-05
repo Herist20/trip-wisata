@@ -1,11 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
 import ChatBot from '../common/ChatBot';
 
 function Layout() {
   const location = useLocation();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     // Scroll to top on route change
@@ -18,7 +20,7 @@ function Layout() {
     announcement.setAttribute('aria-live', 'polite');
     announcement.setAttribute('aria-atomic', 'true');
     announcement.className = 'sr-only';
-    announcement.textContent = `Navigated to ${pageTitle}`;
+    announcement.textContent = t('aria.navigatedTo', { page: pageTitle });
     document.body.appendChild(announcement);
 
     setTimeout(() => {
@@ -30,7 +32,7 @@ function Layout() {
     <div className="flex flex-col min-h-screen">
       {/* Skip to Content Link for Accessibility */}
       <a href="#main-content" className="skip-to-content">
-        Skip to main content
+        {t('aria.skipToContent')}
       </a>
 
       <Header />

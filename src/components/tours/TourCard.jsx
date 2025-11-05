@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Star, Clock, ArrowRight, CheckCircle, Calendar, Users, Eye } from 'lucide-react';
 import { useState, memo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const TourCard = memo(function TourCard({ tour, onQuickView }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { t } = useTranslation('tours');
+  const { currentLanguage } = useLanguage();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -53,7 +57,7 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
           {tour.availability <= 10 && (
             <div className="flex items-center gap-2 bg-red-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
               <Users className="w-4 h-4 text-white" />
-              <span className="text-xs font-semibold text-white">{tour.availability} slots left</span>
+              <span className="text-xs font-semibold text-white">{tour.availability} {t('card.slotsLeft')}</span>
             </div>
           )}
         </div>
@@ -72,7 +76,7 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white hover:bg-primary text-secondary hover:text-white px-6 py-3 rounded-full font-semibold shadow-xl flex items-center gap-2 z-20"
         >
           <Eye className="w-5 h-5" />
-          Quick View
+          {t('card.quickView')}
         </button>
       </div>
 
@@ -98,7 +102,7 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
             ))}
           </div>
           <span className="text-sm font-semibold text-secondary">{tour.rating}</span>
-          <span className="text-sm text-text-light">({tour.reviews} reviews)</span>
+          <span className="text-sm text-text-light">({tour.reviews} {t('card.reviews')})</span>
         </div>
 
         {/* Highlights with Checkmarks */}
@@ -115,7 +119,7 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
         <div className="mb-5">
           <div className="flex items-center gap-2 mb-2">
             <Calendar className="w-4 h-4 text-primary" />
-            <span className="text-xs font-semibold text-secondary uppercase">Next Departures</span>
+            <span className="text-xs font-semibold text-secondary uppercase">{t('card.nextDepartures')}</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {tour.departureDates.slice(0, 3).map((date, idx) => (
@@ -135,14 +139,14 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
         {/* Price & CTA */}
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs text-text-light mb-1">Starting from</p>
+            <p className="text-xs text-text-light mb-1">{t('card.startingFrom')}</p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold text-primary">${tour.priceUSD}</span>
               <span className="text-sm text-text-light line-through">
                 ${Math.round(tour.priceUSD * 1.3)}
               </span>
             </div>
-            <p className="text-xs text-text-light mt-1">per person</p>
+            <p className="text-xs text-text-light mt-1">{t('card.perPerson')}</p>
           </div>
 
           <Link
@@ -150,7 +154,7 @@ const TourCard = memo(function TourCard({ tour, onQuickView }) {
             className="group/btn bg-secondary hover:bg-primary text-white hover:text-secondary font-semibold px-5 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
           >
             <span className="flex items-center gap-2">
-              View Details
+              {t('card.viewDetails')}
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </span>
           </Link>

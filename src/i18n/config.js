@@ -6,11 +6,19 @@ import enCommon from '../locales/en/common.json';
 import enTours from '../locales/en/tours.json';
 import enBooking from '../locales/en/booking.json';
 import enMockData from '../locales/en/mockData.json';
+import enHome from '../locales/en/home.json';
+import enAbout from '../locales/en/about.json';
+import enGallery from '../locales/en/gallery.json';
+import enTourDetail from '../locales/en/tourDetail.json';
 
 import idCommon from '../locales/id/common.json';
 import idTours from '../locales/id/tours.json';
 import idBooking from '../locales/id/booking.json';
 import idMockData from '../locales/id/mockData.json';
+import idHome from '../locales/id/home.json';
+import idAbout from '../locales/id/about.json';
+import idGallery from '../locales/id/gallery.json';
+import idTourDetail from '../locales/id/tourDetail.json';
 
 const resources = {
   en: {
@@ -18,12 +26,20 @@ const resources = {
     tours: enTours,
     booking: enBooking,
     mockData: enMockData,
+    home: enHome,
+    about: enAbout,
+    gallery: enGallery,
+    tourDetail: enTourDetail,
   },
   id: {
     common: idCommon,
     tours: idTours,
     booking: idBooking,
     mockData: idMockData,
+    home: idHome,
+    about: idAbout,
+    gallery: idGallery,
+    tourDetail: idTourDetail,
   },
 };
 
@@ -43,7 +59,7 @@ i18n
     lng: getInitialLanguage(),
     fallbackLng: 'id',
     defaultNS: 'common',
-    ns: ['common', 'tours', 'booking', 'mockData'],
+    ns: ['common', 'tours', 'booking', 'mockData', 'home', 'about', 'gallery', 'tourDetail'],
 
     interpolation: {
       escapeValue: false,

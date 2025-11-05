@@ -55,7 +55,11 @@
     "perPerson": "/person",
     "viewDetails": "View Details",
     "bookNow": "Book Now",
-    "reviews": "{{count}} reviews",
+    "reviews": "reviews",
+    "slotsLeft": "slots left",
+    "quickView": "Quick View",
+    "nextDepartures": "Next Departures",
+    "startingFrom": "Starting from",
     "badges": {
       "bestSeller": "Best Seller",
       "new": "New",
@@ -74,6 +78,43 @@
     "close": "Close",
     "highlights": "Highlights",
     "whatsIncluded": "What's Included",
-    "bookThisTour": "Book This Tour"
+    "bookThisTour": "Book This Tour",
+    "tourInformation": "Tour Information",
+    "bookingInformation": "Booking Information",
+    "viewFullDetails": "View Full Details",
+    "bookNow": "Book Now",
+    "reviewsCount": "reviews"
+  },
+  "hero": {
+    "title": "Explore Our Tour Packages",
+    "subtitle": "Find your dream destination from 24+ interesting tour packages throughout Indonesia"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "tourPackages": "Tour Packages"
+  },
+  "searchBar": {
+    "placeholder": "Search tour packages by name, destination, or category..."
+  },
+  "toolbar": {
+    "showing": "Showing",
+    "of": "of",
+    "tourPackages": "tour packages",
+    "for": "for",
+    "filtersButton": "Filters"
+  },
+  "sortOptions": {
+    "popular": "Most Popular",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "rating": "Highest Rating",
+    "duration": "Shortest Duration"
+  },
+  "loadMore": {
+    "button": "Load More Tours",
+    "showing": "Showing {{displayed}} of {{total}} tours"
+  },
+  "aria": {
+    "clearSearch": "Clear search"
   }
 }

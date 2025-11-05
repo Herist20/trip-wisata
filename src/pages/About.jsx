@@ -4,10 +4,12 @@ import {
   Handshake, Star, Leaf, Heart, TrendingUp, Users, MapPin, Award,
   Mail, Linkedin, Calendar, CheckCircle, ArrowRight, Shield, Target
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function About() {
+  const { t } = useTranslation('about');
   const [counts, setCounts] = useState({
     travelers: 0,
     destinations: 0,
@@ -79,83 +81,40 @@ function About() {
     }, interval);
   };
 
-  const timeline = [
-    { year: 2015, event: 'Founded', description: 'Dimulai dengan 2 paket tour dan passion yang besar' },
-    { year: 2018, event: 'Expansion', description: 'Berkembang ke 10 destinasi di seluruh Indonesia' },
-    { year: 2020, event: 'Digital Transformation', description: 'Launching sistem booking online untuk kemudahan pelanggan' },
-    { year: 2024, event: 'Major Milestone', description: '20+ destinasi dan 500+ pelanggan bahagia' },
+  const timeline = t('timeline', { returnObjects: true });
+
+  const valuesIcons = [
+    { icon: Handshake, color: 'from-blue-500 to-blue-600' },
+    { icon: Star, color: 'from-yellow-500 to-yellow-600' },
+    { icon: Leaf, color: 'from-green-500 to-green-600' },
+    { icon: Heart, color: 'from-red-500 to-red-600' },
   ];
 
-  const values = [
-    {
-      icon: Handshake,
-      title: 'Integrity',
-      description: 'Kami beroperasi dengan kejujuran dan transparansi penuh. Tidak ada biaya tersembunyi, semua informasi disampaikan dengan jelas kepada setiap pelanggan.',
-      color: 'from-blue-500 to-blue-600',
-    },
-    {
-      icon: Star,
-      title: 'Excellence',
-      description: 'Komitmen kami adalah memberikan layanan terbaik di kelasnya. Setiap detail perjalanan dirancang untuk melampaui ekspektasi Anda.',
-      color: 'from-yellow-500 to-yellow-600',
-    },
-    {
-      icon: Leaf,
-      title: 'Sustainability',
-      description: 'Kami peduli pada kelestarian alam dan budaya. Setiap tour dirancang untuk mendukung pariwisata berkelanjutan dan memberdayakan komunitas lokal.',
-      color: 'from-green-500 to-green-600',
-    },
-    {
-      icon: Heart,
-      title: 'Customer-Centric',
-      description: 'Kepuasan Anda adalah prioritas utama kami. Tim kami siap 24/7 untuk memastikan setiap perjalanan Anda berjalan sempurna.',
-      color: 'from-red-500 to-red-600',
-    },
+  const valuesTranslations = t('values.items', { returnObjects: true });
+  const values = valuesIcons.map((iconData, index) => ({
+    ...iconData,
+    ...valuesTranslations[index],
+  }));
+
+  const teamImages = [
+    { image: 'https://i.pravatar.cc/400?img=12', linkedin: 'https://linkedin.com', email: 'andi@tripwisata.com' },
+    { image: 'https://i.pravatar.cc/400?img=45', linkedin: 'https://linkedin.com', email: 'siti@tripwisata.com' },
+    { image: 'https://i.pravatar.cc/400?img=33', linkedin: 'https://linkedin.com', email: 'made@tripwisata.com' },
+    { image: 'https://i.pravatar.cc/400?img=25', linkedin: 'https://linkedin.com', email: 'dewi@tripwisata.com' },
   ];
 
-  const team = [
-    {
-      name: 'Andi Wijaya',
-      position: 'CEO & Founder',
-      bio: 'Dengan 15+ tahun pengalaman di industri pariwisata, Andi memimpin visi perusahaan untuk memberikan pengalaman wisata terbaik.',
-      image: 'https://i.pravatar.cc/400?img=12',
-      linkedin: 'https://linkedin.com',
-      email: 'andi@tripwisata.com',
-    },
-    {
-      name: 'Siti Rahman',
-      position: 'Operations Manager',
-      bio: 'Bertanggung jawab atas operasional harian dan memastikan setiap tour berjalan lancar dengan standar kualitas tertinggi.',
-      image: 'https://i.pravatar.cc/400?img=45',
-      linkedin: 'https://linkedin.com',
-      email: 'siti@tripwisata.com',
-    },
-    {
-      name: 'Made Prasetya',
-      position: 'Senior Tour Guide',
-      bio: 'Dengan pengetahuan mendalam tentang budaya Indonesia, Made telah memandu 200+ tour dengan rating sempurna.',
-      image: 'https://i.pravatar.cc/400?img=33',
-      linkedin: 'https://linkedin.com',
-      email: 'made@tripwisata.com',
-    },
-    {
-      name: 'Dewi Kusuma',
-      position: 'Senior Tour Guide',
-      bio: 'Berpengalaman 10 tahun sebagai tour guide, Dewi ahli dalam cultural tours dan adventure expeditions.',
-      image: 'https://i.pravatar.cc/400?img=25',
-      linkedin: 'https://linkedin.com',
-      email: 'dewi@tripwisata.com',
-    },
-  ];
+  const teamTranslations = t('team.members', { returnObjects: true });
+  const team = teamImages.map((imageData, index) => ({
+    ...imageData,
+    ...teamTranslations[index],
+  }));
 
-  const partners = [
-    { name: 'Ministry of Tourism', logo: '🏛️' },
-    { name: 'ASITA Member', logo: '🌏' },
-    { name: 'Verified Tour Operator', logo: '✓' },
-    { name: 'Green Tourism Certified', logo: '🌿' },
-    { name: 'Trip Advisor Partner', logo: '🦉' },
-    { name: 'Safety First Certified', logo: '🛡️' },
-  ];
+  const partnerLogos = ['🏛️', '🌏', '✓', '🌿', '🦉', '🛡️'];
+  const partnerNames = t('certifications.partners', { returnObjects: true });
+  const partners = partnerLogos.map((logo, index) => ({
+    logo,
+    name: partnerNames[index],
+  }));
 
   return (
     <div className="min-h-screen">
@@ -177,14 +136,14 @@ function About() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
             data-aos="fade-up"
           >
-            Tentang Kami
+            {t('hero.title')}
           </h1>
           <p
             className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Mewujudkan Impian Perjalanan Anda Sejak 2015
+            {t('hero.subtitle')}
           </p>
         </div>
       </section>
@@ -211,38 +170,18 @@ function About() {
               <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                 <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
-                  Our Journey
+                  {t('ourStory.badge')}
                 </span>
               </div>
 
               <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6 leading-tight">
-                Perjalanan Kami Dimulai dengan Passion
+                {t('ourStory.title')}
               </h2>
 
               <div className="space-y-4 text-text-light leading-relaxed">
-                <p>
-                  Berawal dari kecintaan mendalam terhadap keindahan Indonesia, kami mendirikan Trip
-                  Wisata pada tahun 2015 dengan visi sederhana namun mulia: memperkenalkan pesona
-                  nusantara kepada lebih banyak orang. Dari sebuah kantor kecil dan dua paket tour
-                  pertama, kami memulai perjalanan yang luar biasa ini.
-                </p>
-                <p>
-                  Setiap destinasi yang kami tawarkan dipilih dengan cermat, setiap pengalaman
-                  dirancang dengan detail. Kami tidak hanya ingin mengajak Anda berwisata, tetapi
-                  menghadirkan petualangan yang berkesan, pengetahuan budaya yang mendalam, dan
-                  kenangan indah yang akan Anda bawa pulang selamanya.
-                </p>
-                <p>
-                  Dengan tim profesional yang memiliki pengalaman lebih dari 10 tahun di industri
-                  pariwisata, kami memahami bahwa setiap traveler memiliki kebutuhan dan impian yang
-                  unik. Itulah mengapa kami selalu berusaha memberikan layanan yang personal,
-                  fleksibel, dan melebihi ekspektasi.
-                </p>
-                <p>
-                  Hari ini, dengan bangga kami melayani ratusan wisatawan setiap tahunnya, membawa
-                  mereka menjelajahi 20+ destinasi menakjubkan di seluruh Indonesia. Dan perjalanan
-                  kami masih terus berlanjut, dengan semangat yang sama seperti hari pertama.
-                </p>
+                {t('ourStory.paragraphs', { returnObjects: true }).map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
             </div>
           </div>
@@ -250,7 +189,7 @@ function About() {
           {/* Timeline */}
           <div className="mt-20" data-aos="fade-up">
             <h3 className="text-2xl md:text-3xl font-bold text-secondary text-center mb-12">
-              Timeline Perjalanan Kami
+              {t('ourStory.timelineTitle')}
             </h3>
             <div className="relative">
               {/* Timeline Line */}
@@ -300,10 +239,10 @@ function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
-              Nilai-Nilai Kami
+              {t('values.title')}
             </h2>
             <p className="text-lg text-text-light max-w-2xl mx-auto">
-              Prinsip fundamental yang menjadi fondasi setiap layanan dan keputusan kami
+              {t('values.subtitle')}
             </p>
           </div>
 
@@ -336,10 +275,10 @@ function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
-              Tim Profesional Kami
+              {t('team.title')}
             </h2>
             <p className="text-lg text-text-light max-w-2xl mx-auto">
-              Bertemu dengan orang-orang berdedikasi yang membuat setiap perjalanan Anda istimewa
+              {t('team.subtitle')}
             </p>
           </div>
 
@@ -400,7 +339,7 @@ function About() {
                 <Users className="w-10 h-10 text-secondary" />
               </div>
               <p className="text-5xl font-bold text-white mb-2">{counts.travelers}+</p>
-              <p className="text-lg text-white/90">Happy Travelers</p>
+              <p className="text-lg text-white/90">{t('stats.travelers')}</p>
             </div>
 
             <div className="text-center" data-aos="fade-up" data-aos-delay="100">
@@ -408,7 +347,7 @@ function About() {
                 <MapPin className="w-10 h-10 text-secondary" />
               </div>
               <p className="text-5xl font-bold text-white mb-2">{counts.destinations}+</p>
-              <p className="text-lg text-white/90">Destinations</p>
+              <p className="text-lg text-white/90">{t('stats.destinations')}</p>
             </div>
 
             <div className="text-center" data-aos="fade-up" data-aos-delay="200">
@@ -416,7 +355,7 @@ function About() {
                 <Award className="w-10 h-10 text-secondary" />
               </div>
               <p className="text-5xl font-bold text-white mb-2">{counts.guides}</p>
-              <p className="text-lg text-white/90">Professional Guides</p>
+              <p className="text-lg text-white/90">{t('stats.guides')}</p>
             </div>
 
             <div className="text-center" data-aos="fade-up" data-aos-delay="300">
@@ -424,7 +363,7 @@ function About() {
                 <Star className="w-10 h-10 text-secondary" />
               </div>
               <p className="text-5xl font-bold text-white mb-2">{counts.rating}/5</p>
-              <p className="text-lg text-white/90">Average Rating</p>
+              <p className="text-lg text-white/90">{t('stats.rating')}</p>
             </div>
           </div>
         </div>
@@ -435,10 +374,10 @@ function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
-              Sertifikasi & Partner
+              {t('certifications.title')}
             </h2>
             <p className="text-lg text-text-light max-w-2xl mx-auto">
-              Terpercaya dan diakui oleh berbagai lembaga pariwisata terkemuka
+              {t('certifications.subtitle')}
             </p>
           </div>
 
@@ -462,41 +401,26 @@ function About() {
 
           {/* Trust Badges */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
-            <div className="bg-white p-6 rounded-xl border-2 border-green-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="font-bold text-secondary">Licensed & Insured</h3>
-              </div>
-              <p className="text-sm text-text-light">
-                Terdaftar resmi dengan asuransi perjalanan lengkap
-              </p>
-            </div>
+            {t('certifications.badges', { returnObjects: true }).map((badge, index) => {
+              const icons = [Shield, Target, TrendingUp];
+              const colors = ['green', 'blue', 'purple'];
+              const IconComponent = icons[index];
+              const color = colors[index];
 
-            <div className="bg-white p-6 rounded-xl border-2 border-blue-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Target className="w-6 h-6 text-blue-600" />
+              return (
+                <div key={index} className={`bg-white p-6 rounded-xl border-2 border-${color}-200`}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-12 h-12 bg-${color}-100 rounded-full flex items-center justify-center`}>
+                      <IconComponent className={`w-6 h-6 text-${color}-600`} />
+                    </div>
+                    <h3 className="font-bold text-secondary">{badge.title}</h3>
+                  </div>
+                  <p className="text-sm text-text-light">
+                    {badge.description}
+                  </p>
                 </div>
-                <h3 className="font-bold text-secondary">Quality Assured</h3>
-              </div>
-              <p className="text-sm text-text-light">
-                Standar kualitas internasional dalam setiap layanan
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border-2 border-purple-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-purple-600" />
-                </div>
-                <h3 className="font-bold text-secondary">Sustainable Tourism</h3>
-              </div>
-              <p className="text-sm text-text-light">
-                Komitmen pada pariwisata berkelanjutan dan ramah lingkungan
-              </p>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -508,15 +432,14 @@ function About() {
             className="text-3xl md:text-4xl font-bold text-secondary mb-6"
             data-aos="fade-up"
           >
-            Siap Memulai Petualangan Anda?
+            {t('cta.title')}
           </h2>
           <p
             className="text-lg text-secondary/80 max-w-2xl mx-auto mb-10"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Bergabunglah dengan ratusan traveler yang telah mempercayai kami untuk mewujudkan
-            impian perjalanan mereka
+            {t('cta.subtitle')}
           </p>
           <div
             className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -527,14 +450,14 @@ function About() {
               to="/booking"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-secondary hover:bg-secondary-light text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-xl"
             >
-              Hubungi Kami
+              {t('cta.contactButton')}
               <Mail className="w-5 h-5" />
             </Link>
             <Link
               to="/tours"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-gray-100 text-secondary font-bold rounded-xl transition-all transform hover:scale-105 shadow-xl"
             >
-              Lihat Paket Tour
+              {t('cta.toursButton')}
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>

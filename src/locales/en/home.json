@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "badges": {
+      "verifiedOperator": "Verified Tour Operator",
+      "bestPrice": "Best Price Guarantee"
+    },
+    "title": "Explore the Beauty of",
+    "titleHighlight": "Indonesia",
+    "titleSuffix": "with Us",
+    "subtitle": "Trusted tour packages with unforgettable experiences, best prices, and professional service",
+    "cta": {
+      "viewTours": "View Tour Packages",
+      "contactUs": "Contact Us"
+    }
+  },
+  "stats": {
+    "travelers": {
+      "value": "500+",
+      "label": "Happy Travelers",
+      "description": "Satisfied customers with our service"
+    },
+    "destinations": {
+      "value": "20+",
+      "label": "Destinations",
+      "description": "Interesting destination choices in Indonesia"
+    },
+    "guides": {
+      "value": "100%",
+      "label": "Professional Tour Guides",
+      "description": "Certified and experienced"
+    },
+    "rating": {
+      "value": "4.9/5",
+      "label": "Satisfaction Rating",
+      "description": "From our customer reviews"
+    }
+  },
+  "featuredTours": {
+    "title": "Our Popular Tour Packages",
+    "subtitle": "Best choice for your dream vacation with affordable prices and premium service",
+    "startingFrom": "Starting from",
+    "perPerson": "per person",
+    "reviews": "reviews",
+    "viewDetails": "View Details",
+    "viewAllButton": "View All Tour Packages",
+    "viewAllSubtitle": "More than 20+ interesting destinations await you"
+  },
+  "whyChooseUs": {
+    "badge": "Why Choose Us",
+    "title": "Best Travel Experience",
+    "titleHighlight": "in Indonesia",
+    "description": "We are committed to providing an unforgettable holiday experience with professional service, transparent pricing, and full support from start to finish of your journey. Your satisfaction and comfort are our top priorities.",
+    "features": [
+      {
+        "title": "Professional & Experienced Tour Guides",
+        "description": "Certified tour guide team with in-depth knowledge of destinations and local culture"
+      },
+      {
+        "title": "Transparent Pricing with No Hidden Fees",
+        "description": "All costs are clearly explained upfront, no surprising additional charges"
+      },
+      {
+        "title": "Travel Insurance Included",
+        "description": "Every tour package includes travel insurance for your safety and peace of mind"
+      },
+      {
+        "title": "Flexible Cancellation Policy",
+        "description": "Flexible cancellation policy with full refund up to 7 days before departure"
+      },
+      {
+        "title": "24/7 Customer Support",
+        "description": "Our customer support team is ready to help you anytime, before, during, and after your trip"
+      }
+    ],
+    "floatingStats": {
+      "customerRating": "Customer Rating",
+      "happyTravelers": "Happy Travelers"
+    }
+  },
+  "testimonials": {
+    "badge": "Customer Testimonials",
+    "title": "What Do They Say?",
+    "subtitle": "Real experiences from customers who have trusted us for their journeys",
+    "tourPackage": "Tour Package",
+    "tourGuide": "Tour Guide",
+    "statsBar": {
+      "happyReviews": "Happy Reviews",
+      "averageRating": "Average Rating",
+      "happyTravelers": "Happy Travelers",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "cta": {
+    "title": "Ready for Your Next Adventure?",
+    "subtitle": "Contact us now and get special offers for your dream tour package",
+    "bookNowButton": "Start Booking Now",
+    "viewToursButton": "View Tour Packages"
+  },
+  "aria": {
+    "previousTestimonial": "Previous testimonial",
+    "nextTestimonial": "Next testimonial"
+  }
+}

@@ -55,7 +55,11 @@
     "perPerson": "/orang",
     "viewDetails": "Lihat Detail",
     "bookNow": "Pesan Sekarang",
-    "reviews": "{{count}} ulasan",
+    "reviews": "ulasan",
+    "slotsLeft": "slot tersisa",
+    "quickView": "Lihat Cepat",
+    "nextDepartures": "Keberangkatan Selanjutnya",
+    "startingFrom": "Mulai dari",
     "badges": {
       "bestSeller": "Best Seller",
       "new": "New",
@@ -74,6 +78,43 @@
     "close": "Tutup",
     "highlights": "Sorotan",
     "whatsIncluded": "Yang Termasuk",
-    "bookThisTour": "Pesan Tour Ini"
+    "bookThisTour": "Pesan Tour Ini",
+    "tourInformation": "Informasi Tour",
+    "bookingInformation": "Informasi Pemesanan",
+    "viewFullDetails": "Lihat Detail Lengkap",
+    "bookNow": "Pesan Sekarang",
+    "reviewsCount": "ulasan"
+  },
+  "hero": {
+    "title": "Jelajahi Paket Tour Kami",
+    "subtitle": "Temukan destinasi impian Anda dari 24+ pilihan paket tour menarik di seluruh Indonesia"
+  },
+  "breadcrumb": {
+    "home": "Beranda",
+    "tourPackages": "Paket Tour"
+  },
+  "searchBar": {
+    "placeholder": "Cari paket tour berdasarkan nama, destinasi, atau kategori..."
+  },
+  "toolbar": {
+    "showing": "Menampilkan",
+    "of": "dari",
+    "tourPackages": "paket tour",
+    "for": "untuk",
+    "filtersButton": "Filter"
+  },
+  "sortOptions": {
+    "popular": "Paling Populer",
+    "priceLow": "Harga: Rendah ke Tinggi",
+    "priceHigh": "Harga: Tinggi ke Rendah",
+    "rating": "Rating Tertinggi",
+    "duration": "Durasi Terpendek"
+  },
+  "loadMore": {
+    "button": "Muat Lebih Banyak Tour",
+    "showing": "Menampilkan {{displayed}} dari {{total}} tour"
+  },
+  "aria": {
+    "clearSearch": "Hapus pencarian"
   }
 }

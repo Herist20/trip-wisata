@@ -1,0 +1,89 @@
+{
+  "breadcrumb": {
+    "tours": "Tours"
+  },
+  "notFound": {
+    "title": "Tour Not Found",
+    "backToTours": "Back to Tours"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "itinerary": "Itinerary",
+    "inclusions": "Inclusions",
+    "requirements": "Requirements",
+    "reviews": "Reviews"
+  },
+  "overview": {
+    "aboutTour": "About This Tour",
+    "tourHighlights": "Tour Highlights",
+    "meetingPointTitle": "Meeting Point & Time",
+    "location": "Location:",
+    "time": "Time:"
+  },
+  "itinerary": {
+    "title": "Day-by-Day Itinerary",
+    "day": "Day",
+    "meals": "Meals",
+    "accommodation": "Accommodation"
+  },
+  "inclusions": {
+    "included": "What's Included",
+    "excluded": "What's Not Included"
+  },
+  "requirements": {
+    "title": "Requirements & Information",
+    "whatToBring": "What to Bring",
+    "importantNotes": "Important Notes",
+    "cancellationPolicy": "Cancellation Policy",
+    "ageRequirement": "Age Requirement",
+    "fitnessLevel": "Fitness Level",
+    "dressCode": "Dress Code",
+    "healthNotice": "Health Notice"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "overallRating": "Overall Rating",
+    "basedOn": "Based on {{count}} reviews",
+    "verified": "Verified Purchase",
+    "helpful": "Helpful",
+    "writeReview": "Write a Review"
+  },
+  "booking": {
+    "title": "Book This Tour",
+    "selectDate": "Select Date",
+    "selectDatePlaceholder": "Choose departure date",
+    "participants": "Participants",
+    "adults": "Adults",
+    "children": "Children",
+    "childrenAge": "(2-11 years)",
+    "priceBreakdown": "Price Breakdown",
+    "adult": "Adult",
+    "child": "Child",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "from": "From",
+    "perPerson": "per person",
+    "proceedToBooking": "Proceed to Booking",
+    "whyBookWithUs": "Why Book With Us",
+    "bestPrice": "Best Price Guarantee",
+    "bestPriceDesc": "We guarantee the best prices",
+    "freeCancel": "Free Cancellation",
+    "freeCancelDesc": "Cancel up to 7 days before",
+    "instantConfirm": "Instant Confirmation",
+    "instantConfirmDesc": "Receive confirmation instantly",
+    "contactUs": "Contact Us",
+    "securePayment": "Secure payment",
+    "linkCopied": "Link copied to clipboard!"
+  },
+  "availabilityAlert": "Only {{count}} slots left!",
+  "lightbox": {
+    "imageCounter": "{{current}} / {{total}}"
+  },
+  "aria": {
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "shareTour": "Share tour",
+    "saveTour": "Save tour"
+  }
+}

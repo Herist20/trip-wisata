@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Our Travel Gallery",
+    "subtitle": "Beautiful moments from every adventure"
+  },
+  "searchBar": {
+    "placeholder": "Search location, tour package..."
+  },
+  "sort": {
+    "recent": "Recent",
+    "popular": "Popular",
+    "mostLiked": "Most Liked"
+  },
+  "categories": {
+    "all": "All Photos",
+    "beach": "Beach & Islands",
+    "mountain": "Mountains & Hiking",
+    "cultural": "Cultural Heritage",
+    "adventure": "Adventure & Activities",
+    "culinary": "Food & Culinary"
+  },
+  "display": {
+    "showing": "Showing",
+    "of": "of",
+    "photos": "photos"
+  },
+  "emptyState": {
+    "title": "No photos found",
+    "subtitle": "Try changing your filter or search keywords"
+  },
+  "loadMore": {
+    "button": "Load More",
+    "remaining": "remaining",
+    "loading": "Loading..."
+  },
+  "lightbox": {
+    "share": "Share",
+    "download": "Download",
+    "photoBy": "Photo by",
+    "tour": "Tour:"
+  },
+  "linkCopied": "Link copied to clipboard!"
+}

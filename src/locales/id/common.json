@@ -95,5 +95,71 @@
   },
   "mobileMenu": {
     "explore": "Jelajahi keindahan Indonesia"
-  }
+  },
+  "newsletter": {
+    "title": "Dapatkan Penawaran Spesial",
+    "subtitle": "Subscribe newsletter kami dan dapatkan diskon hingga 20% untuk booking pertama",
+    "emailPlaceholder": "Masukkan email Anda",
+    "subscribeButton": "Subscribe",
+    "loading": "Loading...",
+    "errorEmpty": "Email tidak boleh kosong",
+    "errorInvalid": "Format email tidak valid",
+    "errorGeneric": "Terjadi kesalahan. Silakan coba lagi.",
+    "successTitle": "Terima Kasih!",
+    "successMessage": "Email Anda telah terdaftar. Cek inbox untuk mendapatkan kode diskon spesial!",
+    "privacyNote": "Kami tidak akan spam email Anda",
+    "exclusiveOffers": "Penawaran eksklusif setiap bulan",
+    "subscribersCount": "Join {{count}}+ happy subscribers"
+  },
+  "chatbot": {
+    "greeting1": "Halo! 👋 Selamat datang di Tour Bali.",
+    "greeting2": "Saya adalah asisten virtual Tour Bali. Saya siap membantu Anda merencanakan liburan impian ke destinasi indah di Bali! ✈️",
+    "greeting3": "Ada yang bisa saya bantu hari ini?",
+    "quickReplies": {
+      "tourPackages": "Paket Tour",
+      "priceInfo": "Info Harga",
+      "locationContact": "Lokasi & Kontak",
+      "howToBook": "Cara Booking"
+    },
+    "responses": {
+      "tourPackages": "Kami menyediakan berbagai paket tour menarik ke destinasi populer seperti Bali, Bromo, Raja Ampat, dan banyak lagi! 🏝️\n\nApakah Anda ingin melihat daftar paket tour kami?",
+      "priceInfo": "Harga paket tour kami mulai dari Rp 1.500.000 per orang! 💰\n\nHarga sudah termasuk:\n✓ Akomodasi\n✓ Transportasi\n✓ Tour Guide\n✓ Makan\n✓ Tiket masuk wisata",
+      "howToBook": "Booking paket tour sangat mudah! 😊\n\n1️⃣ Pilih paket tour\n2️⃣ Tentukan tanggal keberangkatan\n3️⃣ Isi data peserta\n4️⃣ Pilih metode pembayaran\n5️⃣ Konfirmasi booking\n\nApakah Anda siap untuk booking?"
+    },
+    "followUpButtons": {
+      "viewTours": "Ya, lihat paket tour",
+      "priceInfo": "Info harga",
+      "bookNow": "Booking sekarang",
+      "chatCS": "Chat dengan CS",
+      "contactWhatsApp": "Hubungi via WhatsApp",
+      "viewMaps": "Lihat di maps",
+      "bookNow2": "Ya, booking sekarang",
+      "askCS": "Tanya CS dulu",
+      "mainMenu": "Menu Utama"
+    },
+    "botName": "Tour Bali Bot",
+    "status": "Online - Siap Membantu",
+    "selectTopic": "Pilih topik:",
+    "typeMessageWhatsApp": "Ketik pesan di WhatsApp",
+    "resetMessage": "Terima kasih! Ada yang bisa saya bantu lagi? 😊",
+    "tooltipMessage": "Halo! Ada yang bisa dibantu?"
+  },
+  "aria": {
+    "mainNavigation": "Navigasi utama",
+    "logoLink": "Tour Bali - Kembali ke beranda",
+    "mobileNavigation": "Navigasi mobile",
+    "closeMenu": "Tutup menu navigasi",
+    "changeLanguage": "Ubah bahasa",
+    "closeChat": "Tutup obrolan",
+    "openWhatsApp": "Buka WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "skipToContent": "Langsung ke konten utama",
+    "navigatedTo": "Berpindah ke {{page}}",
+    "openChatbot": "Buka chatbot",
+    "closeChatbot": "Tutup chatbot"
+  },
+  "loading": "Memuat..."
 }

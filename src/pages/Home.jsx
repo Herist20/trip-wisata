@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { MapPin, Star, Clock, ArrowRight, Users, Award, TrendingUp, Shield, CheckCircle, ChevronDown, MessageCircle, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { tourPackages, testimonials, features, contactInfo } from '../data/mockData';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 // import Newsletter from '../components/home/Newsletter';
 
 function Home() {
+  const { t } = useTranslation('home');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
@@ -78,27 +80,27 @@ function Home() {
   const statsHighlights = [
     {
       icon: Users,
-      value: '500+',
-      label: 'Happy Travelers',
-      description: 'Pelanggan puas dengan layanan kami'
+      value: t('stats.travelers.value'),
+      label: t('stats.travelers.label'),
+      description: t('stats.travelers.description')
     },
     {
       icon: MapPin,
-      value: '20+',
-      label: 'Destinasi',
-      description: 'Pilihan destinasi menarik di Indonesia'
+      value: t('stats.destinations.value'),
+      label: t('stats.destinations.label'),
+      description: t('stats.destinations.description')
     },
     {
       icon: Award,
-      value: '100%',
-      label: 'Tour Guide Profesional',
-      description: 'Bersertifikat dan berpengalaman'
+      value: t('stats.guides.value'),
+      label: t('stats.guides.label'),
+      description: t('stats.guides.description')
     },
     {
       icon: TrendingUp,
-      value: '4.9/5',
-      label: 'Rating Kepuasan',
-      description: 'Dari review pelanggan kami'
+      value: t('stats.rating.value'),
+      label: t('stats.rating.label'),
+      description: t('stats.rating.description')
     }
   ];
 
@@ -128,11 +130,11 @@ function Home() {
           >
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
               <Shield className="w-4 h-4 text-primary" />
-              <span className="text-white text-sm font-semibold">Verified Tour Operator</span>
+              <span className="text-white text-sm font-semibold">{t('hero.badges.verifiedOperator')}</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
               <CheckCircle className="w-4 h-4 text-primary" />
-              <span className="text-white text-sm font-semibold">Best Price Guarantee</span>
+              <span className="text-white text-sm font-semibold">{t('hero.badges.bestPrice')}</span>
             </div>
           </div>
 
@@ -142,9 +144,9 @@ function Home() {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Jelajahi Keindahan
+            {t('hero.title')}
             <br />
-            <span className="text-primary">Indonesia</span> Bersama Kami
+            <span className="text-primary">{t('hero.titleHighlight')}</span> {t('hero.titleSuffix')}
           </h1>
 
           {/* Subheadline */}
@@ -153,8 +155,7 @@ function Home() {
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            Paket wisata terpercaya dengan pengalaman tak terlupakan,
-            harga terbaik, dan pelayanan profesional
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
@@ -167,7 +168,7 @@ function Home() {
               to="/tours"
               className="group px-8 py-4 bg-primary hover:bg-primary-light text-secondary font-bold rounded-full text-lg shadow-2xl hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
-              Lihat Paket Tour
+              {t('hero.cta.viewTours')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -175,7 +176,7 @@ function Home() {
               className="group px-8 py-4 bg-transparent hover:bg-white border-2 border-white text-white hover:text-secondary font-bold rounded-full text-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
               <MessageCircle className="w-5 h-5" />
-              Hubungi Kami
+              {t('hero.cta.contactUs')}
             </Link>
           </div>
         </div>
@@ -219,10 +220,10 @@ function Home() {
       <section className="section-container bg-white">
         <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-            Paket Tour Populer Kami
+            {t('featuredTours.title')}
           </h2>
           <p className="text-lg md:text-xl text-text-light max-w-3xl mx-auto">
-            Pilihan terbaik untuk liburan impian Anda dengan harga terjangkau dan layanan premium
+            {t('featuredTours.subtitle')}
           </p>
         </div>
 
@@ -293,7 +294,7 @@ function Home() {
                     ))}
                   </div>
                   <span className="text-sm font-semibold text-secondary">{tour.rating}</span>
-                  <span className="text-sm text-text-light">({tour.reviews} reviews)</span>
+                  <span className="text-sm text-text-light">({tour.reviews} {t('featuredTours.reviews')})</span>
                 </div>
 
                 {/* Highlights with Checkmarks */}
@@ -312,7 +313,7 @@ function Home() {
                 {/* Price & CTA */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-text-light mb-1">Starting from</p>
+                    <p className="text-xs text-text-light mb-1">{t('featuredTours.startingFrom')}</p>
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-bold text-primary">
                         ${tour.priceUSD}
@@ -321,7 +322,7 @@ function Home() {
                         ${Math.round(tour.priceUSD * 1.3)}
                       </span>
                     </div>
-                    <p className="text-xs text-text-light mt-1">per person</p>
+                    <p className="text-xs text-text-light mt-1">{t('featuredTours.perPerson')}</p>
                   </div>
 
                   <Link
@@ -329,7 +330,7 @@ function Home() {
                     className="group/btn bg-secondary hover:bg-primary text-white hover:text-secondary font-semibold px-5 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                   >
                     <span className="flex items-center gap-2">
-                      Lihat Detail
+                      {t('featuredTours.viewDetails')}
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
                   </Link>
@@ -345,11 +346,11 @@ function Home() {
             to="/tours"
             className="group inline-flex items-center gap-3 bg-gradient-to-r from-secondary to-secondary-light hover:from-primary hover:to-primary-light text-white font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
           >
-            Lihat Semua Paket Tour
+            {t('featuredTours.viewAllButton')}
             <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
           </Link>
           <p className="text-sm text-text-light mt-4">
-            Lebih dari 20+ destinasi menarik menanti Anda
+            {t('featuredTours.viewAllSubtitle')}
           </p>
         </div>
       </section>
@@ -371,7 +372,7 @@ function Home() {
             <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
               <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
-                Mengapa Memilih Kami
+                {t('whyChooseUs.badge')}
               </span>
             </div>
 
@@ -380,16 +381,14 @@ function Home() {
 
             {/* Heading */}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-6 leading-tight">
-              Pengalaman Wisata
+              {t('whyChooseUs.title')}
               <br />
-              <span className="text-primary">Terbaik di Indonesia</span>
+              <span className="text-primary">{t('whyChooseUs.titleHighlight')}</span>
             </h2>
 
             {/* Description */}
             <p className="text-lg text-text-light mb-10 leading-relaxed">
-              Kami berkomitmen memberikan pengalaman liburan yang tak terlupakan dengan
-              layanan profesional, harga transparan, dan dukungan penuh dari awal hingga
-              akhir perjalanan Anda. Kepuasan dan kenyamanan Anda adalah prioritas utama kami.
+              {t('whyChooseUs.description')}
             </p>
 
             {/* Keunggulan List */}
@@ -397,32 +396,22 @@ function Home() {
               {[
                 {
                   icon: Users,
-                  title: 'Tour Guide Profesional & Berpengalaman',
-                  description: 'Tim tour guide bersertifikat dengan pengetahuan mendalam tentang destinasi dan budaya lokal',
                   number: '01'
                 },
                 {
                   icon: Shield,
-                  title: 'Harga Transparan Tanpa Biaya Tersembunyi',
-                  description: 'Semua biaya dijelaskan dengan jelas di awal, tidak ada biaya tambahan yang mengejutkan',
                   number: '02'
                 },
                 {
                   icon: CheckCircle,
-                  title: 'Asuransi Perjalanan Included',
-                  description: 'Setiap paket tour sudah termasuk asuransi perjalanan untuk keamanan dan ketenangan pikiran Anda',
                   number: '03'
                 },
                 {
                   icon: Award,
-                  title: 'Flexible Cancellation Policy',
-                  description: 'Kebijakan pembatalan yang fleksibel dengan refund penuh hingga 7 hari sebelum keberangkatan',
                   number: '04'
                 },
                 {
                   icon: MessageCircle,
-                  title: '24/7 Customer Support',
-                  description: 'Tim customer support kami siap membantu Anda kapan saja, sebelum, selama, dan setelah perjalanan',
                   number: '05'
                 }
               ].map((item, index) => {
@@ -452,10 +441,10 @@ function Home() {
                     {/* Content */}
                     <div className="flex-1 pt-1">
                       <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
-                        {item.title}
+                        {t(`whyChooseUs.features.${index}.title`)}
                       </h3>
                       <p className="text-sm text-text-light leading-relaxed">
-                        {item.description}
+                        {t(`whyChooseUs.features.${index}.description`)}
                       </p>
                     </div>
                   </div>
@@ -487,7 +476,7 @@ function Home() {
                   </div>
                   <div>
                     <p className="text-3xl font-bold text-secondary">4.9/5</p>
-                    <p className="text-sm text-text-light">Customer Rating</p>
+                    <p className="text-sm text-text-light">{t('whyChooseUs.floatingStats.customerRating')}</p>
                   </div>
                 </div>
               </div>
@@ -499,7 +488,7 @@ function Home() {
                   </div>
                   <div>
                     <p className="text-3xl font-bold text-secondary">500+</p>
-                    <p className="text-sm text-text-light">Happy Travelers</p>
+                    <p className="text-sm text-text-light">{t('whyChooseUs.floatingStats.happyTravelers')}</p>
                   </div>
                 </div>
               </div>
@@ -520,14 +509,14 @@ function Home() {
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
             <Star className="w-4 h-4 text-primary fill-primary" />
             <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
-              Testimoni Pelanggan
+              {t('testimonials.badge')}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-            Apa Kata Mereka?
+            {t('testimonials.title')}
           </h2>
           <p className="text-lg text-text-light max-w-3xl mx-auto">
-            Pengalaman nyata dari pelanggan yang telah mempercayai kami untuk perjalanan mereka
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
@@ -608,7 +597,7 @@ function Home() {
                         <div className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-xs text-text-light mb-1">Tour Package</p>
+                            <p className="text-xs text-text-light mb-1">{t('testimonials.tourPackage')}</p>
                             <p className="text-sm font-semibold text-secondary">{testimonial.tour}</p>
                           </div>
                         </div>
@@ -616,7 +605,7 @@ function Home() {
                           <div className="flex items-start gap-2 mt-3">
                             <Users className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                             <div>
-                              <p className="text-xs text-text-light mb-1">Tour Guide</p>
+                              <p className="text-xs text-text-light mb-1">{t('testimonials.tourGuide')}</p>
                               <p className="text-sm font-semibold text-secondary">{testimonial.guideName}</p>
                             </div>
                           </div>
@@ -633,14 +622,14 @@ function Home() {
           <button
             onClick={prevSlide}
             className="absolute -left-1 sm:left-0 md:left-1 lg:-left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-primary text-secondary hover:text-white w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full shadow-lg sm:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
-            aria-label="Previous testimonial"
+            aria-label={t('aria.previousTestimonial')}
           >
             <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
           <button
             onClick={nextSlide}
             className="absolute -right-1 sm:right-0 md:right-1 lg:-right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-primary text-secondary hover:text-white w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full shadow-lg sm:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
-            aria-label="Next testimonial"
+            aria-label={t('aria.nextTestimonial')}
           >
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
@@ -666,19 +655,19 @@ function Home() {
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up">
           <div className="text-center p-6 bg-white rounded-2xl shadow-md">
             <p className="text-4xl font-bold text-primary mb-2">{testimonials.length}+</p>
-            <p className="text-sm text-text-light">Happy Reviews</p>
+            <p className="text-sm text-text-light">{t('testimonials.statsBar.happyReviews')}</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md">
             <p className="text-4xl font-bold text-primary mb-2">4.9/5</p>
-            <p className="text-sm text-text-light">Average Rating</p>
+            <p className="text-sm text-text-light">{t('testimonials.statsBar.averageRating')}</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md">
             <p className="text-4xl font-bold text-primary mb-2">500+</p>
-            <p className="text-sm text-text-light">Happy Travelers</p>
+            <p className="text-sm text-text-light">{t('testimonials.statsBar.happyTravelers')}</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md">
             <p className="text-4xl font-bold text-primary mb-2">100%</p>
-            <p className="text-sm text-text-light">Satisfaction</p>
+            <p className="text-sm text-text-light">{t('testimonials.statsBar.satisfaction')}</p>
           </div>
         </div>
       </section>
@@ -691,17 +680,17 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Siap Untuk Petualangan Berikutnya?
+              {t('cta.title')}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto text-white/90">
-              Hubungi kami sekarang dan dapatkan penawaran spesial untuk paket tour impian Anda
+              {t('cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/booking"
                 className="btn-primary inline-flex items-center gap-2 px-8 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                Mulai Booking Sekarang
+                {t('cta.bookNowButton')}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -710,7 +699,7 @@ function Home() {
                 to="/tours"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-bold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                Lihat Paket Tour
+                {t('cta.viewToursButton')}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

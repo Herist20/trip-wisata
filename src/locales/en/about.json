@@ -1,0 +1,125 @@
+{
+  "hero": {
+    "title": "About Us",
+    "subtitle": "Making Your Travel Dreams Come True Since 2015"
+  },
+  "ourStory": {
+    "badge": "Our Journey",
+    "title": "Our Journey Began with Passion",
+    "paragraphs": [
+      "Starting from a deep love for Indonesia's beauty, we founded Trip Wisata in 2015 with a simple yet noble vision: to introduce the charm of the archipelago to more people. From a small office and two first tour packages, we started this extraordinary journey.",
+      "Every destination we offer is carefully selected, every experience is designed with detail. We don't just want to take you on a tour, but to present memorable adventures, deep cultural knowledge, and beautiful memories that you will take home forever.",
+      "With a professional team that has more than 10 years of experience in the tourism industry, we understand that every traveler has unique needs and dreams. That's why we always strive to provide personal, flexible service that exceeds expectations.",
+      "Today, we proudly serve hundreds of tourists every year, taking them to explore 20+ amazing destinations throughout Indonesia. And our journey continues, with the same spirit as day one."
+    ],
+    "timelineTitle": "Our Journey Timeline"
+  },
+  "timeline": [
+    {
+      "year": "2015",
+      "event": "Founded",
+      "description": "Started with 2 tour packages and great passion"
+    },
+    {
+      "year": "2018",
+      "event": "Expansion",
+      "description": "Expanded to 10 destinations throughout Indonesia"
+    },
+    {
+      "year": "2020",
+      "event": "Digital Transformation",
+      "description": "Launched online booking system for customer convenience"
+    },
+    {
+      "year": "2024",
+      "event": "Major Milestone",
+      "description": "20+ destinations and 500+ happy customers"
+    }
+  ],
+  "values": {
+    "title": "Our Values",
+    "subtitle": "Fundamental principles that form the foundation of every service and decision we make",
+    "items": [
+      {
+        "title": "Integrity",
+        "description": "We operate with full honesty and transparency. No hidden costs, all information is clearly communicated to every customer."
+      },
+      {
+        "title": "Excellence",
+        "description": "Our commitment is to provide the best service in its class. Every detail of the journey is designed to exceed your expectations."
+      },
+      {
+        "title": "Sustainability",
+        "description": "We care about the preservation of nature and culture. Every tour is designed to support sustainable tourism and empower local communities."
+      },
+      {
+        "title": "Customer-Centric",
+        "description": "Your satisfaction is our top priority. Our team is ready 24/7 to ensure every journey runs perfectly."
+      }
+    ]
+  },
+  "team": {
+    "title": "Our Professional Team",
+    "subtitle": "Meet the dedicated people who make every journey special",
+    "members": [
+      {
+        "name": "Andi Wijaya",
+        "position": "CEO & Founder",
+        "bio": "With 15+ years of experience in the tourism industry, Andi leads the company's vision to provide the best travel experience."
+      },
+      {
+        "name": "Siti Rahman",
+        "position": "Operations Manager",
+        "bio": "Responsible for daily operations and ensuring every tour runs smoothly with the highest quality standards."
+      },
+      {
+        "name": "Made Prasetya",
+        "position": "Senior Tour Guide",
+        "bio": "With in-depth knowledge of Indonesian culture, Made has guided 200+ tours with perfect ratings."
+      },
+      {
+        "name": "Dewi Kusuma",
+        "position": "Senior Tour Guide",
+        "bio": "With 10 years of experience as a tour guide, Dewi is an expert in cultural tours and adventure expeditions."
+      }
+    ]
+  },
+  "stats": {
+    "travelers": "Happy Travelers",
+    "destinations": "Destinations",
+    "guides": "Professional Guides",
+    "rating": "Average Rating"
+  },
+  "certifications": {
+    "title": "Certifications & Partners",
+    "subtitle": "Trusted and recognized by leading tourism agencies",
+    "partners": [
+      "Ministry of Tourism",
+      "ASITA Member",
+      "Verified Tour Operator",
+      "Green Tourism Certified",
+      "Trip Advisor Partner",
+      "Safety First Certified"
+    ],
+    "badges": [
+      {
+        "title": "Licensed & Insured",
+        "description": "Officially registered with comprehensive travel insurance"
+      },
+      {
+        "title": "Quality Assured",
+        "description": "International quality standards in every service"
+      },
+      {
+        "title": "Sustainable Tourism",
+        "description": "Commitment to sustainable and environmentally friendly tourism"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Your Adventure?",
+    "subtitle": "Join hundreds of travelers who have trusted us to make their travel dreams come true",
+    "contactButton": "Contact Us",
+    "toursButton": "View Tour Packages"
+  }
+}

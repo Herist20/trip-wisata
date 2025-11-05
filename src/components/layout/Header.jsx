@@ -6,7 +6,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 
 function Header() {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const { currentLanguage } = useLanguage(); // This will trigger re-render
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -98,14 +98,14 @@ function Header() {
       >
         <nav
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-label="Main navigation"
+          aria-label={t('aria.mainNavigation')}
         >
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link
               to="/"
               className="flex items-center gap-2 group relative z-10"
-              aria-label="Tour Bali - Go to homepage"
+              aria-label={t('aria.logoLink')}
             >
               <div className="relative">
                 <h1 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
@@ -198,7 +198,7 @@ function Header() {
         className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        aria-label="Mobile navigation"
+        aria-label={t('aria.mobileNavigation')}
         aria-hidden={!isMenuOpen}
       >
         <div className="flex flex-col h-full">
@@ -210,7 +210,7 @@ function Header() {
             <button
               onClick={toggleMenu}
               className="p-2 text-secondary hover:bg-secondary/10 rounded-lg transition-colors"
-              aria-label="Close navigation menu"
+              aria-label={t('aria.closeMenu')}
             >
               <X className="w-6 h-6" aria-hidden="true" />
             </button>
@@ -236,17 +236,50 @@ function Header() {
             </div>
 
             {/* Mobile Language Switcher & CTA */}
-            <div className="mt-6 px-4 space-y-4">
-              <div className="flex justify-center">
-                <LanguageSwitcher />
+            <div className="mt-8 space-y-4">
+              {/* Language Selector - Mobile Optimized */}
+              <div className="px-4">
+                <p className="text-xs font-semibold text-text-light uppercase tracking-wider mb-3">
+                  {t('languageSwitcher.selectLanguage') || 'Language'}
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => i18n.changeLanguage('id')}
+                    className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
+                      currentLanguage === 'id'
+                        ? 'bg-primary text-secondary shadow-md ring-2 ring-primary/30'
+                        : 'bg-gray-100 text-text hover:bg-gray-200'
+                    }`}
+                    aria-label="Bahasa Indonesia"
+                  >
+                    <span className="text-xl">🇮🇩</span>
+                    <span className="font-semibold">ID</span>
+                  </button>
+                  <button
+                    onClick={() => i18n.changeLanguage('en')}
+                    className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
+                      currentLanguage === 'en'
+                        ? 'bg-primary text-secondary shadow-md ring-2 ring-primary/30'
+                        : 'bg-gray-100 text-text hover:bg-gray-200'
+                    }`}
+                    aria-label="English"
+                  >
+                    <span className="text-xl">🇺🇸</span>
+                    <span className="font-semibold">EN</span>
+                  </button>
+                </div>
               </div>
-              <Link
-                to="/booking"
-                onClick={toggleMenu}
-                className="block w-full py-3 px-6 bg-primary text-secondary text-center font-semibold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 transform hover:scale-105"
-              >
-                {t('nav.bookNow')}
-              </Link>
+
+              {/* CTA Button */}
+              <div className="px-4">
+                <Link
+                  to="/booking"
+                  onClick={toggleMenu}
+                  className="block w-full py-3 px-6 bg-primary text-secondary text-center font-semibold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 transform hover:scale-105"
+                >
+                  {t('nav.bookNow')}
+                </Link>
+              </div>
             </div>
           </div>
 

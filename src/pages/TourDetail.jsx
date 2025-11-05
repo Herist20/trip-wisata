@@ -6,10 +6,12 @@ import {
   Home, ChevronDown, ChevronUp, Shield, RotateCcw, Sparkles, Image as ImageIcon
 } from 'lucide-react';
 import { tourPackages, tourDetails } from '../data/mockData';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function TourDetail() {
+  const { t } = useTranslation('tourDetail');
   const { id } = useParams();
   const navigate = useNavigate();
   const tour = tourPackages.find((t) => t.id === parseInt(id));
@@ -36,9 +38,9 @@ function TourDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-secondary mb-4">Tour Not Found</h2>
+          <h2 className="text-2xl font-bold text-secondary mb-4">{t('notFound.title')}</h2>
           <Link to="/tours" className="text-primary hover:underline">
-            Back to Tours
+            {t('notFound.backToTours')}
           </Link>
         </div>
       </div>
@@ -63,7 +65,7 @@ function TourDetail() {
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      alert(t('booking.linkCopied'));
     }
   };
 
@@ -87,7 +89,7 @@ function TourDetail() {
             </Link>
             <ChevronRight className="w-4 h-4 flex-shrink-0 text-gray-400" />
             <Link to="/tours" className="hover:text-primary transition-colors flex items-center flex-shrink-0 whitespace-nowrap">
-              Tours
+              {t('breadcrumb.tours')}
             </Link>
             <ChevronRight className="w-4 h-4 flex-shrink-0 text-gray-400" />
             <span className="text-secondary font-medium truncate flex items-center">{tour.title}</span>
@@ -134,7 +136,7 @@ function TourDetail() {
                     prevImage();
                   }}
                   className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all z-10 flex items-center justify-center"
-                  aria-label="Previous image"
+                  aria-label={t('aria.previousImage')}
                 >
                   <ChevronLeft className="w-6 h-6 text-secondary flex-shrink-0" />
                 </button>
@@ -144,7 +146,7 @@ function TourDetail() {
                     nextImage();
                   }}
                   className="absolute right-2 sm:right-3 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all z-10 flex items-center justify-center"
-                  aria-label="Next image"
+                  aria-label={t('aria.nextImage')}
                 >
                   <ChevronRight className="w-6 h-6 text-secondary flex-shrink-0" />
                 </button>
@@ -196,7 +198,7 @@ function TourDetail() {
                   <button
                     onClick={handleShare}
                     className="p-3 border-2 border-gray-200 rounded-xl hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
-                    aria-label="Share tour"
+                    aria-label={t('aria.shareTour')}
                   >
                     <Share2 className="w-5 h-5 flex-shrink-0" />
                   </button>
@@ -207,7 +209,7 @@ function TourDetail() {
                         ? 'border-primary bg-primary/10 text-primary'
                         : 'border-gray-200 hover:border-primary hover:text-primary'
                     }`}
-                    aria-label="Save tour"
+                    aria-label={t('aria.saveTour')}
                   >
                     <Heart className={`w-5 h-5 flex-shrink-0 ${isSaved ? 'fill-primary' : ''}`} />
                   </button>
@@ -233,7 +235,7 @@ function TourDetail() {
                   onClick={() => setActiveTab('reviews')}
                   className="text-primary hover:underline font-medium text-sm sm:text-base"
                 >
-                  ({tour.reviews} reviews)
+                  ({tour.reviews} {t('tabs.reviews').toLowerCase()})
                 </button>
               </div>
             </div>
@@ -243,11 +245,11 @@ function TourDetail() {
               {/* Tab Navigation */}
               <div className="flex border-b overflow-x-auto scrollbar-hide">
                 {[
-                  { id: 'overview', label: 'Overview' },
-                  { id: 'itinerary', label: 'Itinerary' },
-                  { id: 'inclusions', label: 'Inclusions' },
-                  { id: 'requirements', label: 'Requirements' },
-                  { id: 'reviews', label: 'Reviews' },
+                  { id: 'overview', label: t('tabs.overview') },
+                  { id: 'itinerary', label: t('tabs.itinerary') },
+                  { id: 'inclusions', label: t('tabs.inclusions') },
+                  { id: 'requirements', label: t('tabs.requirements') },
+                  { id: 'reviews', label: t('tabs.reviews') },
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -269,7 +271,7 @@ function TourDetail() {
                 {activeTab === 'overview' && (
                   <div className="space-y-4 sm:space-y-5 md:space-y-6">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">About This Tour</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">{t('overview.aboutTour')}</h3>
                       <div className="prose prose-lg max-w-none text-text-light">
                         {details.fullDescription.split('\n\n').map((para, idx) => (
                           <p key={idx} className="mb-4">{para}</p>
@@ -278,7 +280,7 @@ function TourDetail() {
                     </div>
 
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">Tour Highlights</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">{t('overview.tourHighlights')}</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {tour.highlights.map((highlight, idx) => (
                           <div key={idx} className="flex items-center gap-3 p-3 bg-primary/5 rounded-lg">
@@ -292,11 +294,11 @@ function TourDetail() {
                     <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl">
                       <h3 className="text-lg font-bold text-secondary mb-4 flex items-center gap-2">
                         <Info className="w-5 h-5 text-primary" />
-                        Meeting Point & Time
+                        {t('overview.meetingPointTitle')}
                       </h3>
                       <div className="space-y-2 text-text-light">
-                        <p><strong>Location:</strong> {details.meetingPoint}</p>
-                        <p><strong>Time:</strong> {details.meetingTime}</p>
+                        <p><strong>{t('overview.location')}</strong> {details.meetingPoint}</p>
+                        <p><strong>{t('overview.time')}</strong> {details.meetingTime}</p>
                       </div>
                     </div>
                   </div>
@@ -305,7 +307,7 @@ function TourDetail() {
                 {/* Itinerary Tab */}
                 {activeTab === 'itinerary' && (
                   <div className="space-y-3 sm:space-y-4">
-                    <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">Day by Day Itinerary</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">{t('itinerary.title')}</h3>
                     {details.itinerary.map((day) => (
                       <div key={day.day} className="border-2 border-gray-200 rounded-xl overflow-hidden">
                         <button
@@ -317,7 +319,7 @@ function TourDetail() {
                               {day.day}
                             </div>
                             <div className="text-left">
-                              <h4 className="font-bold text-secondary text-sm sm:text-base">Day {day.day}</h4>
+                              <h4 className="font-bold text-secondary text-sm sm:text-base">{t('itinerary.day')} {day.day}</h4>
                               <p className="text-xs sm:text-sm text-text-light line-clamp-1">{day.title}</p>
                             </div>
                           </div>
@@ -352,7 +354,7 @@ function TourDetail() {
                               <div className="flex items-center gap-2 text-text-light">
                                 <div className="text-xl sm:text-2xl">🍽️</div>
                                 <div>
-                                  <p className="text-xs text-text-light/60 font-semibold uppercase">Meals</p>
+                                  <p className="text-xs text-text-light/60 font-semibold uppercase">{t('itinerary.meals')}</p>
                                   <p className="font-medium text-sm sm:text-base">{day.meals.join(', ')}</p>
                                 </div>
                               </div>
@@ -360,7 +362,7 @@ function TourDetail() {
                                 <div className="flex items-center gap-2 text-text-light">
                                   <div className="text-xl sm:text-2xl">🏨</div>
                                   <div>
-                                    <p className="text-xs text-text-light/60 font-semibold uppercase">Accommodation</p>
+                                    <p className="text-xs text-text-light/60 font-semibold uppercase">{t('itinerary.accommodation')}</p>
                                     <p className="font-medium text-sm sm:text-base">{day.accommodation}</p>
                                   </div>
                                 </div>
@@ -379,7 +381,7 @@ function TourDetail() {
                     <div>
                       <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
                         <Check className="w-6 h-6 text-primary" />
-                        What's Included
+                        {t('inclusions.included')}
                       </h3>
                       <div className="space-y-4">
                         {Object.entries(details.inclusions).map(([category, items]) => (
@@ -403,7 +405,7 @@ function TourDetail() {
                     <div className="pt-6 border-t">
                       <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
                         <XIcon className="w-6 h-6 text-red-500" />
-                        What's Not Included
+                        {t('inclusions.excluded')}
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {details.exclusions.map((item, idx) => (
@@ -424,7 +426,7 @@ function TourDetail() {
                       <div className="bg-blue-50 p-4 rounded-xl">
                         <h4 className="font-bold text-secondary mb-2 flex items-center gap-2">
                           <Info className="w-5 h-5 text-blue-600" />
-                          Age Requirement
+                          {t('requirements.ageRequirement')}
                         </h4>
                         <p className="text-text-light">{details.requirements.age}</p>
                       </div>
@@ -432,14 +434,14 @@ function TourDetail() {
                       <div className="bg-green-50 p-4 rounded-xl">
                         <h4 className="font-bold text-secondary mb-2 flex items-center gap-2">
                           <Users className="w-5 h-5 text-green-600" />
-                          Fitness Level
+                          {t('requirements.fitnessLevel')}
                         </h4>
                         <p className="text-text-light">{details.requirements.fitness}</p>
                       </div>
                     </div>
 
                     <div>
-                      <h4 className="font-bold text-secondary mb-3">What to Bring</h4>
+                      <h4 className="font-bold text-secondary mb-3">{t('requirements.whatToBring')}</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {details.requirements.whatToBring.map((item, idx) => (
                           <div key={idx} className="flex items-center gap-2 text-text-light">
@@ -453,7 +455,7 @@ function TourDetail() {
                     <div className="bg-yellow-50 p-4 rounded-xl">
                       <h4 className="font-bold text-secondary mb-2 flex items-center gap-2">
                         <AlertCircle className="w-5 h-5 text-yellow-600" />
-                        Dress Code
+                        {t('requirements.dressCode')}
                       </h4>
                       <p className="text-text-light">{details.requirements.dressCode}</p>
                     </div>
@@ -461,7 +463,7 @@ function TourDetail() {
                     <div className="bg-red-50 p-4 rounded-xl">
                       <h4 className="font-bold text-secondary mb-2 flex items-center gap-2">
                         <AlertCircle className="w-5 h-5 text-red-600" />
-                        Health Notice
+                        {t('requirements.healthNotice')}
                       </h4>
                       <p className="text-text-light">{details.requirements.health}</p>
                     </div>
@@ -489,7 +491,7 @@ function TourDetail() {
                             />
                           ))}
                         </div>
-                        <p className="text-text-light">{details.reviewStats.total} reviews</p>
+                        <p className="text-text-light">{details.reviewStats.total} {t('tabs.reviews').toLowerCase()}</p>
                       </div>
 
                       <div className="md:col-span-2 space-y-2">
@@ -563,14 +565,14 @@ function TourDetail() {
 
                           <button className="flex items-center gap-2 text-text-light hover:text-primary transition-colors">
                             <ThumbsUp className="w-4 h-4 flex-shrink-0" />
-                            <span className="text-sm">Helpful ({review.helpful})</span>
+                            <span className="text-sm">{t('reviews.helpful')} ({review.helpful})</span>
                           </button>
                         </div>
                       ))}
                     </div>
 
                     <button className="w-full py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary/5 transition-colors">
-                      Write a Review
+                      {t('reviews.writeReview')}
                     </button>
                   </div>
                 )}
@@ -585,21 +587,21 @@ function TourDetail() {
               <div className="bg-white rounded-2xl shadow-xl p-6 border-2 border-gray-100" data-aos="fade-left">
                 {/* Price */}
                 <div className="mb-6">
-                  <p className="text-sm text-text-light mb-2">From</p>
+                  <p className="text-sm text-text-light mb-2">{t('booking.from')}</p>
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-bold text-primary">${tour.priceUSD}</span>
                     <span className="text-lg text-text-light line-through">
                       ${Math.round(tour.priceUSD * 1.3)}
                     </span>
                   </div>
-                  <p className="text-sm text-text-light">per person</p>
+                  <p className="text-sm text-text-light">{t('booking.perPerson')}</p>
                 </div>
 
                 {/* Date Selector */}
                 <div className="mb-4">
                   <label className="block text-sm font-semibold text-secondary mb-2">
                     <Calendar className="w-4 h-4 inline mr-1" />
-                    Select Date
+                    {t('booking.selectDate')}
                   </label>
                   <select
                     value={selectedDate}
@@ -612,7 +614,7 @@ function TourDetail() {
                       backgroundSize: '20px'
                     }}
                   >
-                    <option value="">Choose departure date</option>
+                    <option value="">{t('booking.selectDatePlaceholder')}</option>
                     {tour.departureDates.map((date) => (
                       <option key={date} value={date}>
                         {new Date(date).toLocaleDateString('en-US', {
@@ -628,7 +630,7 @@ function TourDetail() {
                 {/* Participants */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-secondary">Adults</span>
+                    <span className="text-sm font-semibold text-secondary">{t('booking.adults')}</span>
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => setAdults(Math.max(1, adults - 1))}
@@ -647,7 +649,7 @@ function TourDetail() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-secondary">Children</span>
+                    <span className="text-sm font-semibold text-secondary">{t('booking.children')}</span>
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => setChildren(Math.max(0, children - 1))}
@@ -669,12 +671,12 @@ function TourDetail() {
                 {/* Subtotal */}
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 rounded-xl mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-text-light">Subtotal</span>
+                    <span className="text-sm text-text-light">{t('booking.subtotal')}</span>
                     <span className="text-2xl font-bold text-secondary">${subtotal.toFixed(2)}</span>
                   </div>
                   {children > 0 && (
                     <p className="text-xs text-text-light">
-                      ({adults} adults × ${tour.priceUSD} + {children} children × ${childPrice.toFixed(2)})
+                      ({adults} {t('booking.adults').toLowerCase()} × ${tour.priceUSD} + {children} {t('booking.children').toLowerCase()} × ${childPrice.toFixed(2)})
                     </p>
                   )}
                 </div>
@@ -685,13 +687,13 @@ function TourDetail() {
                     to={`/booking?tour=${tour.id}&adults=${adults}&children=${children}&date=${selectedDate}`}
                     className="block w-full bg-primary hover:bg-primary-light text-secondary font-bold py-4 rounded-xl text-center transition-all transform hover:scale-105 shadow-lg"
                   >
-                    Book Now
+                    {t('booking.proceedToBooking')}
                   </Link>
                   <Link
                     to="/booking"
                     className="block w-full border-2 border-secondary text-secondary font-semibold py-3 rounded-xl text-center hover:bg-secondary hover:text-white transition-all"
                   >
-                    Contact Us
+                    {t('booking.contactUs')}
                   </Link>
                 </div>
 
@@ -699,15 +701,15 @@ function TourDetail() {
                 <div className="mt-6 pt-6 border-t space-y-3">
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <RotateCcw className="w-4 h-4 text-primary" />
-                    <span>Free cancellation up to 7 days</span>
+                    <span>{t('booking.freeCancelDesc')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <Check className="w-4 h-4 text-primary" />
-                    <span>Instant confirmation</span>
+                    <span>{t('booking.instantConfirmDesc')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-text-light">
                     <Shield className="w-4 h-4 text-primary" />
-                    <span>Secure payment</span>
+                    <span>{t('booking.securePayment')}</span>
                   </div>
                 </div>
               </div>
@@ -717,7 +719,7 @@ function TourDetail() {
                 <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 animate-pulse">
                   <p className="text-sm font-semibold text-red-600 flex items-center gap-2">
                     <AlertCircle className="w-4 h-4" />
-                    Only {tour.availability} slots left!
+                    {t('availabilityAlert', { count: tour.availability })}
                   </p>
                 </div>
               )}
@@ -757,7 +759,7 @@ function TourDetail() {
           </button>
 
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm">
-            {selectedImage + 1} / {details.gallery.length}
+            {t('lightbox.imageCounter', { current: selectedImage + 1, total: details.gallery.length })}
           </div>
         </div>
       )}

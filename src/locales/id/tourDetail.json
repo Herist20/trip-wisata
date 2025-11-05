@@ -1,0 +1,89 @@
+{
+  "breadcrumb": {
+    "tours": "Tour"
+  },
+  "notFound": {
+    "title": "Tour Tidak Ditemukan",
+    "backToTours": "Kembali ke Tour"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "itinerary": "Itinerary",
+    "inclusions": "Inclusions",
+    "requirements": "Requirements",
+    "reviews": "Reviews"
+  },
+  "overview": {
+    "aboutTour": "About This Tour",
+    "tourHighlights": "Tour Highlights",
+    "meetingPointTitle": "Meeting Point & Time",
+    "location": "Location:",
+    "time": "Time:"
+  },
+  "itinerary": {
+    "title": "Day-by-Day Itinerary",
+    "day": "Day",
+    "meals": "Makanan",
+    "accommodation": "Akomodasi"
+  },
+  "inclusions": {
+    "included": "What's Included",
+    "excluded": "What's Not Included"
+  },
+  "requirements": {
+    "title": "Requirements & Information",
+    "whatToBring": "What to Bring",
+    "importantNotes": "Important Notes",
+    "cancellationPolicy": "Cancellation Policy",
+    "ageRequirement": "Persyaratan Usia",
+    "fitnessLevel": "Tingkat Kebugaran",
+    "dressCode": "Kode Berpakaian",
+    "healthNotice": "Pemberitahuan Kesehatan"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "overallRating": "Overall Rating",
+    "basedOn": "Berdasarkan {{count}} ulasan",
+    "verified": "Verified Purchase",
+    "helpful": "Helpful",
+    "writeReview": "Tulis Ulasan"
+  },
+  "booking": {
+    "title": "Pesan Tour Ini",
+    "selectDate": "Pilih Tanggal",
+    "selectDatePlaceholder": "Pilih tanggal keberangkatan",
+    "participants": "Peserta",
+    "adults": "Dewasa",
+    "children": "Anak-anak",
+    "childrenAge": "(2-11 tahun)",
+    "priceBreakdown": "Rincian Harga",
+    "adult": "Dewasa",
+    "child": "Anak",
+    "subtotal": "Subtotal",
+    "tax": "Pajak",
+    "total": "Total",
+    "from": "Mulai dari",
+    "perPerson": "/orang",
+    "proceedToBooking": "Lanjutkan ke Booking",
+    "whyBookWithUs": "Mengapa Booking Dengan Kami",
+    "bestPrice": "Jaminan Harga Terbaik",
+    "bestPriceDesc": "Kami jamin harga terbaik",
+    "freeCancel": "Pembatalan Gratis",
+    "freeCancelDesc": "Batal hingga 7 hari sebelumnya",
+    "instantConfirm": "Konfirmasi Instan",
+    "instantConfirmDesc": "Terima konfirmasi secara instan",
+    "contactUs": "Hubungi Kami",
+    "securePayment": "Pembayaran aman",
+    "linkCopied": "Link berhasil disalin!"
+  },
+  "availabilityAlert": "Hanya {{count}} slot tersisa!",
+  "lightbox": {
+    "imageCounter": "{{current}} / {{total}}"
+  },
+  "aria": {
+    "previousImage": "Gambar sebelumnya",
+    "nextImage": "Gambar selanjutnya",
+    "shareTour": "Bagikan tour",
+    "saveTour": "Simpan tour"
+  }
+}

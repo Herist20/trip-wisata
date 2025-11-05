@@ -60,7 +60,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white/10 hover:bg-primary p-2.5 rounded-lg transition-all duration-300 hover:scale-110"
-                  aria-label="Instagram"
+                  aria-label={t('aria.instagram')}
                 >
                   <Instagram className="w-5 h-5 group-hover:text-secondary transition-colors" />
                 </a>
@@ -69,7 +69,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white/10 hover:bg-primary p-2.5 rounded-lg transition-all duration-300 hover:scale-110"
-                  aria-label="Facebook"
+                  aria-label={t('aria.facebook')}
                 >
                   <Facebook className="w-5 h-5 group-hover:text-secondary transition-colors" />
                 </a>
@@ -78,14 +78,14 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white/10 hover:bg-primary p-2.5 rounded-lg transition-all duration-300 hover:scale-110"
-                  aria-label="WhatsApp"
+                  aria-label={t('aria.whatsapp')}
                 >
                   <MessageCircle className="w-5 h-5 group-hover:text-secondary transition-colors" />
                 </a>
                 <a
                   href={contactInfo.social.email}
                   className="group bg-white/10 hover:bg-primary p-2.5 rounded-lg transition-all duration-300 hover:scale-110"
-                  aria-label="Email"
+                  aria-label={t('aria.email')}
                 >
                   <Mail className="w-5 h-5 group-hover:text-secondary transition-colors" />
                 </a>

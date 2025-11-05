@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Galeri Perjalanan Kami",
+    "subtitle": "Momen indah dari setiap petualangan"
+  },
+  "searchBar": {
+    "placeholder": "Cari lokasi, tour package..."
+  },
+  "sort": {
+    "recent": "Recent",
+    "popular": "Popular",
+    "mostLiked": "Most Liked"
+  },
+  "categories": {
+    "all": "All Photos",
+    "beach": "Beach & Islands",
+    "mountain": "Mountains & Hiking",
+    "cultural": "Cultural Heritage",
+    "adventure": "Adventure & Activities",
+    "culinary": "Food & Culinary"
+  },
+  "display": {
+    "showing": "Menampilkan",
+    "of": "dari",
+    "photos": "foto"
+  },
+  "emptyState": {
+    "title": "Tidak ada foto ditemukan",
+    "subtitle": "Coba ubah filter atau kata kunci pencarian Anda"
+  },
+  "loadMore": {
+    "button": "Muat Lebih Banyak",
+    "remaining": "tersisa",
+    "loading": "Loading..."
+  },
+  "lightbox": {
+    "share": "Share",
+    "download": "Download",
+    "photoBy": "Photo by",
+    "tour": "Tour:"
+  },
+  "linkCopied": "Link berhasil disalin!"
+}

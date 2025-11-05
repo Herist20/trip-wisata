@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "badges": {
+      "verifiedOperator": "Operator Tur Terverifikasi",
+      "bestPrice": "Jaminan Harga Terbaik"
+    },
+    "title": "Jelajahi Keindahan",
+    "titleHighlight": "Indonesia",
+    "titleSuffix": "Bersama Kami",
+    "subtitle": "Paket wisata terpercaya dengan pengalaman tak terlupakan, harga terbaik, dan pelayanan profesional",
+    "cta": {
+      "viewTours": "Lihat Paket Tour",
+      "contactUs": "Hubungi Kami"
+    }
+  },
+  "stats": {
+    "travelers": {
+      "value": "500+",
+      "label": "Happy Travelers",
+      "description": "Pelanggan puas dengan layanan kami"
+    },
+    "destinations": {
+      "value": "20+",
+      "label": "Destinasi",
+      "description": "Pilihan destinasi menarik di Indonesia"
+    },
+    "guides": {
+      "value": "100%",
+      "label": "Tour Guide Profesional",
+      "description": "Bersertifikat dan berpengalaman"
+    },
+    "rating": {
+      "value": "4.9/5",
+      "label": "Rating Kepuasan",
+      "description": "Dari review pelanggan kami"
+    }
+  },
+  "featuredTours": {
+    "title": "Paket Tour Populer Kami",
+    "subtitle": "Pilihan terbaik untuk liburan impian Anda dengan harga terjangkau dan layanan premium",
+    "startingFrom": "Mulai dari",
+    "perPerson": "/orang",
+    "reviews": "ulasan",
+    "viewDetails": "Lihat Detail",
+    "viewAllButton": "Lihat Semua Paket Tour",
+    "viewAllSubtitle": "Lebih dari 20+ destinasi menarik menanti Anda"
+  },
+  "whyChooseUs": {
+    "badge": "Mengapa Memilih Kami",
+    "title": "Pengalaman Wisata",
+    "titleHighlight": "Terbaik di Indonesia",
+    "description": "Kami berkomitmen memberikan pengalaman liburan yang tak terlupakan dengan layanan profesional, harga transparan, dan dukungan penuh dari awal hingga akhir perjalanan Anda. Kepuasan dan kenyamanan Anda adalah prioritas utama kami.",
+    "features": [
+      {
+        "title": "Tour Guide Profesional & Berpengalaman",
+        "description": "Tim tour guide bersertifikat dengan pengetahuan mendalam tentang destinasi dan budaya lokal"
+      },
+      {
+        "title": "Harga Transparan Tanpa Biaya Tersembunyi",
+        "description": "Semua biaya dijelaskan dengan jelas di awal, tidak ada biaya tambahan yang mengejutkan"
+      },
+      {
+        "title": "Asuransi Perjalanan Included",
+        "description": "Setiap paket tour sudah termasuk asuransi perjalanan untuk keamanan dan ketenangan pikiran Anda"
+      },
+      {
+        "title": "Flexible Cancellation Policy",
+        "description": "Kebijakan pembatalan yang fleksibel dengan refund penuh hingga 7 hari sebelum keberangkatan"
+      },
+      {
+        "title": "24/7 Customer Support",
+        "description": "Tim customer support kami siap membantu Anda kapan saja, sebelum, selama, dan setelah perjalanan"
+      }
+    ],
+    "floatingStats": {
+      "customerRating": "Customer Rating",
+      "happyTravelers": "Happy Travelers"
+    }
+  },
+  "testimonials": {
+    "badge": "Testimoni Pelanggan",
+    "title": "Apa Kata Mereka?",
+    "subtitle": "Pengalaman nyata dari pelanggan yang telah mempercayai kami untuk perjalanan mereka",
+    "tourPackage": "Tour Package",
+    "tourGuide": "Tour Guide",
+    "statsBar": {
+      "happyReviews": "Happy Reviews",
+      "averageRating": "Average Rating",
+      "happyTravelers": "Happy Travelers",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "cta": {
+    "title": "Siap Untuk Petualangan Berikutnya?",
+    "subtitle": "Hubungi kami sekarang dan dapatkan penawaran spesial untuk paket tour impian Anda",
+    "bookNowButton": "Mulai Booking Sekarang",
+    "viewToursButton": "Lihat Paket Tour"
+  },
+  "aria": {
+    "previousTestimonial": "Testimoni sebelumnya",
+    "nextTestimonial": "Testimoni selanjutnya"
+  }
+}
